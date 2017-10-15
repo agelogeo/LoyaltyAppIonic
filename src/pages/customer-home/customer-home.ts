@@ -23,6 +23,7 @@ export class CustomerHomePage implements OnInit{
     this.customer.name=this.navParams.get('name');
     this.customer.surname=this.navParams.get('surname');
     this.customer.phone=this.navParams.get('phone');
+    this.customer.barcode=this.navParams.get('barcode');
     this.customer.stamps=this.navParams.get('stamps');
     this.customer.coupons_used=this.navParams.get('coupons_used');
     this.customer.visits=this.navParams.get('visits');
