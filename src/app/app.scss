@@ -22,7 +22,6 @@
   h4 {
     position: absolute;
     bottom: 30px;
-    color: #f4f4f4;
     left: 10px;
     width: 100%;
   }
@@ -30,15 +29,16 @@
   p {
     position: absolute;
     bottom: 5px;
-    color: #f4f4f4;
     left: 10px;
     width: 100%;
   }
 
   #ball {
     position: absolute;
-    left: 10px;
-    bottom: 70px;
-    width: 20%;
+    margin: auto;
+    text-align: center;
+    left : 85px;
+    bottom : 30px;
+    width: 40%;
   }
 }

@@ -1,17 +1,34 @@
 page-customer-home {
 
   .head{
-    background-color : #2263d9;
+    background-image: url("../assets/bg.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
 
   .bottom{
     height : 100px;
     padding-top: 35px;
-    border: 5px solid #2263d9;
+    border: 5px solid #2da7bf;
     border-radius: 100%;
   }
 
   #barcode{
-    object-fit: cover;
+    border-radius: 100%;
+    background-blend-mode: multiply;
+    mix-blend-mode: screen;
+  }
+
+  #top{
+
+  }
+
+  #middle{
+    margin-top: -60px;
+  }
+
+  #footer{
+    margin-top: -20px;
   }
 }

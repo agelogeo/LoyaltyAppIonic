@@ -14,7 +14,7 @@
 
 <ion-content >
     <ion-grid class="head">
-      <ion-row  >
+      <ion-row  id="top">
         <ion-col text-left>
           <h6>#{{ customer.barcode }}</h6>
           Barcode
@@ -24,12 +24,12 @@
           Last visit
         </ion-col>
       </ion-row>
-      <ion-row no-margin>
+      <ion-row no-padding no-margin id="middle">
         <ion-col  text-center>
-            <img id="barcode" width="200"  style="border-radius:100%" src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
+            <img id="barcode" width="200"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
         </ion-col>
       </ion-row>
-      <ion-row no-padding>
+      <ion-row no-padding no-margin id="footer">
         <ion-col text-center>
           <h2>{{ customer.name }} {{ customer.surname }}</h2>
           <h5>{{ customer.phone }}</h5>
