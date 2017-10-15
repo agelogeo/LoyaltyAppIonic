@@ -1,14 +1,39 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Welcome
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <form #f="ngForm" (ngSubmit)="onCreateCustomer(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>First name</ion-label>
+        <ion-input type="text" ngModel name="name" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Last name</ion-label>
+        <ion-input type="text" ngModel name="surname" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Phone</ion-label>
+        <ion-input type="number" ngModel name="phone" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button type="submit" ion-button block [disabled]="!f.valid">Create new customer</button>
+  </form>
+  <ion-list>
+    <ion-item-divider></ion-item-divider>
+    <ion-item-group>
+      <ion-label text-center>Are you already a member?</ion-label>
+      <button ion-button color="secondary" block (click)="goToLogin()">Log In</button>
+    </ion-item-group>
+    <hr>
+    <ion-item-group>
+      <ion-label text-center>Do you have administrator access?</ion-label>
+      <button ion-button color="danger" block>Log In as Administrator</button>
+    </ion-item-group>
+  </ion-list>
 </ion-content>
