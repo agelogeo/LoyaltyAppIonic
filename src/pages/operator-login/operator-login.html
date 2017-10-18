@@ -1,0 +1,24 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Operator Log in</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onLoginOperator(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Username</ion-label>
+        <ion-input type="text" ngModel name="username" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" ngModel name="password" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button type="submit" ion-button block [disabled]="!f.valid">Log in</button>
+  </form>
+</ion-content>

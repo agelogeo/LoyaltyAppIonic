@@ -6,6 +6,7 @@ import 'rxjs';
 import {Logger} from "@ionic/app-scripts/dist/logger/logger";
 import {CustomerHomePage} from "../customer-home/customer-home";
 import {CustomerLoginPage} from "../customer-login/customer-login";
+import {OperatorLoginPage} from "../operator-login/operator-login";
 
 @Component({
   selector: 'page-home',
@@ -65,4 +66,7 @@ export class HomePage {
     this.navCtrl.push(CustomerLoginPage);
   }
 
+  goToAdmin(){
+    this.navCtrl.push(OperatorLoginPage);
+  }
 }

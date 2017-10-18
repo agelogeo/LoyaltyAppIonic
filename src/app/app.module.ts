@@ -9,13 +9,17 @@ import { HomePage } from '../pages/home/home';
 import {HttpModule} from "@angular/http";
 import {CustomerHomePage} from "../pages/customer-home/customer-home";
 import {CustomerLoginPage} from "../pages/customer-login/customer-login";
+import {OperatorHomePage} from "../pages/operator-home/operator-home";
+import {OperatorLoginPage} from "../pages/operator-login/operator-login";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     CustomerHomePage,
-    CustomerLoginPage
+    CustomerLoginPage,
+    OperatorHomePage,
+    OperatorLoginPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +31,9 @@ import {CustomerLoginPage} from "../pages/customer-login/customer-login";
     MyApp,
     HomePage,
     CustomerHomePage,
-    CustomerLoginPage
+    CustomerLoginPage,
+    OperatorHomePage,
+    OperatorLoginPage
   ],
   providers: [
     StatusBar,

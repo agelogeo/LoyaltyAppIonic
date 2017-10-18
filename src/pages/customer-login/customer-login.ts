@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {CustomerHomePage} from "../customer-home/customer-home";
 import {Http} from "@angular/http";
@@ -18,7 +18,7 @@ import {Http} from "@angular/http";
 })
 export class CustomerLoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private toastCtrl:ToastController,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
   }
 
   ionViewDidLoad() {
@@ -49,17 +49,14 @@ export class CustomerLoginPage {
         });
         alert.present();
       }else {
-        const alert = this.alertCtrl.create({
-          title: 'Success',
+        const toast = this.toastCtrl.create({
           message: 'You logged in successfully',
-          buttons: [{
-            text : 'Ok',
-            handler: () => {
-              loading.dismiss();
-            }
-          }]
+          showCloseButton: true,
+          closeButtonText: 'Ok',
+          duration: 2000
         });
-        alert.present();
+        loading.dismiss();
+        toast.present();
         this.navCtrl.setRoot(CustomerHomePage,{id:data.id,
                                                       name:data.name,
                                                       surname:data.surname,
