@@ -7,24 +7,14 @@
 <ion-header>
   <ion-navbar>
     <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
-    <ion-title>Welcome {{ customer.name }}</ion-title>
+    <ion-title>Barcode  #{{ customer.barcode }}</ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content >
   <ion-grid class="head">
-    <ion-row  id="top">
-      <ion-col text-left>
-        <h6>#{{ customer.barcode }}</h6>
-        Barcode
-      </ion-col>
-      <ion-col text-right>
-        <h6>{{ customer.last_visit }}</h6>
-        Last visit
-      </ion-col>
-    </ion-row>
-    <ion-row no-padding no-margin id="middle">
+    <ion-row  id="middle">
       <ion-col  text-center>
         <img id="barcode" width="200"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
       </ion-col>
@@ -36,30 +26,60 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-fab middle right edge margin-bottom padding-bottom >
-    <button color="danger" ion-fab>+</button>
+  <ion-fab middle right edge margin-bottom >
+    <button   color="danger" ion-fab><img src="assets/btn.png"></button>
   </ion-fab>
   <ion-grid padding>
     <ion-row >
+      <ion-col text-center>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              {{ customer.coupons_used }}
+            </ion-card-title>
+            <p>
+              Coupons Used
+            </p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
       <ion-col text-center >
-        <h5 text-center class="bottom">{{ customer.stamps }}</h5>
-      </ion-col>
-      <ion-col text-center>
-        <h5 text-center class="bottom">{{ customer.coupons_used }}</h5>
-      </ion-col>
-      <ion-col text-center>
-        <h5 text-center class="bottom">{{ customer.visits }}</h5>
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              {{ customer.stamps }}
+            </ion-card-title>
+            <p>
+              Current Stamps
+            </p>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col text-center>
-        Stamps
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              {{ customer.last_visit }}
+            </ion-card-title>
+            <p>
+              Last Visit
+            </p>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
       <ion-col text-center>
-        Coupons Used
-      </ion-col>
-      <ion-col text-center>
-        Visits
+        <ion-card>
+          <ion-card-content>
+            <ion-card-title>
+              {{ customer.visits }}
+            </ion-card-title>
+            <p>
+              Total Visits
+            </p>
+          </ion-card-content>
+        </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
