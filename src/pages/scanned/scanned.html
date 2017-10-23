@@ -1,0 +1,64 @@
+<!--
+  Generated template for the ScannedPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
+    <ion-title>Welcome {{ customer.name }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+  <ion-grid class="head">
+    <ion-row  id="top">
+      <ion-col text-left>
+        <h6>#{{ customer.barcode }}</h6>
+        Barcode
+      </ion-col>
+      <ion-col text-right>
+        <h6>{{ customer.last_visit }}</h6>
+        Last visit
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding no-margin id="middle">
+      <ion-col  text-center>
+        <img id="barcode" width="200"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
+      </ion-col>
+    </ion-row>
+    <ion-row no-padding no-margin id="footer">
+      <ion-col text-center>
+        <h2>{{ customer.name }} {{ customer.surname }}</h2>
+        <h5>{{ customer.phone }}</h5>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid padding>
+    <ion-row >
+      <ion-col text-center >
+        <h5 text-center class="bottom">{{ customer.stamps }}</h5>
+      </ion-col>
+      <ion-col text-center>
+        <h5 text-center class="bottom">{{ customer.coupons_used }}</h5>
+      </ion-col>
+      <ion-col text-center>
+        <h5 text-center class="bottom">{{ customer.visits }}</h5>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col text-center>
+        Stamps
+      </ion-col>
+      <ion-col text-center>
+        Coupons Used
+      </ion-col>
+      <ion-col text-center>
+        Visits
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

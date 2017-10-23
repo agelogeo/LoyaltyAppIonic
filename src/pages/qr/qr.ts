@@ -1,6 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
+import {
+  AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController,
+  ViewController
+} from 'ionic-angular';
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
+import {ScannedPage} from "../scanned/scanned";
+import {Http} from "@angular/http";
 
 /**
  * Generated class for the QrPage page.
@@ -16,7 +21,7 @@ import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 })
 export class QrPage implements OnInit{
 
-  constructor(private viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl:ToastController) {
+  constructor(private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl:ToastController) {
   }
 
   ionViewWillEnter() {
@@ -34,9 +39,15 @@ export class QrPage implements OnInit{
               duration : 2000
             });
             toast.present();
+
+
+
+
             this.qrScanner.hide(); // hide camera preview
             this.hideCamera();
             scanSub.unsubscribe(); // stop scanning
+            //this.navCtrl.push(ScannedPage,{barcode : text})
+            this.goToScanned(text);
           });
           this.showCamera();
           // show camera preview
@@ -69,5 +80,51 @@ export class QrPage implements OnInit{
   ionViewWillLeave(){
     this.qrScanner.hide(); // hide camera preview
     this.hideCamera();
+  }
+
+  goToScanned(barcode){
+
+    const loading = this.loadingCtrl.create({
+      content : 'Please wait..'
+    });
+    loading.present();
+
+    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+barcode);
+    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+barcode)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        const toast = this.toastCtrl.create({
+          message: 'You logged in successfully',
+          showCloseButton: true,
+          closeButtonText: 'Ok',
+          duration: 2000
+        });
+        loading.dismiss();
+        toast.present();
+        this.navCtrl.push(ScannedPage,{id:data.id,
+          name:data.name,
+          surname:data.surname,
+          phone:data.phone,
+          barcode:data.barcode,
+          stamps:data.stamps,
+          coupons_used:data.coupons_used,
+          visits:data.visits,
+          last_visit:data.last_visit});
+      }
+    });
+
   }
 }
