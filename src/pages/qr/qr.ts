@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 
 /**
@@ -16,14 +16,10 @@ import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
 })
 export class QrPage implements OnInit{
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl:ToastController) {
+  constructor(private viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl:ToastController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad QrPage');
-  }
-
-  ngOnInit(){
+  ionViewWillEnter() {
     this.qrScanner.prepare()
       .then((status: QRScannerStatus) => {
         if (status.authorized) {
@@ -59,10 +55,19 @@ export class QrPage implements OnInit{
       .catch((e: any) => console.log('Error is', e));
   }
 
+  ngOnInit(){
+
+  }
+
   showCamera() {
     (window.document.querySelector('ion-app') as HTMLElement).classList.add('cameraView');
   }
   hideCamera() {
     (window.document.querySelector('ion-app') as HTMLElement).classList.remove('cameraView');
+  }
+
+  ionViewWillLeave(){
+    this.qrScanner.hide(); // hide camera preview
+    this.hideCamera();
   }
 }
