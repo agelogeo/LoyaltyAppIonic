@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Operator} from "../../model/operator";
+import {QrPage} from "../qr/qr";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -30,6 +31,10 @@ export class OperatorHomePage implements OnInit{
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad OperatorHomePage');
+  }
+
+  openCamera(){
+    this.navCtrl.push(QrPage);
   }
 
   ngOnInit(){

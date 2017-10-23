@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
-import {OperatorHomePage} from "../operator-home/operator-home";
+import {TabsPage} from "../operator-tabs/operator-tabs";
 
 /**
  * Generated class for the OperatorLoginPage page.
@@ -52,11 +52,12 @@ export class OperatorLoginPage {
           message: 'You logged in successfully',
           showCloseButton: true,
           closeButtonText: 'Ok',
+          position:'middle',
           duration: 2000
         });
         loading.dismiss();
         toast.present();
-        this.navCtrl.setRoot(OperatorHomePage,{id:data.id,
+        this.navCtrl.setRoot(TabsPage,{id:data.id,
           username:data.username,
           password:data.password,
           access_level:data.access_level,

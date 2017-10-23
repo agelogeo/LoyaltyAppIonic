@@ -11,6 +11,9 @@ import {CustomerHomePage} from "../pages/customer-home/customer-home";
 import {CustomerLoginPage} from "../pages/customer-login/customer-login";
 import {OperatorHomePage} from "../pages/operator-home/operator-home";
 import {OperatorLoginPage} from "../pages/operator-login/operator-login";
+import { QRScanner } from '@ionic-native/qr-scanner';
+import {QrPage} from "../pages/qr/qr";
+import {TabsPage} from "../pages/operator-tabs/operator-tabs";
 
 @NgModule({
   declarations: [
@@ -19,7 +22,9 @@ import {OperatorLoginPage} from "../pages/operator-login/operator-login";
     CustomerHomePage,
     CustomerLoginPage,
     OperatorHomePage,
-    OperatorLoginPage
+    OperatorLoginPage,
+    QrPage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -33,10 +38,13 @@ import {OperatorLoginPage} from "../pages/operator-login/operator-login";
     CustomerHomePage,
     CustomerLoginPage,
     OperatorHomePage,
-    OperatorLoginPage
+    OperatorLoginPage,
+    QrPage,
+    TabsPage
   ],
   providers: [
     StatusBar,
+    QRScanner,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

@@ -3,7 +3,6 @@ import {AlertController, LoadingController, NavController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
 import 'rxjs';
-import {Logger} from "@ionic/app-scripts/dist/logger/logger";
 import {CustomerHomePage} from "../customer-home/customer-home";
 import {CustomerLoginPage} from "../customer-login/customer-login";
 import {OperatorLoginPage} from "../operator-login/operator-login";
