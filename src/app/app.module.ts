@@ -16,6 +16,7 @@ import {QrPage} from "../pages/qr/qr";
 import {TabsPage} from "../pages/operator-tabs/operator-tabs";
 import {ScannedPage} from "../pages/scanned/scanned";
 
+
 @NgModule({
   declarations: [
     MyApp,

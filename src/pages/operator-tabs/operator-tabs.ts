@@ -6,7 +6,7 @@ import {NavParams} from "ionic-angular";
 @Component({
   selector: 'page-tabs',
   template: `
-    <ion-tabs color="primary">
+    <ion-tabs color="dark">
       <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home" [rootParams]="homeParams"></ion-tab>
       <ion-tab [root]="scanPage" tabTitle="Scan" tabIcon="qr-scanner" ></ion-tab>
     </ion-tabs>

@@ -41,8 +41,6 @@ export class QrPage implements OnInit{
             toast.present();
 
 
-
-
             this.qrScanner.hide(); // hide camera preview
             this.hideCamera();
             scanSub.unsubscribe(); // stop scanning

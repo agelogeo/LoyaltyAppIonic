@@ -2,22 +2,24 @@ page-customer-home {
 
   .head{
     background-image: url("../assets/bg.jpg");
-    background-size: cover;
+    background-size: 130% 100%;
     background-position: center center;
     background-repeat: no-repeat;
+    color: #ffffff;
   }
 
   .bottom{
     height : 100px;
     padding-top: 35px;
-    border: 5px solid #2da7bf;
+    border: 5px solid #e84c3d;
     border-radius: 100%;
   }
 
   #barcode{
     border-radius: 100%;
-    background-blend-mode: multiply;
+    background-blend-mode: normal;
     mix-blend-mode: screen;
+    filter: invert(100%);
   }
 
   #top{
@@ -25,10 +27,19 @@ page-customer-home {
   }
 
   #middle{
-    margin-top: -60px;
+    margin-top: -20px;
+    margin-bottom: -10px;
   }
 
   #footer{
+    margin-left : -10px;
+    margin-right : -10px;
+    margin-bottom : -5px;
+    background-color: #f4f4f4;
+    background : linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+    );
     margin-top: -20px;
   }
 }

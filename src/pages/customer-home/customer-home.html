@@ -7,7 +7,7 @@
 <ion-header>
   <ion-navbar>
       <button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>
-    <ion-title>Welcome {{ customer.name }}</ion-title>
+    <ion-title>Barcode  #{{ customer.barcode }}</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -16,14 +16,12 @@
     <ion-grid class="head">
       <ion-row  id="top">
         <ion-col text-left>
-          <h6>#{{ customer.barcode }}</h6>
-          Barcode
+          <h6>Last Visit</h6>
         </ion-col>
-        <ion-col text-right>
-          <h6>{{ customer.last_visit }}</h6>
-          Last visit
-        </ion-col>
-      </ion-row>
+      <ion-col text-right>
+        <h6>{{ customer.last_visit }}</h6>
+      </ion-col>
+    </ion-row>
       <ion-row no-padding no-margin id="middle">
         <ion-col  text-center>
             <img id="barcode" width="200"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
