@@ -1,0 +1,56 @@
+<!--
+  Generated template for the DatabaseStatsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Database Stats</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-card *ngFor="let c of customers">
+      <ion-card-title margin-left>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              {{c.name}} {{c.surname}}
+            </ion-col>
+            <ion-col>
+              {{c.barcode}}
+            </ion-col>
+            <ion-col>
+              {{c.phone}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-title>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              Stamps : {{c.stamps}}
+            </ion-col>
+            <ion-col>
+              Coupons Used : {{c.coupons_used}}
+            </ion-col>
+            <ion-col>
+              Total Visits : {{c.visits}}
+            </ion-col>
+            <ion-col>
+              Last Visit : {{c.last_visit}}
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+</ion-content>

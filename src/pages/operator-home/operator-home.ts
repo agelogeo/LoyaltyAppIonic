@@ -1,7 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Operator} from "../../model/operator";
 import {QrPage} from "../qr/qr";
+import {DatabaseStatsPage} from "../database-stats/database-stats";
+import {Http} from "@angular/http";
+import {Customer} from "../../model/customer";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -19,7 +22,7 @@ export class OperatorHomePage implements OnInit{
 
   operator = new Operator();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
     this.operator.id=this.navParams.get('id');
     this.operator.username=this.navParams.get('username');
     this.operator.password=this.navParams.get('password');
@@ -39,5 +42,58 @@ export class OperatorHomePage implements OnInit{
 
   ngOnInit(){
     console.log(this.operator);
+  }
+
+  openDatabaseStats(){
+      const loading = this.loadingCtrl.create({
+        content : 'Please wait..'
+      });
+      loading.present();
+
+      console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=get_db&filter=name');
+      this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=get_db&filter=name')
+        .map(res => res.json()).subscribe(data => {
+
+        if (data.error != null) {
+          const alert = this.alertCtrl.create({
+            title: 'Error',
+            message: data.message,
+            buttons: [{
+              text : 'Ok',
+              handler: () => {
+                loading.dismiss();
+              }
+            }]
+          });
+          alert.present();
+        }else {
+          const toast = this.toastCtrl.create({
+            message: 'You logged in successfully',
+            showCloseButton: true,
+            closeButtonText: 'Ok',
+            position:'middle',
+            duration: 2000
+          });
+          loading.dismiss();
+          toast.present();
+          var customers : Customer[] = [];
+
+          for(var item of data.results){
+            const c = new Customer();
+            c.id=item.id;
+            c.name=item.name;
+            c.surname=item.surname;
+            c.phone=item.phone;
+            c.barcode=item.barcode;
+            c.stamps=item.stamps;
+            c.coupons_used=item.coupons_used;
+            c.visits=item.visits;
+            c.last_visit=item.last_visit;
+            customers.push(c);
+          }
+          this.navCtrl.push(DatabaseStatsPage,{customers : customers});
+        }
+      });
+
   }
 }

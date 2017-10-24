@@ -16,6 +16,7 @@ import {QrPage} from "../pages/qr/qr";
 import {TabsPage} from "../pages/operator-tabs/operator-tabs";
 import {ScannedPage} from "../pages/scanned/scanned";
 import {CustomerHomeTabsPage} from "../pages/customer-home-tabs/customer-home-tabs";
+import {DatabaseStatsPage} from "../pages/database-stats/database-stats";
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import {CustomerHomeTabsPage} from "../pages/customer-home-tabs/customer-home-ta
     QrPage,
     TabsPage,
     ScannedPage,
-    CustomerHomeTabsPage
+    CustomerHomeTabsPage,
+    DatabaseStatsPage
   ],
   imports: [
     BrowserModule,
@@ -47,7 +49,8 @@ import {CustomerHomeTabsPage} from "../pages/customer-home-tabs/customer-home-ta
     QrPage,
     TabsPage,
     ScannedPage,
-    CustomerHomeTabsPage
+    CustomerHomeTabsPage,
+    DatabaseStatsPage
   ],
   providers: [
     StatusBar,
