@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {FilterPage} from "../filter/filter";
 
 /**
  * Generated class for the DatabaseStatsPage page.
@@ -17,7 +18,7 @@ export class DatabaseStatsPage {
 
   customers : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private popoverCtrl:PopoverController) {
   }
 
   ionViewDidLoad() {
@@ -28,4 +29,24 @@ export class DatabaseStatsPage {
     this.customers=this.navParams.get('customers');
   }
 
+  onFilter(event: MouseEvent){
+      const popover = this.popoverCtrl.create(FilterPage);
+      popover.present({ev: event});
+      popover.onDidDismiss(
+        data => {
+          if (data == null) {
+
+          }else{
+            if (data.action == "android"){
+
+            } else if (data.action == "ios"){
+
+            }else if (data.action == "windows"){
+
+            }
+          }
+        }
+      )
+
+  }
 }

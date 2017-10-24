@@ -8,6 +8,9 @@
 
   <ion-navbar>
     <ion-title>Database Stats</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="onFilter($event)"><ion-icon name="funnel"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -16,34 +19,37 @@
 <ion-content padding>
   <ion-list>
     <ion-card *ngFor="let c of customers">
-      <ion-card-title margin-left>
+
+      <ion-card-content>
         <ion-grid>
           <ion-row>
-            <ion-col>
+            <ion-col text-center>
               {{c.name}} {{c.surname}}
             </ion-col>
-            <ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col text-left>
               {{c.barcode}}
             </ion-col>
-            <ion-col>
+            <ion-col text-right>
               {{c.phone}}
             </ion-col>
           </ion-row>
-        </ion-grid>
-      </ion-card-title>
-      <ion-card-content>
-        <ion-grid>
           <ion-row>
             <ion-col>
               Stamps : {{c.stamps}}
             </ion-col>
+            <ion-col text-right>
+              Total Visits : {{c.visits}}
+            </ion-col>
+          </ion-row>
+          <ion-row>
             <ion-col>
               Coupons Used : {{c.coupons_used}}
             </ion-col>
-            <ion-col>
-              Total Visits : {{c.visits}}
-            </ion-col>
-            <ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col text-right>
               Last Visit : {{c.last_visit}}
             </ion-col>
           </ion-row>
