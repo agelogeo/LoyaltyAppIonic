@@ -3,6 +3,7 @@ import {AlertController, IonicPage, LoadingController, NavController, NavParams,
 import {NgForm} from "@angular/forms";
 import {CustomerHomePage} from "../customer-home/customer-home";
 import {Http} from "@angular/http";
+import {CustomerHomeTabsPage} from "../customer-home-tabs/customer-home-tabs";
 
 /**
  * Generated class for the CustomerLoginPage page.
@@ -57,7 +58,7 @@ export class CustomerLoginPage {
         });
         loading.dismiss();
         toast.present();
-        this.navCtrl.setRoot(CustomerHomePage,{id:data.id,
+        this.navCtrl.setRoot(CustomerHomeTabsPage,{id:data.id,
                                                       name:data.name,
                                                       surname:data.surname,
                                                       phone:data.phone,

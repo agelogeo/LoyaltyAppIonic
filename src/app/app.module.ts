@@ -15,6 +15,7 @@ import { QRScanner } from '@ionic-native/qr-scanner';
 import {QrPage} from "../pages/qr/qr";
 import {TabsPage} from "../pages/operator-tabs/operator-tabs";
 import {ScannedPage} from "../pages/scanned/scanned";
+import {CustomerHomeTabsPage} from "../pages/customer-home-tabs/customer-home-tabs";
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {ScannedPage} from "../pages/scanned/scanned";
     OperatorLoginPage,
     QrPage,
     TabsPage,
-    ScannedPage
+    ScannedPage,
+    CustomerHomeTabsPage
   ],
   imports: [
     BrowserModule,
@@ -44,7 +46,8 @@ import {ScannedPage} from "../pages/scanned/scanned";
     OperatorLoginPage,
     QrPage,
     TabsPage,
-    ScannedPage
+    ScannedPage,
+    CustomerHomeTabsPage
   ],
   providers: [
     StatusBar,

@@ -1,5 +1,5 @@
 <!--
-  Generated template for the ScannedPage page.
+  Generated template for the CustomerHomePage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -26,12 +26,15 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-fab middle right edge margin-bottom >
-    <button   color="danger" ion-fab><img src="assets/btn.png"></button>
-  </ion-fab>
+
   <ion-grid padding>
+
     <ion-row >
+      <ion-fab middle right edge margin-bottom >
+        <button   color="danger" ion-fab><img src="assets/btn.png"></button>
+      </ion-fab>
       <ion-col text-center>
+
         <ion-card>
           <ion-card-content>
             <ion-card-title>
@@ -59,10 +62,10 @@
     <ion-row>
       <ion-col text-center>
         <ion-card>
+          <ion-card-header>
+            {{ customer.last_visit }}
+          </ion-card-header>
           <ion-card-content>
-            <ion-card-title>
-              {{ customer.last_visit }}
-            </ion-card-title>
             <p>
               Last Visit
             </p>

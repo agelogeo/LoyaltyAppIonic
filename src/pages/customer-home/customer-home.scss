@@ -1,36 +1,43 @@
 page-customer-home {
 
-  .head{
+  .barcode-bg{
     background-image: url("../assets/bg.jpg");
-    background-size: 120% 130%;
+    background-size: 100% 100%;
     background-position: center center;
     background-repeat: no-repeat;
     color: #ffffff;
   }
 
-  .bottom{
-    height : 100px;
-    padding-top: 35px;
-    border: 5px solid #e84c3d;
-    border-radius: 100%;
+  p{
+    color: #0076fe;
+  }
+
+  .barcode-text{
+    text-color : #ffffff;
   }
 
   #barcode{
     border-radius: 100%;
     background-blend-mode: normal;
-    mix-blend-mode: screen;
-    filter: invert(100%);
+    mix-blend-mode: normal;
+    filter: invert(0%);
   }
 
-  #top{
 
+
+
+  ion-grid {
+    height: 100%;
   }
 
-  #middle{
-    margin-top: -10px;
-    margin-bottom: -20px;
+  .full-row {
+    height: 100%;
   }
 
+  .semi-row{
+    height: 80%;
+  }
+///////////////////////////////////////////
   #footer{
     margin-left : -10px;
     margin-right : -10px;
@@ -42,4 +49,5 @@ page-customer-home {
     );
     margin-top: -20px;
   }
+
 }
