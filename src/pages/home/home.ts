@@ -43,7 +43,7 @@ export class HomePage {
             }]
           });
           alert.present();
-        }else {
+        }else if(data.success == 1){
           const alert = this.alertCtrl.create({
             title: 'Success',
             message: 'You account have been created successfully.',
@@ -55,8 +55,21 @@ export class HomePage {
             }]
           });
           alert.present();
-          this.navCtrl.push(CustomerHomePage,{name : form.value.name, surname : form.value.surname, phone : form.value.phone});
+          this.navCtrl.push(CustomerLoginPage,{phone : form.value.phone});
+        }else{
+          const alert = this.alertCtrl.create({
+            title: 'Oups..',
+            message: 'Something went wrong',
+            buttons: [{
+              text : 'Ok',
+              handler: () => {
+                loading.dismiss();
+              }
+            }]
+          });
+          alert.present();
         }
+
     });
     console.log("Test");
   }

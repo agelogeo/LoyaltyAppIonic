@@ -20,6 +20,7 @@ import {CustomerHomeTabsPage} from "../customer-home-tabs/customer-home-tabs";
 export class CustomerLoginPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private toastCtrl:ToastController,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
+
   }
 
   ionViewDidLoad() {
