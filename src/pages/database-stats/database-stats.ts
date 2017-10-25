@@ -82,7 +82,7 @@ export class DatabaseStatsPage {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+
           }
         }
       ]

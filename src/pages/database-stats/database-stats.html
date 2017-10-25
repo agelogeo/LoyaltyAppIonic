@@ -17,9 +17,36 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-card *ngFor="let c of customers">
+  <ion-list >
+    <ion-item *ngFor="let c of customers" no-padding no-margin>
+      <ion-grid no-margin no-padding>
+        <ion-row>
+          <ion-col>
+            <h2>{{c.name}} {{c.surname}}</h2>
+          </ion-col>
+          <ion-col text-right>
+            <h2>#{{c.barcode}}</h2>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <h3>{{c.visits}} Total visits | {{c.last_visit}}</h3>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <p>{{c.coupons_used}} Coupons Used</p>
+          </ion-col>
+          <ion-col text-right>
+            <p>{{c.stamps}} Stamps</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
 
+
+    </ion-item>
+
+    <!--<ion-card *ngFor="let c of customers">
       <ion-card-content>
         <ion-grid>
           <ion-row>
@@ -56,7 +83,7 @@
         </ion-grid>
 
       </ion-card-content>
-    </ion-card>
+    </ion-card>-->
   </ion-list>
 
 </ion-content>
