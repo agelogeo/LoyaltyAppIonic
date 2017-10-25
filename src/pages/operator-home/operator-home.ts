@@ -45,7 +45,8 @@ export class OperatorHomePage implements OnInit{
   }
 
   openDatabaseStats(){
-      const loading = this.loadingCtrl.create({
+    this.navCtrl.push(DatabaseStatsPage);
+      /*const loading = this.loadingCtrl.create({
         content : 'Please wait..'
       });
       loading.present();
@@ -85,7 +86,7 @@ export class OperatorHomePage implements OnInit{
           }
           this.navCtrl.push(DatabaseStatsPage,{customers : customers});
         }
-      });
+      });*/
 
   }
 }

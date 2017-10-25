@@ -1,6 +1,12 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, PopoverController} from 'ionic-angular';
+import {
+  AlertController, IonicPage, LoadingController, NavController, NavParams,
+  PopoverController
+} from 'ionic-angular';
 import {FilterPage} from "../filter/filter";
+import {Customer} from "../../model/customer";
+import {Http} from "@angular/http";
+import {MyLinks} from "../../services/mylinks";
 
 /**
  * Generated class for the DatabaseStatsPage page.
@@ -18,7 +24,7 @@ export class DatabaseStatsPage {
 
   customers : any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private popoverCtrl:PopoverController) {
+  constructor(private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -26,7 +32,7 @@ export class DatabaseStatsPage {
   }
 
   ionViewWillEnter(){
-    this.customers=this.navParams.get('customers');
+    this.openDatabaseStats('default');
   }
 
   onFilter(event: MouseEvent){
@@ -37,16 +43,55 @@ export class DatabaseStatsPage {
           if (data == null) {
 
           }else{
-            if (data.action == "android"){
-
-            } else if (data.action == "ios"){
-
-            }else if (data.action == "windows"){
-
-            }
+            this.openDatabaseStats(data.action);
           }
         }
       )
+
+  }
+
+  openDatabaseStats(filter:string){
+    const loading = this.loadingCtrl.create({
+      content : 'Please wait..'
+    });
+    loading.present();
+
+    console.log(this.ml.base+this.ml.a_get_db+'&filter='+filter);
+    this.http.get(this.ml.base+this.ml.a_get_db+'&filter='+filter)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        loading.dismiss();
+        var customers : Customer[] = [];
+
+        for(var item of data.results){
+          const c = new Customer();
+          c.id=item.id;
+          c.name=item.name;
+          c.surname=item.surname;
+          c.phone=item.phone;
+          c.barcode=item.barcode;
+          c.stamps=item.stamps;
+          c.coupons_used=item.coupons_used;
+          c.visits=item.visits;
+          c.last_visit=item.last_visit;
+          customers.push(c);
+        }
+        this.customers=customers;
+      }
+    });
 
   }
 }
