@@ -14,49 +14,80 @@
   </ion-navbar>
 </ion-header>
 
+<!--
+<img  id="barcode"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
+-->
+
 
 <ion-content >
 
+  <ion-grid no-padding align-items-stretch>
+    <ion-row align-items-stretch id="first_row">
+    <ion-col col-8>
 
-  <ion-grid no-padding no-margin>
-    <ion-row align-items-stretch class="semi-row">
-      <ion-col text-center align-self-center>
-        <h4>{{ customer.coupons_used }}</h4>
-        <p>Coupons Used</p>
-      </ion-col>
-      <ion-col text-center align-self-center>
-        <h4>{{ customer.stamps }}</h4>
-        <p>Current Stamps</p>
-      </ion-col>
+      <ion-row >
+        <ion-col text-center>
+          <img  id="barcode"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
+          <br>
+          <h4 id="barcode_text">{{customer.barcode}}</h4>
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col text-center>
+          <h6>{{customer.name}} {{customer.surname}}</h6>
+          <p>{{customer.phone}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col text-center>
+          <button ion-button block outline>MENU</button>
+        </ion-col>
+      </ion-row>
+
+      <ion-row >
+        <ion-col text-center>
+          <button ion-button block outline>DEALS</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
+
+    <ion-col align-self-stretch align-items-center>
+
+      <ion-row class="rows side-background">
+        <ion-col text-center align-self-center>
+          <h4>{{customer.stamps}}</h4>
+          <p>Stamps</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="rows side-background">
+        <ion-col text-center align-self-center>
+          <h4>{{customer.coupons_used}}</h4>
+          <p>Coupons Used</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="rows side-background">
+        <ion-col text-center align-self-center>
+          <h4>{{customer.visits}}</h4>
+          <p>Total Visits</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="rows side-background">
+        <ion-col text-center align-self-center>
+          <h6>{{customer.last_visit}}</h6>
+          <p>Last Visit</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-col>
     </ion-row>
-    <ion-row class="barcode-bg full-row" >
-      <ion-col  text-left align-self-center margin-left >
-        <img  id="barcode"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
-      </ion-col>
-      <ion-col>
-        <ion-row class="barcode-text " margin-top margin-right >
-          <ion-col text-left >
-            <h6>{{ customer.name }} {{ customer.surname }}</h6>
-            <h6>{{ customer.phone }}</h6><br><br>
-            <ion-row >
-              <ion-col text-right>
-                <h3>#{{customer.barcode}}</h3>
-              </ion-col>
-            </ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-    <ion-row align-items-stretch class="semi-row">
-      <ion-col text-center align-self-center>
-        <h4>{{ customer.last_visit }}</h4>
-        <p>Last Visit</p>
-      </ion-col>
-      <ion-col text-center align-self-center>
-        <h4>{{ customer.visits }}</h4>
-        <p>Total Visits</p>
-      </ion-col>
-    </ion-row>
+
   </ion-grid>
+
 
 </ion-content>
