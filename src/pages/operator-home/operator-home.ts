@@ -46,47 +46,7 @@ export class OperatorHomePage implements OnInit{
 
   openDatabaseStats(){
     this.navCtrl.push(DatabaseStatsPage);
-      /*const loading = this.loadingCtrl.create({
-        content : 'Please wait..'
-      });
-      loading.present();
 
-      console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=get_db&filter=name');
-      this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=get_db&filter=name')
-        .map(res => res.json()).subscribe(data => {
-
-        if (data.error != null) {
-          const alert = this.alertCtrl.create({
-            title: 'Error',
-            message: data.message,
-            buttons: [{
-              text : 'Ok',
-              handler: () => {
-                loading.dismiss();
-              }
-            }]
-          });
-          alert.present();
-        }else {
-          loading.dismiss();
-          var customers : Customer[] = [];
-
-          for(var item of data.results){
-            const c = new Customer();
-            c.id=item.id;
-            c.name=item.name;
-            c.surname=item.surname;
-            c.phone=item.phone;
-            c.barcode=item.barcode;
-            c.stamps=item.stamps;
-            c.coupons_used=item.coupons_used;
-            c.visits=item.visits;
-            c.last_visit=item.last_visit;
-            customers.push(c);
-          }
-          this.navCtrl.push(DatabaseStatsPage,{customers : customers});
-        }
-      });*/
 
   }
 }
