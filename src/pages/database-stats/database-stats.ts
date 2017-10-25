@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {
+  ActionSheetController,
   AlertController, IonicPage, LoadingController, NavController, NavParams,
   PopoverController
 } from 'ionic-angular';
@@ -24,7 +25,7 @@ export class DatabaseStatsPage {
 
   customers : any;
 
-  constructor(private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
+  constructor(public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -36,7 +37,7 @@ export class DatabaseStatsPage {
   }
 
   onFilter(event: MouseEvent){
-      const popover = this.popoverCtrl.create(FilterPage);
+      /*const popover = this.popoverCtrl.create(FilterPage);
       popover.present({ev: event});
       popover.onDidDismiss(
         data => {
@@ -46,7 +47,47 @@ export class DatabaseStatsPage {
             this.openDatabaseStats(data.action);
           }
         }
-      )
+      )*/
+
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Sort Filter',
+      buttons: [
+        {
+          text: 'Default',
+          role: 'destructive',
+          handler: () => {
+            this.openDatabaseStats('default');
+          }
+        },{
+          text: 'Name',
+          handler: () => {
+            this.openDatabaseStats('name');
+          }
+        },{
+          text: 'Stamps',
+          handler: () => {
+            this.openDatabaseStats('stamps');
+          }
+        },{
+          text: 'Barcode',
+          handler: () => {
+            this.openDatabaseStats('barcode');
+          }
+        },{
+          text: 'Total Visits',
+          handler: () => {
+            this.openDatabaseStats('visits');
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
 
   }
 
