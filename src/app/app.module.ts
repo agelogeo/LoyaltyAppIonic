@@ -18,6 +18,7 @@ import {ScannedPage} from "../pages/scanned/scanned";
 import {CustomerHomeTabsPage} from "../pages/customer-home-tabs/customer-home-tabs";
 import {DatabaseStatsPage} from "../pages/database-stats/database-stats";
 import {FilterPage} from "../pages/filter/filter";
+import {MyLinks} from "../services/mylinks";
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import {FilterPage} from "../pages/filter/filter";
     StatusBar,
     QRScanner,
     SplashScreen,
+    MyLinks,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

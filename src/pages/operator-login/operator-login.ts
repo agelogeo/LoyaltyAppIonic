@@ -3,6 +3,7 @@ import {AlertController, IonicPage, LoadingController, NavController, NavParams,
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
 import {TabsPage} from "../operator-tabs/operator-tabs";
+import {MyLinks} from "../../services/mylinks";
 
 /**
  * Generated class for the OperatorLoginPage page.
@@ -18,7 +19,7 @@ import {TabsPage} from "../operator-tabs/operator-tabs";
 })
 export class OperatorLoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -31,8 +32,8 @@ export class OperatorLoginPage {
     });
     loading.present();
 
-    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_login&username='+form.value.username+'&password='+form.value.password);
-    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_login&username='+form.value.username+'&password='+form.value.password)
+    console.log(this.ml.base+this.ml.a_operator_login+'&username='+form.value.username+'&password='+form.value.password);
+    this.http.get(this.ml.base+this.ml.a_operator_login+'&username='+form.value.username+'&password='+form.value.password)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
@@ -48,15 +49,7 @@ export class OperatorLoginPage {
         });
         alert.present();
       }else {
-        const toast = this.toastCtrl.create({
-          message: 'You logged in successfully',
-          showCloseButton: true,
-          closeButtonText: 'Ok',
-          position:'middle',
-          duration: 2000
-        });
         loading.dismiss();
-        toast.present();
         this.navCtrl.setRoot(TabsPage,{id:data.id,
           username:data.username,
           password:data.password,

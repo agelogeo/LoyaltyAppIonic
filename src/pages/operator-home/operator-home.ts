@@ -67,15 +67,7 @@ export class OperatorHomePage implements OnInit{
           });
           alert.present();
         }else {
-          const toast = this.toastCtrl.create({
-            message: 'You logged in successfully',
-            showCloseButton: true,
-            closeButtonText: 'Ok',
-            position:'middle',
-            duration: 2000
-          });
           loading.dismiss();
-          toast.present();
           var customers : Customer[] = [];
 
           for(var item of data.results){
