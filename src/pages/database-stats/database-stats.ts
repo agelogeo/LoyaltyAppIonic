@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {
   ActionSheetController,
   AlertController, IonicPage, LoadingController, NavController, NavParams,
-  PopoverController
+  PopoverController, ToastController
 } from 'ionic-angular';
 import {FilterPage} from "../filter/filter";
 import {Customer} from "../../model/customer";
@@ -25,7 +25,7 @@ export class DatabaseStatsPage {
 
   customers : any;
 
-  constructor(public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
+  constructor(private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -134,5 +134,63 @@ export class DatabaseStatsPage {
       }
     });
 
+  }
+
+  onDelete(customer:Customer,i : number){
+    console.log(customer);
+    console.log(i);
+    const alert = this.alertCtrl.create({
+      title: 'Are you sure?',
+      message: 'If you click Yes ,you won\'t be able to recover this customer',
+      buttons: [
+        {
+        text : 'No',
+        role : 'cancel',
+        handler : () => {
+        }
+        },
+        {
+        text : 'Delete',
+          handler: () => {
+            this.deleteCustomer(customer,i);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  deleteCustomer(customer:Customer,i : number){
+    const loading = this.loadingCtrl.create({
+      content : 'Please wait..'
+    });
+    loading.present();
+
+    console.log(this.ml.base+this.ml.a_customer_deletion+'&id='+customer.id);
+    this.http.get(this.ml.base+this.ml.a_customer_deletion+'&id='+customer.id)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        loading.dismiss();
+        this.customers.splice(i,1);
+        const toast = this.toastCtrl.create({
+          message: customer.name+' '+customer.surname+' was removed successfully',
+          duration: 1500,
+        });
+        toast.present();
+      }
+    });
   }
 }
