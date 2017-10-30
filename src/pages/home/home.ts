@@ -9,7 +9,8 @@ import {OperatorLoginPage} from "../operator-login/operator-login";
 
 @Component({
   selector: 'page-home',
-  templateUrl: 'home.html'
+  templateUrl: 'home.html',
+
 })
 export class HomePage {
 
@@ -81,4 +82,5 @@ export class HomePage {
   goToAdmin(){
     this.navCtrl.push(OperatorLoginPage);
   }
+
 }

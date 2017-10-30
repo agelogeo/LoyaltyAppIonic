@@ -20,7 +20,6 @@ import {DatabaseStatsPage} from "../pages/database-stats/database-stats";
 import {FilterPage} from "../pages/filter/filter";
 import {MyLinks} from "../services/mylinks";
 
-
 @NgModule({
   declarations: [
     MyApp,

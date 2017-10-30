@@ -46,3 +46,72 @@
 ion-app.cameraView, ion-app.cameraView ion-content, ion-app.cameraView .nav-decor {
   background: transparent none !important;
 }
+
+@-webkit-keyframes animateInPrimary {
+  0% {
+    -webkit-transform: translate3d(0,+500%,0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+@-webkit-keyframes animateFromLeftToRight {
+  0% {
+    -webkit-transform: translate3d(-200%,0,0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+@-webkit-keyframes animateFromRightToLeft {
+  0% {
+    -webkit-transform: translate3d(+200%,0,0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+@-webkit-keyframes animateFromTopToBottom{
+
+  0% {
+    -webkit-transform: translate3d(0,-200%,0);
+  }
+
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+
+.animate-in-primary  {
+   -webkit-animation: animateInPrimary;
+   animation: animateInPrimary;
+   -webkit-animation-duration: 750ms;
+   animation-duraton: 750ms;
+}
+
+.animate-from-left-to-right  {
+  -webkit-animation: animateFromLeftToRight;
+  animation: animateFromLeftToRight;
+  -webkit-animation-duration: 750ms;
+  animation-duraton: 750ms;
+}
+
+.animate-from-right-to-left  {
+  -webkit-animation: animateFromRightToLeft;
+  animation: animateFromRightToLeft;
+  -webkit-animation-duration: 750ms;
+  animation-duraton: 750ms;
+}
+
+.animate-from-top-to-bottom {
+  -webkit-animation: animateFromTopToBottom;
+  animation: animateFromTopToBottom;
+  -webkit-animation-duration: 750ms;
+  animation-duraton: 750ms;
+}
