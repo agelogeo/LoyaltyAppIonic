@@ -18,7 +18,7 @@
 
 <ion-content >
   <ion-list >
-    <ion-item-sliding *ngFor="let c of customers; let i = index" no-padding no-margin>
+    <ion-item-sliding *ngFor="let c of customers; let i = index;" no-padding no-margin [ngClass]="(i%2==0) ? 'animate-from-left-to-right':'animate-from-right-to-left'">
       <ion-item  >
         <ion-grid no-margin no-padding>
           <ion-row>
