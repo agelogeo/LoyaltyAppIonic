@@ -91,22 +91,22 @@ ion-app.cameraView, ion-app.cameraView ion-content, ion-app.cameraView .nav-deco
 .animate-in-primary  {
    -webkit-animation: animateInPrimary;
    animation: animateInPrimary;
-   -webkit-animation-duration: 750ms;
-   animation-duraton: 750ms;
+   -webkit-animation-duration: 100ms;
+   animation-duraton: 2000ms;
 }
 
 .animate-from-left-to-right  {
   -webkit-animation: animateFromLeftToRight;
   animation: animateFromLeftToRight;
-  -webkit-animation-duration: 750ms;
-  animation-duraton: 750ms;
+  -webkit-animation-duration: 1200ms;
+  animation-duraton: 1200ms;
 }
 
 .animate-from-right-to-left  {
   -webkit-animation: animateFromRightToLeft;
   animation: animateFromRightToLeft;
-  -webkit-animation-duration: 750ms;
-  animation-duraton: 750ms;
+  -webkit-animation-duration: 1200ms;
+  animation-duraton: 1200ms;
 }
 
 .animate-from-top-to-bottom {
