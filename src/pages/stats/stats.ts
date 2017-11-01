@@ -3,6 +3,7 @@ import {AlertController, IonicPage, LoadingController, NavController, NavParams,
 import { Chart } from 'chart.js';
 import {MyLinks} from "../../services/mylinks";
 import {Http} from "@angular/http";
+import {PieChartForm} from "../../model/piechartForm";
 
 /**
  * Generated class for the StatsPage page.
@@ -27,11 +28,12 @@ export class StatsPage {
   doughnutChart: any;
   lineChart: any;
 
-  names = [];
-  counts = [];
+
 
   constructor(private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
   }
+
+  pieChartForm = new PieChartForm();
 
   fix(){
     const loading = this.loadingCtrl.create({
@@ -57,14 +59,12 @@ export class StatsPage {
         alert.present();
       }else {
         loading.dismiss();
-        this.names = [];
-        this.counts = [];
+        this.pieChartForm = new PieChartForm();
         for(var i=0;i<data.results.length;i++){
-          this.names.push(data.results[i].name);
-          this.counts.push(data.results[i].count);
+          this.pieChartForm.names.push(data.results[i].name);
+          this.pieChartForm.counts.push(data.results[i].count);
+          this.pieChartForm.getRandomColor();
         }
-        console.log(this.names);
-        console.log(this.counts);
         this.startPieChart();
       }
     });
@@ -81,22 +81,8 @@ export class StatsPage {
         datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
-            'rgba(255, 159, 64, 1)'
-          ],
+
+
           borderWidth: 1
         }]
       },
@@ -112,9 +98,9 @@ export class StatsPage {
 
     });
 
-    this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
+    /*this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
-      type: 'doughnut',
+      type: 'pie',
       data: {
         labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
         datasets: [{
@@ -137,9 +123,15 @@ export class StatsPage {
             "#FFCE56"
           ]
         }]
+
+      },
+      options : {
+        animation: {
+          duration : 3000
+        }
       }
 
-    });
+    });*/
 
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
@@ -177,31 +169,23 @@ export class StatsPage {
   }
 
   startPieChart(){
+
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
       type: 'doughnut',
       data: {
-        labels: this.names,
+        labels: this.pieChartForm.names,
         datasets: [{
-          label: '# of Votes',
-          data: this.counts,
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
+          label: '% of coupons used',
+          data: this.pieChartForm.counts,
+          backgroundColor: this.pieChartForm.colors,
+          hoverBackgroundColor: this.pieChartForm.hover_colors
         }]
+      },
+      options : {
+        animation: {
+          duration : 3000
+        }
       }
 
     });
