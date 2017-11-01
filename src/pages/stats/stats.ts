@@ -40,7 +40,7 @@ export class StatsPage {
 
   pieChartSettings(){
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Sort Filter',
+      title: 'Chart Pie - Choose free dimension',
       buttons: [
         {
           text: 'Today',
@@ -197,7 +197,7 @@ export class StatsPage {
   }
 
   startPieChart(selected : string){
-    this.title = selected;
+    this.title = 'Used coupons - '+selected;
     if(this.doughnutChart!=null)
       this.doughnutChart.destroy();
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
