@@ -20,8 +20,8 @@
 
   <ion-card>
     <ion-card-header>
-      Doughnut Chart
-      <button float-right outline small ion-button icon-only (click)="fix()"><ion-icon name="construct"></ion-icon></button>
+      {{ title }}
+      <button float-right outline small ion-button icon-only (click)="pieChartSettings()"><ion-icon name="construct"></ion-icon></button>
     </ion-card-header>
     <ion-card-content>
       <canvas #doughnutCanvas></canvas>

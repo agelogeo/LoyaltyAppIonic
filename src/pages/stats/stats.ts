@@ -1,5 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {ActionSheetController, AlertController, IonicPage, LoadingController, NavController, NavParams,
+  ToastController
+} from 'ionic-angular';
 import { Chart } from 'chart.js';
 import {MyLinks} from "../../services/mylinks";
 import {Http} from "@angular/http";
@@ -27,22 +29,78 @@ export class StatsPage {
   barChart: any;
   doughnutChart: any;
   lineChart: any;
+  title:any;
 
 
 
-  constructor(private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(private actionSheetCtrl:ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
   }
 
   pieChartForm = new PieChartForm();
 
-  fix(){
+  pieChartSettings(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Sort Filter',
+      buttons: [
+        {
+          text: 'Today',
+          role: 'destructive',
+          handler: () => {
+
+            this.makeTheCall('2017-11-08','true','Today');
+          }
+        },{
+          text: 'Yesterday',
+          handler: () => {
+            this.makeTheCall('2017-11-07','true','Yesterday');
+          }
+        },{
+          text: 'Last week',
+          handler: () => {
+            this.makeTheCall('2017-01-01','false','Last week');
+          }
+        },{
+          text: 'Last month',
+          handler: () => {
+            this.makeTheCall('2017-01-01','false','Last month');
+          }
+        },{
+          text: 'Last 6 months',
+          handler: () => {
+            this.makeTheCall('2017-01-01','false','Last 6 months');
+          }
+        },{
+          text: 'Last year',
+          handler: () => {
+            this.makeTheCall('2017-01-01','false','Last year');
+          }
+        },{
+          text: 'All Time',
+          handler: () => {
+            this.makeTheCall('2017-01-01','false','All Time');
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+
+  makeTheCall(date : string, equality : string,title : string){
+    this.title=title;
     const loading = this.loadingCtrl.create({
       content : 'Please wait..'
     });
     loading.present();
 
-    console.log(this.ml.base+this.ml.a_get_pie_chart+'&username=test');
-    this.http.get(this.ml.base+this.ml.a_get_pie_chart+'&username=test')
+    console.log(this.ml.base+this.ml.a_get_pie_chart+'&date='+date+'&equality='+equality);
+    this.http.get(this.ml.base+this.ml.a_get_pie_chart+'&date='+date+'&equality='+equality)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
@@ -59,19 +117,22 @@ export class StatsPage {
         alert.present();
       }else {
         loading.dismiss();
+
         this.pieChartForm = new PieChartForm();
         for(var i=0;i<data.results.length;i++){
           this.pieChartForm.names.push(data.results[i].name);
           this.pieChartForm.counts.push(data.results[i].count);
           this.pieChartForm.getRandomColor();
         }
-        this.startPieChart();
+        this.startPieChart(title);
       }
     });
 
   }
 
   ionViewDidLoad() {
+
+    this.makeTheCall("2016-11-01","false",'All Time');
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
@@ -98,40 +159,7 @@ export class StatsPage {
 
     });
 
-    /*this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
-      type: 'pie',
-      data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
-        datasets: [{
-          label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-            'rgba(153, 102, 255, 0.2)',
-            'rgba(255, 159, 64, 0.2)'
-          ],
-          hoverBackgroundColor: [
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56",
-            "#FF6384",
-            "#36A2EB",
-            "#FFCE56"
-          ]
-        }]
-
-      },
-      options : {
-        animation: {
-          duration : 3000
-        }
-      }
-
-    });*/
 
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
@@ -168,8 +196,10 @@ export class StatsPage {
 
   }
 
-  startPieChart(){
-
+  startPieChart(selected : string){
+    this.title = selected;
+    if(this.doughnutChart!=null)
+      this.doughnutChart.destroy();
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
 
       type: 'doughnut',
