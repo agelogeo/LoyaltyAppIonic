@@ -9,6 +9,8 @@
   <ion-navbar>
     <ion-title>Database Stats</ion-title>
     <ion-buttons right>
+      <button ion-button icon-only><ion-icon name="analytics"></ion-icon></button>
+      <button ion-button icon-only (click)="onStats()"><ion-icon name="stats"></ion-icon></button>
       <button ion-button icon-only (click)="onFilter($event)"><ion-icon name="funnel"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>

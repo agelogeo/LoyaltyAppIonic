@@ -28,6 +28,7 @@ export class MyLinks{
   a_search_operator = '&action=search_operator';
   a_operator_save = '&action=operator_save';
   a_get_db = '&action=get_db';
+  a_get_pie_chart = '&action=get_pie_chart';
 
   base = this.url+this.database;
 

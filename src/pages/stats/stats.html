@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar color="danger">
+    <ion-title>
+      Demo Charts
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-header>
+      Bar Chart
+      <button float-right outline small ion-button icon-only><ion-icon name="construct"></ion-icon></button>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #barCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Doughnut Chart
+      <button float-right outline small ion-button icon-only (click)="fix()"><ion-icon name="construct"></ion-icon></button>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #doughnutCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      Line Chart
+      <button float-right outline small ion-button icon-only><ion-icon name="construct"></ion-icon></button>
+    </ion-card-header>
+    <ion-card-content>
+      <canvas #lineCanvas></canvas>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -8,6 +8,7 @@ import {FilterPage} from "../filter/filter";
 import {Customer} from "../../model/customer";
 import {Http} from "@angular/http";
 import {MyLinks} from "../../services/mylinks";
+import {StatsPage} from "../stats/stats";
 
 /**
  * Generated class for the DatabaseStatsPage page.
@@ -192,5 +193,9 @@ export class DatabaseStatsPage {
         toast.present();
       }
     });
+  }
+
+  onStats(){
+    this.navCtrl.push(StatsPage);
   }
 }
