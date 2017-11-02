@@ -39,6 +39,7 @@ export class StatsPage {
   pieChartForm = new PieChartForm();
 
   pieChartSettings(){
+    var date = new Date();
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Chart Pie - Choose free dimension',
       buttons: [
@@ -47,37 +48,37 @@ export class StatsPage {
           role: 'destructive',
           handler: () => {
 
-            this.makeTheCall('2017-11-08','true','Today');
+            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'-1','Today');
           }
         },{
           text: 'Yesterday',
           handler: () => {
-            this.makeTheCall('2017-11-07','true','Yesterday');
+            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1','Yesterday');
           }
         },{
           text: 'Last week',
           handler: () => {
-            this.makeTheCall('2017-01-01','false','Last week');
+            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'7','Last week');
           }
         },{
           text: 'Last month',
           handler: () => {
-            this.makeTheCall('2017-01-01','false','Last month');
+            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'30','Last month');
           }
         },{
           text: 'Last 6 months',
           handler: () => {
-            this.makeTheCall('2017-01-01','false','Last 6 months');
+            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'180','Last 6 months');
           }
         },{
           text: 'Last year',
           handler: () => {
-            this.makeTheCall('2017-01-01','false','Last year');
+            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'365','Last year');
           }
         },{
           text: 'All Time',
           handler: () => {
-            this.makeTheCall('2017-01-01','false','All Time');
+            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
           }
         },{
           text: 'Cancel',
@@ -92,15 +93,15 @@ export class StatsPage {
   }
 
 
-  makeTheCall(date : string, equality : string,title : string){
+  makeTheCall(date : string,hours : string, interval : string,title : string){
     this.title=title;
     const loading = this.loadingCtrl.create({
       content : 'Please wait..'
     });
     loading.present();
 
-    console.log(this.ml.base+this.ml.a_get_pie_chart+'&date='+date+'&equality='+equality);
-    this.http.get(this.ml.base+this.ml.a_get_pie_chart+'&date='+date+'&equality='+equality)
+    console.log(this.ml.base+this.ml.a_get_pie_chart+'&date='+date+'&interval='+interval+'&hours='+hours);
+    this.http.get(this.ml.base+this.ml.a_get_pie_chart+'&date='+date+'&interval='+interval+'&hours='+hours)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
@@ -131,8 +132,8 @@ export class StatsPage {
   }
 
   ionViewDidLoad() {
-
-    this.makeTheCall("2016-11-01","false",'All Time');
+    var date = new Date();
+    this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
