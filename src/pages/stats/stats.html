@@ -30,8 +30,8 @@
 
   <ion-card>
     <ion-card-header>
-      Line Chart
-      <button float-right outline small ion-button icon-only><ion-icon name="construct"></ion-icon></button>
+      {{ Linetitle }}
+      <button float-right outline small ion-button icon-only (click)="lineChartSettings()"><ion-icon name="construct"></ion-icon></button>
     </ion-card-header>
     <ion-card-content>
       <canvas #lineCanvas></canvas>

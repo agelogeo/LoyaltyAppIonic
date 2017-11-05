@@ -6,6 +6,7 @@ import { Chart } from 'chart.js';
 import {MyLinks} from "../../services/mylinks";
 import {Http} from "@angular/http";
 import {PieChartForm} from "../../model/piechartForm";
+import {LineChartForm} from "../../model/linechartForm";
 
 /**
  * Generated class for the StatsPage page.
@@ -30,6 +31,7 @@ export class StatsPage {
   doughnutChart: any;
   lineChart: any;
   title:any;
+  Linetitle:any;
 
 
 
@@ -37,6 +39,31 @@ export class StatsPage {
   }
 
   pieChartForm = new PieChartForm();
+  lineChartForm = new LineChartForm();
+
+  lineChartSettings(){
+    var date = new Date();
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Chart Line - Choose free dimension',
+      buttons: [
+        {
+          text: 'Today',
+          role: 'destructive',
+          handler: () => {
+
+            this.makeTheLineCall('2017-11-6','5','Today');
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 
   pieChartSettings(){
     var date = new Date();
@@ -48,37 +75,37 @@ export class StatsPage {
           role: 'destructive',
           handler: () => {
 
-            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'-1','Today');
+            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'-1','Today');
           }
         },{
           text: 'Yesterday',
           handler: () => {
-            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1','Yesterday');
+            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1','Yesterday');
           }
         },{
           text: 'Last week',
           handler: () => {
-            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'7','Last week');
+            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'7','Last week');
           }
         },{
           text: 'Last month',
           handler: () => {
-            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'30','Last month');
+            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'30','Last month');
           }
         },{
           text: 'Last 6 months',
           handler: () => {
-            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'180','Last 6 months');
+            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'180','Last 6 months');
           }
         },{
           text: 'Last year',
           handler: () => {
-            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'365','Last year');
+            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'365','Last year');
           }
         },{
           text: 'All Time',
           handler: () => {
-            this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
+            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
           }
         },{
           text: 'Cancel',
@@ -93,7 +120,7 @@ export class StatsPage {
   }
 
 
-  makeTheCall(date : string,hours : string, interval : string,title : string){
+  makeThePieCall(date : string, hours : string, interval : string, title : string){
     this.title=title;
     const loading = this.loadingCtrl.create({
       content : 'Please wait..'
@@ -131,9 +158,47 @@ export class StatsPage {
 
   }
 
+  makeTheLineCall(date : string, hours : string, title : string){
+    this.Linetitle=title;
+    const loading = this.loadingCtrl.create({
+      content : 'Please wait..'
+    });
+    loading.present();
+
+    console.log(this.ml.base+this.ml.a_get_visits_by_day+'&date='+date+'&hours='+hours);
+    this.http.get(this.ml.base+this.ml.a_get_visits_by_day+'&date='+date+'&hours='+hours)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        loading.dismiss();
+
+        this.lineChartForm = new LineChartForm();
+        for(var i=0;i<data.results.length;i++){
+          this.lineChartForm.names.push(data.results[i].datetime);
+          this.lineChartForm.data.push(data.results[i].visits);
+          this.lineChartForm.getRandomColor();
+        }
+        this.startLineChart(date);
+      }
+    });
+
+  }
+
   ionViewDidLoad() {
     var date = new Date();
-    this.makeTheCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
+    this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
@@ -143,8 +208,6 @@ export class StatsPage {
         datasets: [{
           label: '# of Votes',
           data: [12, 19, 3, 5, 2, 3],
-
-
           borderWidth: 1
         }]
       },
@@ -162,43 +225,12 @@ export class StatsPage {
 
 
 
-    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
-      type: 'line',
-      data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
-        datasets: [
-          {
-            label: "My First dataset",
-            fill: false,
-            lineTension: 0.1,
-            backgroundColor: "rgba(75,192,192,0.4)",
-            borderColor: "rgba(75,192,192,1)",
-            borderCapStyle: 'butt',
-            borderDash: [],
-            borderDashOffset: 0.0,
-            borderJoinStyle: 'miter',
-            pointBorderColor: "rgba(75,192,192,1)",
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 1,
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(75,192,192,1)",
-            pointHoverBorderColor: "rgba(220,220,220,1)",
-            pointHoverBorderWidth: 2,
-            pointRadius: 1,
-            pointHitRadius: 10,
-            data: [65, 59, 80, 81, 56, 55, 40],
-            spanGaps: false,
-          }
-        ]
-      }
-
-    });
 
   }
 
   startPieChart(selected : string){
-    this.title = 'Used coupons - '+selected;
+    this.title = 'Used coupons '+selected;
     if(this.doughnutChart!=null)
       this.doughnutChart.destroy();
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
@@ -222,5 +254,41 @@ export class StatsPage {
     });
   }
 
+  startLineChart(selected : string){
+    this.Linetitle = 'Total visits : '+selected;
+    if(this.lineChart!=null)
+      this.lineChart.destroy();
+    this.lineChart = new Chart(this.lineCanvas.nativeElement, {
 
+      type: 'line',
+      data: {
+        labels: this.lineChartForm.names,
+        datasets: [
+          {
+            label: "My First dataset",
+            fill: false,
+            lineTension: 0.1,
+            backgroundColor: this.lineChartForm.colors,
+            borderColor: "rgba(75,192,192,1)",
+            borderCapStyle: 'butt',
+            borderDash: [],
+            borderDashOffset: 0.0,
+            borderJoinStyle: 'miter',
+            pointBorderColor: "rgba(75,192,192,1)",
+            pointBackgroundColor: "#fff",
+            pointBorderWidth: 1,
+            pointHoverRadius: 5,
+            pointHoverBackgroundColor: "rgba(75,192,192,1)",
+            pointHoverBorderColor: "rgba(220,220,220,1)",
+            pointHoverBorderWidth: 2,
+            pointRadius: 1,
+            pointHitRadius: 10,
+            data: this.lineChartForm.data,
+            spanGaps: false,
+          }
+        ]
+      }
+
+    });
+  }
 }
