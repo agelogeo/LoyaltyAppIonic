@@ -32,6 +32,8 @@ export class StatsPage {
   lineChart: any;
   title:any;
   Linetitle:any;
+  results = [];
+  myDate : string;
 
 
 
@@ -40,6 +42,11 @@ export class StatsPage {
 
   pieChartForm = new PieChartForm();
   lineChartForm = new LineChartForm();
+
+  getDate(){
+
+    this.makeTheLineCall(this.myDate.slice(0,10),'5','Today');
+  }
 
   lineChartSettings(){
     var date = new Date();
@@ -119,6 +126,9 @@ export class StatsPage {
     actionSheet.present();
   }
 
+  getAvailableMonths(){
+    return this.results;
+  }
 
   makeThePieCall(date : string, hours : string, interval : string, title : string){
     this.title=title;
@@ -197,6 +207,32 @@ export class StatsPage {
   }
 
   ionViewDidLoad() {
+    this.myDate = new Date().toISOString();
+    const loading = this.loadingCtrl.create({
+      content : 'Please wait..'
+    });
+    loading.present();
+
+    console.log(this.ml.base+this.ml.a_get_available_months);
+    this.http.get(this.ml.base+this.ml.a_get_available_months)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const toast = this.toastCtrl.create({
+          message: data.message
+        });
+        toast.present();
+      }else {
+        loading.dismiss();
+        for(var i=0;i<data.results.length;i++){
+          this.results.push(data.results[i].MONTH);
+        }
+      }
+    });
+
+
+
+
     var date = new Date();
     this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
 
@@ -265,7 +301,7 @@ export class StatsPage {
         labels: this.lineChartForm.names,
         datasets: [
           {
-            label: "My First dataset",
+            label: "Total Visits",
             fill: false,
             lineTension: 0.1,
             backgroundColor: this.lineChartForm.colors,

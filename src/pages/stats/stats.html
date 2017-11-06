@@ -30,8 +30,12 @@
 
   <ion-card>
     <ion-card-header>
-      {{ Linetitle }}
-      <button float-right outline small ion-button icon-only (click)="lineChartSettings()"><ion-icon name="construct"></ion-icon></button>
+      <ion-item>
+        <ion-label><button float-left outline small  ion-button icon-only (click)="lineChartSettings()"><ion-icon name="settings"></ion-icon></button>
+        </ion-label>
+        <ion-datetime (ionChange)="getDate()" placeholder="Click here to select date" displayFormat="DD/MMMM/YYYY"  [monthValues]="getAvailableMonths()" yearValues="2017" [(ngModel)]="myDate"></ion-datetime>
+      </ion-item>
+
     </ion-card-header>
     <ion-card-content>
       <canvas #lineCanvas></canvas>

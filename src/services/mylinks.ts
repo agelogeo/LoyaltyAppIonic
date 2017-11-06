@@ -31,6 +31,7 @@ export class MyLinks{
   a_get_pie_chart = '&action=get_pie_chart';
   a_get_track_visits = '&action=track_visit';
   a_get_visits_by_day = '&action=get_visits_by_day';
+  a_get_available_months = '&action=get_available_months';
 
   base = this.url+this.database;
 
