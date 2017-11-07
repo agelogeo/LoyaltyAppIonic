@@ -11,7 +11,7 @@
   <ion-card>
     <ion-card-header>
       Bar Chart
-      <button float-right outline small ion-button icon-only><ion-icon name="construct"></ion-icon></button>
+      <button float-right outline small ion-button icon-only (click)="daysChartSettings()"><ion-icon name="construct"></ion-icon></button>
     </ion-card-header>
     <ion-card-content>
       <canvas #barCanvas></canvas>

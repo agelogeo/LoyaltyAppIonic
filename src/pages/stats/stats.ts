@@ -7,6 +7,7 @@ import {MyLinks} from "../../services/mylinks";
 import {Http} from "@angular/http";
 import {PieChartForm} from "../../model/piechartForm";
 import {LineChartForm} from "../../model/linechartForm";
+import {DaysChartForm} from "../../model/dayschartForm";
 
 /**
  * Generated class for the StatsPage page.
@@ -42,23 +43,41 @@ export class StatsPage {
 
   pieChartForm = new PieChartForm();
   lineChartForm = new LineChartForm();
+  daysChartForm = new DaysChartForm();
 
   getDate(){
-
     this.makeTheLineCall(this.myDate.slice(0,10),'5','Today');
   }
 
-  lineChartSettings(){
+  daysChartSettings(){
     var date = new Date();
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Chart Line - Choose free dimension',
+      title: 'Days Chart - Choose free dimension',
       buttons: [
         {
-          text: 'Today',
-          role: 'destructive',
+          text: 'Last week',
           handler: () => {
-
-            this.makeTheLineCall('2017-11-6','5','Today');
+            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'7','Last week');
+          }
+        },{
+          text: 'Last month',
+          handler: () => {
+            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'30','Last month');
+          }
+        },{
+          text: 'Last 6 months',
+          handler: () => {
+            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'180','Last 6 months');
+          }
+        },{
+          text: 'Last year',
+          handler: () => {
+            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'365','Last year');
+          }
+        },{
+          text: 'All Time',
+          handler: () => {
+            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
           }
         },{
           text: 'Cancel',
@@ -128,6 +147,43 @@ export class StatsPage {
 
   getAvailableMonths(){
     return this.results;
+  }
+
+  makeTheDaysCall(date : string, hours : string, interval : string, title : string){
+    const loading = this.loadingCtrl.create({
+      content : 'Please wait..'
+    });
+    loading.present();
+
+    console.log(this.ml.base+this.ml.a_get_days_chart+'&date='+date+'&interval='+interval);
+    this.http.get(this.ml.base+this.ml.a_get_days_chart+'&date='+date+'&interval='+interval)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        loading.dismiss();
+
+        this.daysChartForm = new DaysChartForm();
+        for(var i=0;i<data.results.length;i++){
+          this.daysChartForm.names.push(data.results[i].names);
+          this.daysChartForm.counts.push(data.results[i].counts);
+          this.daysChartForm.getRandomColor();
+        }
+        this.startDaysChart(title);
+      }
+    });
+
   }
 
   makeThePieCall(date : string, hours : string, interval : string, title : string){
@@ -213,6 +269,7 @@ export class StatsPage {
     });
     loading.present();
 
+    this.getDate();
     console.log(this.ml.base+this.ml.a_get_available_months);
     this.http.get(this.ml.base+this.ml.a_get_available_months)
       .map(res => res.json()).subscribe(data => {
@@ -230,21 +287,27 @@ export class StatsPage {
       }
     });
 
-
-
-
     var date = new Date();
     this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
 
+
+
+  }
+
+  startDaysChart(selected : string){
+    if(this.barChart!=null)
+      this.barChart.destroy();
     this.barChart = new Chart(this.barCanvas.nativeElement, {
 
       type: 'bar',
       data: {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+        labels: this.daysChartForm.names,
         datasets: [{
           label: '# of Votes',
-          data: [12, 19, 3, 5, 2, 3],
-          borderWidth: 1
+          data: this.daysChartForm.counts,
+          borderWidth: 1,
+          backgroundColor: this.pieChartForm.colors,
+          hoverBackgroundColor: this.pieChartForm.hover_colors
         }]
       },
       options: {
@@ -258,10 +321,6 @@ export class StatsPage {
       }
 
     });
-
-
-
-
 
   }
 

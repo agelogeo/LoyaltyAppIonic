@@ -1,4 +1,4 @@
-export class PieChartForm{
+export class DaysChartForm{
 
   names = [];
   counts = [];
@@ -25,8 +25,3 @@ export class PieChartForm{
     this.hover_colors.push('rgba('+red+','+green+','+blue+', 1.0)');
   }
 }
-
-
-
-
-
