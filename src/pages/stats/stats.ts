@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActionSheetController, AlertController, IonicPage, LoadingController, NavController, NavParams,
   ToastController
 } from 'ionic-angular';
@@ -21,7 +21,7 @@ import {DaysChartForm} from "../../model/dayschartForm";
   selector: 'page-stats',
   templateUrl: 'stats.html',
 })
-export class StatsPage {
+export class StatsPage implements OnInit{
 
 
   @ViewChild('barCanvas') barCanvas;
@@ -29,12 +29,17 @@ export class StatsPage {
   @ViewChild('lineCanvas') lineCanvas;
 
   barChart: any;
+  barTitle:any;
   doughnutChart: any;
+  doughnutTitle:any;
   lineChart: any;
-  title:any;
-  Linetitle:any;
+  lineTitle:any;
+
   results = [];
   myDate : string;
+
+
+  date = new Date();
 
 
 
@@ -45,39 +50,57 @@ export class StatsPage {
   lineChartForm = new LineChartForm();
   daysChartForm = new DaysChartForm();
 
-  getDate(){
-    this.makeTheLineCall(this.myDate.slice(0,10),'5','Today');
+
+  ngOnInit() {
+    this.myDate = new Date().toISOString();
+
+    console.log(this.ml.base+this.ml.a_get_available_months);
+    this.http.get(this.ml.base+this.ml.a_get_available_months)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const toast = this.toastCtrl.create({
+          message: data.message
+        });
+        toast.present();
+      }else {
+        for(var i=0;i<data.results.length;i++){
+          this.results.push(data.results[i].MONTH);
+        }
+      }
+    });
+
   }
 
+  // BAR CANVAS
   daysChartSettings(){
-    var date = new Date();
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Days Chart - Choose free dimension',
       buttons: [
         {
           text: 'Last week',
           handler: () => {
-            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'7','Last week');
+            this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'7','Last week');
           }
         },{
           text: 'Last month',
           handler: () => {
-            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'30','Last month');
+            this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'30','Last month');
           }
         },{
           text: 'Last 6 months',
           handler: () => {
-            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'180','Last 6 months');
+            this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'180','Last 6 months');
           }
         },{
           text: 'Last year',
           handler: () => {
-            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'365','Last year');
+            this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'365','Last year');
           }
         },{
           text: 'All Time',
           handler: () => {
-            this.makeTheDaysCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
+            this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1000','All Time');
           }
         },{
           text: 'Cancel',
@@ -89,64 +112,6 @@ export class StatsPage {
       ]
     });
     actionSheet.present();
-  }
-
-  pieChartSettings(){
-    var date = new Date();
-    let actionSheet = this.actionSheetCtrl.create({
-      title: 'Chart Pie - Choose free dimension',
-      buttons: [
-        {
-          text: 'Today',
-          role: 'destructive',
-          handler: () => {
-
-            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'-1','Today');
-          }
-        },{
-          text: 'Yesterday',
-          handler: () => {
-            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1','Yesterday');
-          }
-        },{
-          text: 'Last week',
-          handler: () => {
-            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'7','Last week');
-          }
-        },{
-          text: 'Last month',
-          handler: () => {
-            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'30','Last month');
-          }
-        },{
-          text: 'Last 6 months',
-          handler: () => {
-            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'180','Last 6 months');
-          }
-        },{
-          text: 'Last year',
-          handler: () => {
-            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'365','Last year');
-          }
-        },{
-          text: 'All Time',
-          handler: () => {
-            this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
-          }
-        },{
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-
-          }
-        }
-      ]
-    });
-    actionSheet.present();
-  }
-
-  getAvailableMonths(){
-    return this.results;
   }
 
   makeTheDaysCall(date : string, hours : string, interval : string, title : string){
@@ -180,14 +145,72 @@ export class StatsPage {
           this.daysChartForm.counts.push(data.results[i].counts);
           this.daysChartForm.getRandomColor();
         }
-        this.startDaysChart(title);
+        this.barTitle=title;
+        this.startDaysChart();
       }
     });
 
   }
+  // END OF BAR CANVAS
+
+
+
+  // DOUGHNAT GRAPH
+  pieChartSettings(){
+    let actionSheet = this.actionSheetCtrl.create({
+      title: 'Chart Pie - Choose free dimension',
+      buttons: [
+        {
+          text: 'Today',
+          role: 'destructive',
+          handler: () => {
+
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'-1','Today');
+          }
+        },{
+          text: 'Yesterday',
+          handler: () => {
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1','Yesterday');
+          }
+        },{
+          text: 'Last week',
+          handler: () => {
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'7','Last week');
+          }
+        },{
+          text: 'Last month',
+          handler: () => {
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'30','Last month');
+          }
+        },{
+          text: 'Last 6 months',
+          handler: () => {
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'180','Last 6 months');
+          }
+        },{
+          text: 'Last year',
+          handler: () => {
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'365','Last year');
+          }
+        },{
+          text: 'All Time',
+          handler: () => {
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1000','All Time');
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 
   makeThePieCall(date : string, hours : string, interval : string, title : string){
-    this.title=title;
+
     const loading = this.loadingCtrl.create({
       content : 'Please wait..'
     });
@@ -218,14 +241,26 @@ export class StatsPage {
           this.pieChartForm.counts.push(data.results[i].count);
           this.pieChartForm.getRandomColor();
         }
-        this.startPieChart(title);
+        this.doughnutTitle=title;
+        this.startPieChart();
       }
     });
 
   }
+  //END OF DOUGHNAT GRAPH
+
+
+  //LINE CHART
+  getAvailableMonths(){
+    return this.results;
+  }
+
+  getDate(){
+    this.makeTheLineCall(this.myDate.slice(0,10),'5','Today');
+  }
+
 
   makeTheLineCall(date : string, hours : string, title : string){
-    this.Linetitle=title;
     const loading = this.loadingCtrl.create({
       content : 'Please wait..'
     });
@@ -256,45 +291,18 @@ export class StatsPage {
           this.lineChartForm.data.push(data.results[i].visits);
           this.lineChartForm.getRandomColor();
         }
-        this.startLineChart(date);
+        this.lineTitle=date;
+        this.startLineChart();
       }
     });
 
   }
-
-  ionViewDidLoad() {
-    this.myDate = new Date().toISOString();
-    const loading = this.loadingCtrl.create({
-      content : 'Please wait..'
-    });
-    loading.present();
-
-    this.getDate();
-    console.log(this.ml.base+this.ml.a_get_available_months);
-    this.http.get(this.ml.base+this.ml.a_get_available_months)
-      .map(res => res.json()).subscribe(data => {
-
-      if (data.error != null) {
-        const toast = this.toastCtrl.create({
-          message: data.message
-        });
-        toast.present();
-      }else {
-        loading.dismiss();
-        for(var i=0;i<data.results.length;i++){
-          this.results.push(data.results[i].MONTH);
-        }
-      }
-    });
-
-    var date = new Date();
-    this.makeThePieCall((date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()).toString(),date.getHours().toString(),'1000','All Time');
+  // END OF LINE CHART
 
 
 
-  }
 
-  startDaysChart(selected : string){
+  startDaysChart(){
     if(this.barChart!=null)
       this.barChart.destroy();
     this.barChart = new Chart(this.barCanvas.nativeElement, {
@@ -306,8 +314,8 @@ export class StatsPage {
           label: '# of Votes',
           data: this.daysChartForm.counts,
           borderWidth: 1,
-          backgroundColor: this.pieChartForm.colors,
-          hoverBackgroundColor: this.pieChartForm.hover_colors
+          backgroundColor: this.daysChartForm.colors,
+          hoverBackgroundColor: this.daysChartForm.hover_colors
         }]
       },
       options: {
@@ -324,8 +332,7 @@ export class StatsPage {
 
   }
 
-  startPieChart(selected : string){
-    this.title = 'Used coupons '+selected;
+  startPieChart(){
     if(this.doughnutChart!=null)
       this.doughnutChart.destroy();
     this.doughnutChart = new Chart(this.doughnutCanvas.nativeElement, {
@@ -349,8 +356,7 @@ export class StatsPage {
     });
   }
 
-  startLineChart(selected : string){
-    this.Linetitle = 'Total visits : '+selected;
+  startLineChart(){
     if(this.lineChart!=null)
       this.lineChart.destroy();
     this.lineChart = new Chart(this.lineCanvas.nativeElement, {
