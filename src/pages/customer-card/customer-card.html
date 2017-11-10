@@ -1,0 +1,48 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{ originalCustomer.name }} {{originalCustomer.surname}} Card</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSaveCustomer(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Name</ion-label>
+        <ion-input type="text" [ngModel]="originalCustomer.name" name="name" required clearInput="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Surname</ion-label>
+        <ion-input [ngModel]="originalCustomer.surname" name="surname" required clearInput="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Phone</ion-label>
+        <ion-input [ngModel]="originalCustomer.phone" name="phone" required clearInput="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed >Barcode</ion-label>
+        <ion-input [ngModel]="originalCustomer.barcode" name="barcode" required readonly="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed >Stamps</ion-label>
+        <ion-input [ngModel]="originalCustomer.stamps" name="stamps" required readonly="true"  ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed >Coupons Used</ion-label>
+        <ion-input [ngModel]="originalCustomer.coupons_used" name="coupons_used" required readonly="true"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-row>
+      <ion-col>
+        <button type="button" color="danger"  ion-button block (click)="dismiss(null)">Cancel</button>
+      </ion-col>
+      <ion-col>
+        <button type="submit" ion-button block [disabled]="isFormTheSame(f)">Save Customer</button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

@@ -20,6 +20,7 @@ import {DatabaseStatsPage} from "../pages/database-stats/database-stats";
 import {FilterPage} from "../pages/filter/filter";
 import {MyLinks} from "../services/mylinks";
 import {StatsPage} from "../pages/stats/stats";
+import {CustomerCardPage} from "../pages/customer-card/customer-card";
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import {StatsPage} from "../pages/stats/stats";
     CustomerHomeTabsPage,
     DatabaseStatsPage,
     FilterPage,
-    StatsPage
+    StatsPage,
+    CustomerCardPage
   ],
   imports: [
     BrowserModule,
@@ -56,7 +58,8 @@ import {StatsPage} from "../pages/stats/stats";
     CustomerHomeTabsPage,
     DatabaseStatsPage,
     FilterPage,
-    StatsPage
+    StatsPage,
+    CustomerCardPage
   ],
   providers: [
     StatusBar,

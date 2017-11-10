@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   ActionSheetController,
-  AlertController, IonicPage, LoadingController, NavController, NavParams,
+  AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams,
   PopoverController, ToastController
 } from 'ionic-angular';
 import {FilterPage} from "../filter/filter";
@@ -9,6 +9,7 @@ import {Customer} from "../../model/customer";
 import {Http} from "@angular/http";
 import {MyLinks} from "../../services/mylinks";
 import {StatsPage} from "../stats/stats";
+import {CustomerCardPage} from "../customer-card/customer-card";
 
 /**
  * Generated class for the DatabaseStatsPage page.
@@ -26,7 +27,7 @@ export class DatabaseStatsPage {
 
   customers : any;
 
-  constructor(private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
+  constructor(private modalCtrl: ModalController,private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
   }
 
   ionViewDidLoad() {
@@ -197,5 +198,15 @@ export class DatabaseStatsPage {
 
   onStats(){
     this.navCtrl.push(StatsPage);
+  }
+
+  onLoadCustomerCard(customer:Customer,i : number){
+    let modal = this.modalCtrl.create(CustomerCardPage,{ customerId: customer,position : i});
+    modal.onDidDismiss(customer =>{
+      if(customer!=null)
+        this.customers[i]=customer;
+        //this.openDatabaseStats('default');
+    });
+    modal.present();
   }
 }

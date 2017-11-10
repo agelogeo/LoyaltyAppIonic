@@ -12,11 +12,11 @@
     <ion-list>
       <ion-item>
         <ion-label floating>Username</ion-label>
-        <ion-input type="text" ngModel name="username" required></ion-input>
+        <ion-input type="text" ngModel name="username" required clearInput="true"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Password</ion-label>
-        <ion-input type="password" ngModel name="password" required></ion-input>
+        <ion-input  type="password" ngModel name="password" required clearInput="true"></ion-input>
       </ion-item>
     </ion-list>
     <button type="submit" ion-button block [disabled]="!f.valid">Log in</button>
