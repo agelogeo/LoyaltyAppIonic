@@ -39,7 +39,9 @@ export class CustomerCardPage {
      this.originalCustomer.phone==form.value.phone &&
      this.originalCustomer.barcode==form.value.barcode &&
      this.originalCustomer.stamps==form.value.stamps &&
-     this.originalCustomer.coupons_used==form.value.coupons_used )
+     this.originalCustomer.coupons_used==form.value.coupons_used &&
+     this.originalCustomer.visits==form.value.visits &&
+     this.originalCustomer.last_visit==form.value.last_visit )
       return true;
    return false;
   }
