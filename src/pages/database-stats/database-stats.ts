@@ -24,32 +24,19 @@ import {CustomerCardPage} from "../customer-card/customer-card";
   templateUrl: 'database-stats.html',
 })
 export class DatabaseStatsPage {
-
+  showSearchBar : boolean = false;
   customers : any;
+  fullCustomers : any;
 
   constructor(private modalCtrl: ModalController,private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DatabaseStatsPage');
-  }
 
   ionViewWillEnter(){
     this.openDatabaseStats('default');
   }
 
-  onFilter(event: MouseEvent){
-      /*const popover = this.popoverCtrl.create(FilterPage);
-      popover.present({ev: event});
-      popover.onDidDismiss(
-        data => {
-          if (data == null) {
-
-          }else{
-            this.openDatabaseStats(data.action);
-          }
-        }
-      )*/
+  onFilter(){
 
     let actionSheet = this.actionSheetCtrl.create({
       title: 'Sort Filter',
@@ -202,11 +189,41 @@ export class DatabaseStatsPage {
 
   onLoadCustomerCard(customer:Customer,i : number){
     let modal = this.modalCtrl.create(CustomerCardPage,{ customerId: customer,position : i});
-    modal.onDidDismiss(customer =>{
-      if(customer!=null)
-        this.customers[i]=customer;
+    modal.onDidDismiss(customer => {
+      if (customer != null) {
+        this.customers[i] = customer;
+      }
         //this.openDatabaseStats('default');
     });
     modal.present();
+  }
+
+  getItems(ev: any) {
+    // Reset items back to all of the items
+    this.onSearchCancel();
+
+    // set val to the value of the searchbar
+    let val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.customers = this.customers.filter((item) => {
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.surname.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+          item.phone.toLowerCase().indexOf(val.toLowerCase()) > -1 || item.barcode.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
+  onSearchCancel(){
+    this.customers=this.fullCustomers;
+  }
+
+  onToggleSearchBar(){
+    if(this.showSearchBar)
+      this.showSearchBar=false;
+    else{
+      this.showSearchBar=true;
+      this.fullCustomers=this.customers;
+    }
   }
 }
