@@ -6,8 +6,8 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Database Stats</ion-title>
+  <ion-navbar color="danger">
+    <ion-title>Βάση πελατών</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="onToggleSearchBar()"><ion-icon name="search"></ion-icon></button>
       <button ion-button icon-only (click)="onStats()"><ion-icon name="stats"></ion-icon></button>
@@ -19,7 +19,7 @@
 
 
 <ion-content >
-  <ion-searchbar *ngIf="showSearchBar" (ionInput)="getItems($event)" animated="true" showCancelButton="true" (ionCancel)="onSearchCancel()"></ion-searchbar>
+  <ion-searchbar *ngIf="showSearchBar" placeholder="Αναζήτηση.." (ionInput)="getItems($event)" animated="true" showCancelButton="true" (ionCancel)="onSearchCancel()"></ion-searchbar>
   <ion-list >
     <ion-item-sliding *ngFor="let c of customers; let i = index;" no-padding no-margin [ngClass]="(i%2==0) ? 'animate-from-left-to-right':'animate-from-right-to-left'">
       <ion-item  (click)="onLoadCustomerCard(c,i)">

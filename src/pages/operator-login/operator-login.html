@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Operator Log in</ion-title>
+    <ion-title>Είσοδος χειριστή</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -11,14 +11,14 @@
   <form #f="ngForm" (ngSubmit)="onLoginOperator(f)" class="animate-from-right-to-left">
     <ion-list>
       <ion-item>
-        <ion-label floating>Username</ion-label>
+        <ion-label floating>Όνομα χρήστη</ion-label>
         <ion-input type="text" ngModel name="username" required clearInput="true"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label floating>Password</ion-label>
+        <ion-label floating>Συνθηματικό</ion-label>
         <ion-input  type="password" ngModel name="password" required clearInput="true"></ion-input>
       </ion-item>
     </ion-list>
-    <button type="submit" ion-button block [disabled]="!f.valid">Log in</button>
+    <button type="submit" ion-button block [disabled]="!f.valid">Σύνδεση</button>
   </form>
 </ion-content>

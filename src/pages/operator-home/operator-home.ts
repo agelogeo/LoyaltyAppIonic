@@ -5,6 +5,7 @@ import {QrPage} from "../qr/qr";
 import {DatabaseStatsPage} from "../database-stats/database-stats";
 import {Http} from "@angular/http";
 import {Customer} from "../../model/customer";
+import {StatsPage} from "../stats/stats";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -48,5 +49,9 @@ export class OperatorHomePage implements OnInit{
     this.navCtrl.push(DatabaseStatsPage);
 
 
+  }
+
+  openGraphs(){
+    this.navCtrl.push(StatsPage);
   }
 }

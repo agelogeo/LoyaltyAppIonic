@@ -6,7 +6,7 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Welcome {{ operator.name }}</ion-title>
+    <ion-title>Γειά σου {{ operator.first_name }}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only><ion-icon name="settings"></ion-icon></button>
     </ion-buttons>
@@ -18,8 +18,8 @@
   <ion-grid class="head">
     <ion-row  id="top">
       <ion-col text-left>
-        <h6 *ngIf="operator.access_level==1">Administrator</h6>
-        <h6 *ngIf="operator.access_level==2">Operator</h6>
+        <h6 *ngIf="operator.access_level==1">Διαχειριστής</h6>
+        <h6 *ngIf="operator.access_level==2">Ρυθμιστής</h6>
         Access Level
       </ion-col>
       <ion-col text-right>
@@ -57,7 +57,12 @@
     </ion-row>
     <ion-row >
       <ion-col text-center>
-        <button ion-button color="danger"  block round (click)="openDatabaseStats()">Database Statistics</button>
+        <button ion-button color="danger"  block round (click)="openDatabaseStats()">Βάση δεδομένων</button>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col text-center>
+        <button ion-button color="dark"  block round (click)="openGraphs()">Γραφήματα</button>
       </ion-col>
     </ion-row>
   </ion-grid>

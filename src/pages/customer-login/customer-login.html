@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Customer Log in</ion-title>
+    <ion-title>Είσοδος πελάτη</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -17,10 +17,10 @@
   <form #f="ngForm" (ngSubmit)="onLoginCustomer(f)" class="animate-from-right-to-left">
     <ion-list>
       <ion-item>
-        <ion-label floating>Barcode or Phone</ion-label>
+        <ion-label floating>Κωδικός ή Τηλέφωνο</ion-label>
         <ion-input type="number" ngModel name="barcode" required clearInput="true"></ion-input>
       </ion-item>
     </ion-list>
-    <button type="submit" ion-button block [disabled]="!f.valid">Log in</button>
+    <button type="submit" ion-button block [disabled]="!f.valid">Σύνδεση</button>
   </form>
 </ion-content>
