@@ -7,7 +7,7 @@
 <ion-header>
   <ion-navbar>
       <!--<button ion-button menuToggle><ion-icon name="menu"></ion-icon></button>-->
-    <ion-title>Barcode  #{{ customer.barcode }}</ion-title>
+    <ion-title>Γειά σου {{ customer.name }}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only><ion-icon name="settings"></ion-icon></button>
     </ion-buttons>
@@ -42,13 +42,13 @@
 
       <ion-row >
         <ion-col text-center>
-          <button ion-button block outline>MENU</button>
+          <button ion-button block outline>Μενού</button>
         </ion-col>
       </ion-row>
 
       <ion-row >
         <ion-col text-center>
-          <button ion-button block outline>DEALS</button>
+          <button ion-button block outline>Προσφορές</button>
         </ion-col>
       </ion-row>
 
@@ -59,28 +59,28 @@
       <ion-row class="rows side-background">
         <ion-col text-center align-self-center>
           <h4>{{customer.stamps}}</h4>
-          <p>Stamps</p>
+          <p>Σφραγίδες</p>
         </ion-col>
       </ion-row>
 
       <ion-row class="rows side-background">
         <ion-col text-center align-self-center>
           <h4>{{customer.coupons_used}}</h4>
-          <p>Coupons Used</p>
+          <p>Κουπόνια</p>
         </ion-col>
       </ion-row>
 
       <ion-row class="rows side-background">
         <ion-col text-center align-self-center>
           <h4>{{customer.visits}}</h4>
-          <p>Total Visits</p>
+          <p>Επισκέψεις</p>
         </ion-col>
       </ion-row>
 
       <ion-row class="rows side-background">
         <ion-col text-center align-self-center>
           <h6>{{customer.last_visit}}</h6>
-          <p>Last Visit</p>
+          <p>Τελευταία επίσκεψη</p>
         </ion-col>
       </ion-row>
 

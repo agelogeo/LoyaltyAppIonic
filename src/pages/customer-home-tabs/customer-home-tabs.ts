@@ -8,8 +8,8 @@ import {CustomerHomePage} from "../customer-home/customer-home";
   selector: 'customer-page-tabs',
   template: `
     <ion-tabs color="dark">
-      <ion-tab [root]="homePage" tabTitle="Home" tabIcon="home" [rootParams]="homeParams"></ion-tab>
-      <ion-tab [root]="scanPage" tabTitle="Deals" tabIcon="book" ></ion-tab>
+      <ion-tab [root]="homePage" tabTitle="Αρχική" tabIcon="home" [rootParams]="homeParams"></ion-tab>
+      <ion-tab [root]="scanPage" tabTitle="Προσφορές" tabIcon="book" ></ion-tab>
     </ion-tabs>
   `
 })
