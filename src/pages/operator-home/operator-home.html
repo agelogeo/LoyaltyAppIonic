@@ -24,7 +24,7 @@
     <ion-card-content *ngIf="operator.access_level==1">
       Έχεις συνδεθεί ως Διαχειριστής [{{operator.username}}]
     </ion-card-content>
-    <ion-card-content *ngIf="operator.access_level==0">
+    <ion-card-content *ngIf="operator.access_level==2">
       Έχεις συνδεθεί ως Συντονιστής [{{operator.username}}]
     </ion-card-content>
   </ion-card>
@@ -33,22 +33,22 @@
       Διαχείριση συστήματος
     </ion-card-header>
     <ion-card-content>
-      <ion-row>
-        <ion-col text-center >
+      <ion-row >
+        <ion-col text-center *ngIf="operator.access_level==1">
           <button ion-button block text-wrap>Διαχείριση συντονιστών</button>
         </ion-col>
         <ion-col text-center >
           <button ion-button block text-wrap>Διαχείριση πελατών</button>
         </ion-col>
       </ion-row>
-      <ion-row>
+      <ion-row *ngIf="operator.access_level==1">
         <ion-col text-center >
           <button ion-button block text-wrap>Διαχείριση κουπονιών</button>
         </ion-col>
       </ion-row>
     </ion-card-content>
   </ion-card>
-  <ion-card >
+  <ion-card *ngIf="operator.access_level==1">
     <ion-card-header>
       Βοηθήματα διαχειριστή
     </ion-card-header>
@@ -65,5 +65,7 @@
       </ion-row>
     </ion-card-content>
   </ion-card>
+  <button class="bigManualBtn" *ngIf="operator.access_level==2"  ion-button color="dark" large block (click)="openManualAlert()" text-wrap icon-left><ion-icon name="barcode"></ion-icon>Εισαγωγή κωδικού</button>
+  <button class="bigScanBtn" *ngIf="operator.access_level==2"  ion-button color="danger" large block (click)="openQrPage()" text-wrap icon-left><ion-icon name="qr-scanner"></ion-icon>Γρήγορη σαρωση</button>
 
 </ion-content>

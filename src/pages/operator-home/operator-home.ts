@@ -1,11 +1,15 @@
-import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {
+  AlertController, IonicPage, LoadingController, NavController, NavParams, Tabs,
+  ToastController
+} from 'ionic-angular';
 import {Operator} from "../../model/operator";
 import {QrPage} from "../qr/qr";
 import {DatabaseStatsPage} from "../database-stats/database-stats";
 import {Http} from "@angular/http";
 import {Customer} from "../../model/customer";
 import {StatsPage} from "../stats/stats";
+import {ScannedPage} from "../scanned/scanned";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -20,7 +24,7 @@ import {StatsPage} from "../stats/stats";
   templateUrl: 'operator-home.html',
 })
 export class OperatorHomePage implements OnInit{
-
+  @ViewChild('myTabs') tabs : Tabs;
   operator = new Operator();
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
@@ -51,7 +55,88 @@ export class OperatorHomePage implements OnInit{
 
   }
 
+  openQrPage(){
+    this.navCtrl.parent.select(1);
+  }
+
+  openManualAlert(){
+
+      let prompt = this.alertCtrl.create({
+        title: 'Χειροκίνητη εισαγωγή',
+        message: 'Παρακαλώ εισάγεται τον κωδικό ή το τηλέφωνο του πελάτη',
+        inputs: [
+          {
+            name: 'barcode',
+            type: 'number',
+            placeholder: 'Κωδικός ή τηλέφωνο'
+          }
+        ],
+        buttons: [
+          {
+            text: 'Ακύρωση',
+            role: 'cancel'
+          },
+          {
+            text: 'Έλεγχος',
+            handler: data => {
+              console.log(data);
+              this.goToScanned(data.barcode);
+
+            }
+          }
+        ]
+      });
+      prompt.present();
+
+  }
+
   openGraphs(){
     this.navCtrl.push(StatsPage);
+  }
+
+  goToScanned(barcode){
+
+    const loading = this.loadingCtrl.create({
+      content : 'Please wait..'
+    });
+    loading.present();
+
+    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+barcode);
+    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+barcode)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        const toast = this.toastCtrl.create({
+          message: 'You logged in successfully',
+          showCloseButton: true,
+          closeButtonText: 'Ok',
+          duration: 2000
+        });
+        loading.dismiss();
+        toast.present();
+        this.navCtrl.push(ScannedPage,{id:data.id,
+          name:data.name,
+          surname:data.surname,
+          phone:data.phone,
+          barcode:data.barcode,
+          stamps:data.stamps,
+          coupons_used:data.coupons_used,
+          visits:data.visits,
+          last_visit:data.last_visit});
+      }
+    });
+
   }
 }
