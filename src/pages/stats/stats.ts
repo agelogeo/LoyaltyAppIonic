@@ -78,32 +78,32 @@ export class StatsPage implements OnInit{
       title: 'Days Chart - Choose free dimension',
       buttons: [
         {
-          text: 'Last week',
+          text: 'Τελευταία εβδομάδα',
           handler: () => {
             this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'7','Last week');
           }
         },{
-          text: 'Last month',
+          text: 'Τελευταίος μήνας',
           handler: () => {
             this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'30','Last month');
           }
         },{
-          text: 'Last 6 months',
+          text: 'Τελευταίοι 6 μήνες',
           handler: () => {
             this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'180','Last 6 months');
           }
         },{
-          text: 'Last year',
+          text: 'Τελευταίος χρόνος',
           handler: () => {
             this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'365','Last year');
           }
         },{
-          text: 'All Time',
+          text: 'Συνολική διάρκεια',
           handler: () => {
             this.makeTheDaysCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1000','All Time');
           }
         },{
-          text: 'Cancel',
+          text: 'Ακύρωση',
           role: 'cancel',
           handler: () => {
 
@@ -161,44 +161,44 @@ export class StatsPage implements OnInit{
       title: 'Chart Pie - Choose free dimension',
       buttons: [
         {
-          text: 'Today',
+          text: 'Σήμερα',
           role: 'destructive',
           handler: () => {
 
             this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'-1','Today');
           }
         },{
-          text: 'Yesterday',
+          text: 'Χθές',
           handler: () => {
             this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1','Yesterday');
           }
         },{
-          text: 'Last week',
+          text: 'Τελευταία εβδομάδα',
           handler: () => {
             this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'7','Last week');
           }
         },{
-          text: 'Last month',
+          text: 'Τελευταίος μήνας',
           handler: () => {
             this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'30','Last month');
           }
         },{
-          text: 'Last 6 months',
+          text: 'Τελευταίοι 6 μήνες',
           handler: () => {
             this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'180','Last 6 months');
           }
         },{
-          text: 'Last year',
+          text: 'Τελευταίος χρόνος',
           handler: () => {
             this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'365','Last year');
           }
         },{
-          text: 'All Time',
+          text: 'Συνολική διάρκεια',
           handler: () => {
             this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1000','All Time');
           }
         },{
-          text: 'Cancel',
+          text: 'Ακύρωση',
           role: 'cancel',
           handler: () => {
 
