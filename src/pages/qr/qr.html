@@ -9,6 +9,9 @@
 </ion-header>
 
 
-<ion-content no-padding no-margin>
-  <img src="assets/qr.png">
+<ion-content no-padding no-margin class="img-holder">
+  <button color="light" class="link" ion-button full large icon-left (click)="manualCode()"><ion-icon name="barcode"></ion-icon>Γραπτή εισαγωγή</button>
+  <button color="light" class="lightBtn" ion-button icon-only (click)="toggleLight()"><ion-icon name="flash"></ion-icon></button>
+  <button color="light" class="turnBtn" ion-button icon-only (click)="toggleCamera()"><ion-icon name="reverse-camera"></ion-icon></button>
+  <img  src="assets/qr.png">
 </ion-content>

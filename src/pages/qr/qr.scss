@@ -1,3 +1,18 @@
 page-qr {
-
+  .img-holder {position: relative;}
+  .img-holder   {
+    .link{
+      position: absolute;/*your button position*/
+    }
+    .lightBtn {
+      position: absolute;
+      top:70px;
+      right : 10px;/*your button position*/
+    }
+    .turnBtn {
+      position: absolute;
+      top:70px;
+      right : 60px;/*your button position*/
+    }
+  }
 }

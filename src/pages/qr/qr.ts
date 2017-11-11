@@ -21,7 +21,15 @@ import {Http} from "@angular/http";
 })
 export class QrPage implements OnInit{
 
-  constructor(private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private viewCtrl: ViewController,public navCtrl: NavController, public navParams: NavParams,private qrScanner: QRScanner,private toastCtrl:ToastController) {
+
+  constructor(private http:Http,
+              private loadingCtrl:LoadingController,
+              private alertCtrl:AlertController,
+              private viewCtrl: ViewController,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              private qrScanner: QRScanner,
+              private toastCtrl:ToastController) {
   }
 
   ionViewWillEnter() {
@@ -78,6 +86,8 @@ export class QrPage implements OnInit{
   ionViewWillLeave(){
     this.qrScanner.hide(); // hide camera preview
     this.hideCamera();
+    this.qrScanner.disableLight();
+    this.qrScanner.destroy();
   }
 
   goToScanned(barcode){
@@ -124,5 +134,56 @@ export class QrPage implements OnInit{
       }
     });
 
+  }
+
+  toggleLight(){
+    this.qrScanner.getStatus().then(res =>{
+      if(res.canEnableLight){
+        if(res.lightEnabled)
+          this.qrScanner.disableLight();
+        else
+          this.qrScanner.enableLight();
+      }
+    });
+  }
+
+  toggleCamera(){
+    this.qrScanner.getStatus().then(data=>{
+      if(data.canChangeCamera){
+        if(data.currentCamera==0)
+          this.qrScanner.useFrontCamera();
+        else
+          this.qrScanner.useBackCamera();
+      }
+    })
+  }
+
+  manualCode(){
+    let prompt = this.alertCtrl.create({
+      title: 'Χειροκίνητη εισαγωγή',
+      message: 'Παρακαλώ εισάγεται τον κωδικό ή το τηλέφωνο του πελάτη',
+      inputs: [
+        {
+          name: 'barcode',
+          type: 'number',
+          placeholder: 'Κωδικός ή τηλέφωνο'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Ακύρωση',
+          role: 'cancel'
+        },
+        {
+          text: 'Έλεγχος',
+          handler: data => {
+            console.log(data);
+            this.goToScanned(data.barcode);
+
+          }
+        }
+      ]
+    });
+    prompt.present();
   }
 }
