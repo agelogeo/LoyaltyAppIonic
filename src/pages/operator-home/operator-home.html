@@ -6,7 +6,9 @@
 -->
 <ion-header>
   <ion-navbar>
-    <ion-title>Γειά σου {{ operator.first_name }}</ion-title>
+    <ion-title>
+      Κεντρικό μενού
+    </ion-title>
     <ion-buttons right>
       <button ion-button icon-only><ion-icon name="settings"></ion-icon></button>
     </ion-buttons>
@@ -15,51 +17,53 @@
 
 
 <ion-content >
-  <ion-grid class="head">
-    <ion-row  id="top">
-      <ion-col text-left>
-        <h6 *ngIf="operator.access_level==1">Διαχειριστής</h6>
-        <h6 *ngIf="operator.access_level==2">Ρυθμιστής</h6>
-        Access Level
-      </ion-col>
-      <ion-col text-right>
-        <h6>{{ operator.password }}</h6>
-        Password
-      </ion-col>
-    </ion-row>
-    <ion-row  id="footer">
-      <ion-col text-center>
-        <h2>{{ operator.first_name }} {{ operator.last_name }}</h2>
-        <h5>{{ operator.phone }}</h5>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid padding>
-    <ion-row >
-      <ion-col text-center >
-        <button ion-button block round outline>Manage Operators</button>
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col text-center>
-        <button ion-button  block round outline>Manage Customers</button>
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col text-center>
-        <button ion-button  block round outline>Manage Coupons</button>
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col text-center>
-        <button ion-button color="danger"  block round (click)="openDatabaseStats()">Βάση δεδομένων</button>
-      </ion-col>
-    </ion-row>
-    <ion-row >
-      <ion-col text-center>
-        <button ion-button color="dark"  block round (click)="openGraphs()">Γραφήματα</button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-card>
+    <ion-card-header>
+      Καλώς ήρθες, {{ operator.first_name }} {{operator.last_name}}
+    </ion-card-header>
+    <ion-card-content *ngIf="operator.access_level==1">
+      Έχεις συνδεθεί ως Διαχειριστής [{{operator.username}}]
+    </ion-card-content>
+    <ion-card-content *ngIf="operator.access_level==0">
+      Έχεις συνδεθεί ως Συντονιστής [{{operator.username}}]
+    </ion-card-content>
+  </ion-card>
+  <ion-card >
+    <ion-card-header>
+      Διαχείριση συστήματος
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row>
+        <ion-col text-center >
+          <button ion-button block text-wrap>Διαχείριση συντονιστών</button>
+        </ion-col>
+        <ion-col text-center >
+          <button ion-button block text-wrap>Διαχείριση πελατών</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center >
+          <button ion-button block text-wrap>Διαχείριση κουπονιών</button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
+  <ion-card >
+    <ion-card-header>
+      Βοηθήματα διαχειριστή
+    </ion-card-header>
+    <ion-card-content>
+      <ion-row >
+        <ion-col text-center>
+          <button ion-button color="danger"  block (click)="openDatabaseStats()" text-wrap>Βάση δεδομένων</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col text-center>
+          <button ion-button color="dark"  full (click)="openGraphs()" text-wrap>Γραφήματα</button>
+        </ion-col>
+      </ion-row>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>
