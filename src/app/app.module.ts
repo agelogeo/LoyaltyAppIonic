@@ -21,6 +21,7 @@ import {FilterPage} from "../pages/filter/filter";
 import {MyLinks} from "../services/mylinks";
 import {StatsPage} from "../pages/stats/stats";
 import {CustomerCardPage} from "../pages/customer-card/customer-card";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import {CustomerCardPage} from "../pages/customer-card/customer-card";
     QRScanner,
     SplashScreen,
     MyLinks,
+    InAppBrowser,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

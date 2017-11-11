@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Customer} from "../../model/customer";
-
+import {InAppBrowser, InAppBrowserEvent} from '@ionic-native/in-app-browser';
 /**
  * Generated class for the CustomerHomePage page.
  *
@@ -18,7 +18,7 @@ export class CustomerHomePage implements OnInit{
 
   customer = new Customer();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {
     this.customer.id=this.navParams.get('id');
     this.customer.name=this.navParams.get('name');
     this.customer.surname=this.navParams.get('surname');
@@ -38,17 +38,21 @@ export class CustomerHomePage implements OnInit{
     console.log(this.customer);
   }
 
+  openInAppBrowser(){
+    const browser = this.iab.create('https://www.facebook.com/ionicframework/');
 
-  /*
-  id:data.id,
-  name:data.name,
-  surname:data.surname,
-  phone:data.phone,
-  barcode:data.barcode,
-  stamps:data.stamps,
-  coupons_used:data.coupons_used,
-  visits:data.visits,
-  last_visit:data.last_visit
-  */
+    browser.on('loadstop').subscribe((ev: InAppBrowserEvent)=>{
+
+        browser.insertCSS(".youtube_done_button { position: absolute; top: 100px; width: 100%; background: rgba(255, 0, 0, 0.8); color: #2196F3; padding: 10px; font-size: 200px}");
+        browser.executeScript("(function () { \n" +
+          "    var body = document.querySelector('body'); \n" +
+          "    var button = document.createElement('div'); \n" +
+          "    button.innerHTML = 'Done'; \n" +
+          "    button.classList.add('youtube_done_button');\n" +
+          "    body.appendChild(button); \n" +
+          "})();");
+        browser.show();
+    });
+  }
 
 }

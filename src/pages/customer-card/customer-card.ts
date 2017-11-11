@@ -21,12 +21,12 @@ import {Http} from "@angular/http";
 })
 export class CustomerCardPage {
   originalCustomer : Customer;
-  position : number;
+  mode : string;
 
 
   constructor(private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
     this.originalCustomer=this.navParams.get('customerId');
-    this.position=this.navParams.get('position');
+    this.mode=this.navParams.get('mode');
   }
 
   dismiss(customer : any){

@@ -188,7 +188,7 @@ export class DatabaseStatsPage {
   }
 
   onLoadCustomerCard(customer:Customer,i : number){
-    let modal = this.modalCtrl.create(CustomerCardPage,{ customerId: customer,position : i});
+    let modal = this.modalCtrl.create(CustomerCardPage,{ customerId: customer,mode : 'edit'});
     modal.onDidDismiss(customer => {
       if (customer != null) {
         this.customers[i] = customer;

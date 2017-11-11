@@ -75,7 +75,7 @@ export class StatsPage implements OnInit{
   // BAR CANVAS
   daysChartSettings(){
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Days Chart - Choose free dimension',
+      title: 'Γράφημα εβδομάδας - Συνολικές επισκέψεις',
       buttons: [
         {
           text: 'Τελευταία εβδομάδα',
@@ -116,7 +116,7 @@ export class StatsPage implements OnInit{
 
   makeTheDaysCall(date : string, hours : string, interval : string, title : string){
     const loading = this.loadingCtrl.create({
-      content : 'Please wait..'
+      content : 'Παρακαλώ περιμένετε...'
     });
     loading.present();
 
@@ -158,44 +158,44 @@ export class StatsPage implements OnInit{
   // DOUGHNAT GRAPH
   pieChartSettings(){
     let actionSheet = this.actionSheetCtrl.create({
-      title: 'Chart Pie - Choose free dimension',
+      title: 'Γράφημα κουπονιών - Εξαργυρώσεις σε διάστημα Χ',
       buttons: [
         {
           text: 'Σήμερα',
           role: 'destructive',
           handler: () => {
 
-            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'-1','Today');
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'-1','Σήμερα');
           }
         },{
           text: 'Χθές',
           handler: () => {
-            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1','Yesterday');
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1','Χθές');
           }
         },{
           text: 'Τελευταία εβδομάδα',
           handler: () => {
-            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'7','Last week');
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'7','Τελευταία εβδομάδα');
           }
         },{
           text: 'Τελευταίος μήνας',
           handler: () => {
-            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'30','Last month');
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'30','Τελευταίος μήνας');
           }
         },{
           text: 'Τελευταίοι 6 μήνες',
           handler: () => {
-            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'180','Last 6 months');
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'180','Τελευταίοι 6 μήνες');
           }
         },{
           text: 'Τελευταίος χρόνος',
           handler: () => {
-            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'365','Last year');
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'365','Τελευταίος χρόνος');
           }
         },{
           text: 'Συνολική διάρκεια',
           handler: () => {
-            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1000','All Time');
+            this.makeThePieCall((this.date.getFullYear()+'-'+(this.date.getMonth()+1)+'-'+this.date.getDate()).toString(),this.date.getHours().toString(),'1000','Συνολική διάρκεια');
           }
         },{
           text: 'Ακύρωση',
@@ -212,7 +212,7 @@ export class StatsPage implements OnInit{
   makeThePieCall(date : string, hours : string, interval : string, title : string){
 
     const loading = this.loadingCtrl.create({
-      content : 'Please wait..'
+      content : 'Παρακαλώ περιμένετε...'
     });
     loading.present();
 
@@ -256,13 +256,13 @@ export class StatsPage implements OnInit{
   }
 
   getDate(){
-    this.makeTheLineCall(this.myDate.slice(0,10),'5','Today');
+    this.makeTheLineCall(this.myDate.slice(0,10),'5','Σήμερα');
   }
 
 
   makeTheLineCall(date : string, hours : string, title : string){
     const loading = this.loadingCtrl.create({
-      content : 'Please wait..'
+      content : 'Παρακαλώ περιμένετε...'
     });
     loading.present();
 
@@ -311,7 +311,7 @@ export class StatsPage implements OnInit{
       data: {
         labels: this.daysChartForm.names,
         datasets: [{
-          label: '# of Votes',
+          label: '# επισκέψεις',
           data: this.daysChartForm.counts,
           borderWidth: 1,
           backgroundColor: this.daysChartForm.colors,
@@ -341,7 +341,7 @@ export class StatsPage implements OnInit{
       data: {
         labels: this.pieChartForm.names,
         datasets: [{
-          label: '% of coupons used',
+          label: '% εξαργυρώσεις',
           data: this.pieChartForm.counts,
           backgroundColor: this.pieChartForm.colors,
           hoverBackgroundColor: this.pieChartForm.hover_colors
@@ -366,7 +366,7 @@ export class StatsPage implements OnInit{
         labels: this.lineChartForm.names,
         datasets: [
           {
-            label: "Total Visits",
+            label: "Συνολικές επισκέψεις",
             fill: false,
             lineTension: 0.1,
             backgroundColor: this.lineChartForm.colors,

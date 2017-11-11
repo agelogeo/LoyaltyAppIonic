@@ -13,15 +13,15 @@
     <ion-list>
       <ion-item>
         <ion-label fixed>Όνομα</ion-label>
-        <ion-input type="text" [ngModel]="originalCustomer.name" name="name" required clearInput="true"></ion-input>
+        <ion-input type="text" [ngModel]="originalCustomer.name" name="name" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed>Επίθετο</ion-label>
-        <ion-input [ngModel]="originalCustomer.surname" name="surname" required clearInput="true"></ion-input>
+        <ion-input [ngModel]="originalCustomer.surname" name="surname" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed>Τηλέφωνο</ion-label>
-        <ion-input [ngModel]="originalCustomer.phone" name="phone" required clearInput="true"></ion-input>
+        <ion-input [ngModel]="originalCustomer.phone" name="phone" required [clearInput]="mode=='edit'"  [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed text-wrap>Κωδικός</ion-label>
@@ -29,22 +29,35 @@
       </ion-item>
       <ion-item>
         <ion-label fixed >Σφραγίδες</ion-label>
-        <ion-input [ngModel]="originalCustomer.stamps" name="stamps" required readonly="true"  ></ion-input>
+        <ion-input [ngModel]="originalCustomer.stamps" name="stamps" required [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed text-wrap>Κουπόνια</ion-label>
-        <ion-input [ngModel]="originalCustomer.coupons_used" name="coupons_used" required readonly="true"></ion-input>
+        <ion-input [ngModel]="originalCustomer.coupons_used" name="coupons_used" required [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed >Επισκέψεις</ion-label>
-        <ion-input [ngModel]="originalCustomer.visits" name="visits" required readonly="true"></ion-input>
+        <ion-input [ngModel]="originalCustomer.visits" name="visits" required [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label fixed text-wrap>Τελευταία επίσκεψη</ion-label>
         <ion-input [ngModel]="originalCustomer.last_visit" name="last_visit" required readonly="true"></ion-input>
       </ion-item>
     </ion-list>
-    <ion-row>
+    <ion-row *ngIf="mode=='scanned'">
+      <ion-col>
+        <button type="button" color="secondary" large ion-button block (click)="dismiss(null)">Εξαργύρωση</button>
+      </ion-col>
+      <ion-col>
+        <button type="button" large ion-button block (click)="dismiss(null)">Σφραγίδα</button>
+      </ion-col>
+    </ion-row>
+    <ion-row  *ngIf="mode=='scanned'">
+      <ion-col>
+        <button type="button" color="danger"  ion-button block (click)="dismiss(null)">Ακύρωση</button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="mode=='edit'">
       <ion-col>
         <button type="button" color="danger"  ion-button block (click)="dismiss(null)">Ακύρωση</button>
       </ion-col>

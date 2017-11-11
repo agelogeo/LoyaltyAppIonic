@@ -10,6 +10,7 @@ import {Http} from "@angular/http";
 import {Customer} from "../../model/customer";
 import {StatsPage} from "../stats/stats";
 import {ScannedPage} from "../scanned/scanned";
+import {CustomerCardPage} from "../customer-card/customer-card";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -126,7 +127,19 @@ export class OperatorHomePage implements OnInit{
         });
         loading.dismiss();
         toast.present();
-        this.navCtrl.push(ScannedPage,{id:data.id,
+        let customer = new Customer();
+          customer.id=data.id;
+          customer.name=data.name;
+          customer.surname=data.surname;
+          customer.phone=data.phone;
+          customer.barcode=data.barcode;
+          customer.stamps=data.stamps;
+          customer.coupons_used=data.coupons_used;
+          customer.visits=data.visits;
+          customer.last_visit=data.last_visit;
+        this.navCtrl.push(CustomerCardPage,{customerId : customer,mode : 'scanned'});
+
+        /*this.navCtrl.push(ScannedPage,{id:data.id,
           name:data.name,
           surname:data.surname,
           phone:data.phone,
@@ -134,7 +147,7 @@ export class OperatorHomePage implements OnInit{
           stamps:data.stamps,
           coupons_used:data.coupons_used,
           visits:data.visits,
-          last_visit:data.last_visit});
+          last_visit:data.last_visit});*/
       }
     });
 
