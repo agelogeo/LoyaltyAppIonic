@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Img, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Customer} from "../../model/customer";
 import {InAppBrowser, InAppBrowserEvent} from '@ionic-native/in-app-browser';
 /**
@@ -16,6 +16,10 @@ import {InAppBrowser, InAppBrowserEvent} from '@ionic-native/in-app-browser';
 })
 export class CustomerHomePage implements OnInit{
 
+
+
+  image2 : string;
+
   customer = new Customer();
 
   constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {
@@ -28,6 +32,7 @@ export class CustomerHomePage implements OnInit{
     this.customer.coupons_used=this.navParams.get('coupons_used');
     this.customer.visits=this.navParams.get('visits');
     this.customer.last_visit=this.navParams.get('last_visit');
+    this.image2="https://chart.googleapis.com/chart?cht=qr&chl="+this.customer.barcode+"&chs=250x250";
   }
 
   ionViewDidLoad() {

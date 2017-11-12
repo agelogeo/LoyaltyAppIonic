@@ -27,7 +27,8 @@
 
       <ion-row >
         <ion-col text-center>
-          <img  id="barcode"  src="https://chart.googleapis.com/chart?cht=qr&chl=+{{customer.barcode}}+&chs=250x250">
+          <img  id="barcode"  [src]="image2">
+
           <br>
           <h4 id="barcode_text">{{customer.barcode}}</h4>
         </ion-col>

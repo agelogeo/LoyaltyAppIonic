@@ -57,7 +57,7 @@
         <button type="submit" ion-button block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="mode=='edit'">
       <ion-col>
         <button type="button" color="danger"  ion-button block (click)="dismiss(null)">Ακύρωση</button>
       </ion-col>
