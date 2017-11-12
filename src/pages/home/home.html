@@ -7,34 +7,35 @@
 </ion-header>
 
 <ion-content padding>
-  <form #f="ngForm" (ngSubmit)="onCreateCustomer(f)" class="animate-from-top-to-bottom">
+  <div class="ld ldt-power-on">
+    <form #f="ngForm" (ngSubmit)="onCreateCustomer(f)" >
+      <ion-list >
+        <ion-item >
+          <ion-label floating>Όνομα</ion-label>
+          <ion-input type="text" ngModel name="name" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Επίθετο</ion-label>
+          <ion-input type="text" ngModel name="surname" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Τηλέφωνο</ion-label>
+          <ion-input type="number" ngModel name="phone" required></ion-input>
+        </ion-item>
+      </ion-list>
+      <button  type="submit" ion-button block [disabled]="!f.valid">Δημιουργία λογαριασμού</button>
+    </form>
     <ion-list >
-      <ion-item >
-        <ion-label floating>Όνομα</ion-label>
-        <ion-input type="text" ngModel name="name" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Επίθετο</ion-label>
-        <ion-input type="text" ngModel name="surname" required></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label floating>Τηλέφωνο</ion-label>
-        <ion-input type="number" ngModel name="phone" required></ion-input>
-      </ion-item>
+      <ion-item-divider></ion-item-divider>
+      <ion-item-group >
+        <ion-label text-center>Είστε ήδη μέλος;</ion-label>
+        <button  ion-button color="secondary" block (click)="goToLogin()">Σύνδεση</button>
+      </ion-item-group>
+      <hr>
+      <ion-item-group>
+        <ion-label text-center>Έχετε λογαριασμό διαχειριστή;</ion-label>
+        <button  ion-button color="danger" block (click)="goToAdmin()">Σύνδεση ως διαχειριστής</button>
+      </ion-item-group>
     </ion-list>
-    <button  type="submit" ion-button block [disabled]="!f.valid">Δημιουργία λογαριασμού</button>
-  </form>
-  <ion-list >
-    <ion-item-divider></ion-item-divider>
-    <ion-item-group class="animate-from-left-to-right">
-      <ion-label text-center>Είστε ήδη μέλος;</ion-label>
-      <button  ion-button color="secondary" block (click)="goToLogin()">Σύνδεση</button>
-    </ion-item-group>
-    <hr>
-    <ion-item-group class="animate-from-right-to-left">
-      <ion-label text-center>Έχετε λογαριασμό διαχειριστή;</ion-label>
-      <button  ion-button color="danger" block (click)="goToAdmin()">Σύνδεση ως διαχειριστής</button>
-    </ion-item-group>
-  </ion-list>
-
+  </div>
 </ion-content>

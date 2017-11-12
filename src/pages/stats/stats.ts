@@ -116,7 +116,26 @@ export class StatsPage implements OnInit{
 
   makeTheDaysCall(date : string, hours : string, interval : string, title : string){
     const loading = this.loadingCtrl.create({
-      content : 'Παρακαλώ περιμένετε...'
+      spinner: 'hide',
+      content: `<div class="lds-css ng-scope">
+  <div style="width:100%;height:100%" class="lds-wedges">
+    <div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>`,
+      duration: 5000
     });
     loading.present();
 
@@ -212,7 +231,26 @@ export class StatsPage implements OnInit{
   makeThePieCall(date : string, hours : string, interval : string, title : string){
 
     const loading = this.loadingCtrl.create({
-      content : 'Παρακαλώ περιμένετε...'
+      spinner: 'hide',
+      content: `<div class="lds-css ng-scope">
+  <div style="width:100%;height:100%" class="lds-wedges">
+    <div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>`,
+      duration: 5000
     });
     loading.present();
 
@@ -262,7 +300,26 @@ export class StatsPage implements OnInit{
 
   makeTheLineCall(date : string, hours : string, title : string){
     const loading = this.loadingCtrl.create({
-      content : 'Παρακαλώ περιμένετε...'
+      spinner: 'hide',
+      content: `<div class="lds-css ng-scope">
+  <div style="width:100%;height:100%" class="lds-wedges">
+    <div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>`,
+      duration: 5000
     });
     loading.present();
 

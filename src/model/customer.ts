@@ -8,6 +8,7 @@ export class Customer{
   coupons_used: number;
   visits: number;
   last_visit: string;
+  image_url : string;
 
   constructor(){
 

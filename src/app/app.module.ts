@@ -22,6 +22,8 @@ import {MyLinks} from "../services/mylinks";
 import {StatsPage} from "../pages/stats/stats";
 import {CustomerCardPage} from "../pages/customer-card/customer-card";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {FileTransfer} from "@ionic-native/file-transfer";
+import {IonicStorageModule, Storage} from "@ionic/storage";
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -68,6 +71,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
     SplashScreen,
     MyLinks,
     InAppBrowser,
+    FileTransfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
