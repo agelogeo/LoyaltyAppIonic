@@ -1,7 +1,11 @@
 import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
-import {Img, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {App, Img, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {Customer} from "../../model/customer";
 import {InAppBrowser, InAppBrowserEvent} from '@ionic-native/in-app-browser';
+import {Storage} from "@ionic/storage";
+import {AccountService} from "../../services/account";
+import {HomePage} from "../home/home";
+import {CustomerSettingsPage} from "../customer-settings/customer-settings";
 
 
 /**
@@ -53,6 +57,10 @@ export class CustomerHomePage implements OnInit{
           "})();");
         browser.show();
     });
+  }
+
+  onSettings(){
+    this.navCtrl.push(CustomerSettingsPage);
   }
 
 }

@@ -25,6 +25,8 @@ declare var cordova: any;
 })
 export class CustomerLoginPage {
 
+  remember : boolean = false;
+
   constructor(private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,public navCtrl: NavController, public navParams: NavParams,private http:Http,private toastCtrl:ToastController,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
 
   }
@@ -35,6 +37,7 @@ export class CustomerLoginPage {
 
 
   onLoginCustomer(form : NgForm){
+
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: `<div class="lds-css ng-scope">
@@ -58,7 +61,6 @@ export class CustomerLoginPage {
       duration: 3000
     });
     loading.present();
-
     console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+form.value.barcode);
     this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+form.value.barcode)
       .map(res => res.json()).subscribe(data => {
@@ -108,7 +110,7 @@ export class CustomerLoginPage {
               c.image_url = entry.toURL();
               this.accountService.LogIn('customer',c);
 
-              if(c.barcode==45556){
+              if(this.remember){
                 this.storage.set('accountService',this.accountService).then( () => console.log('accountService saved.'));
               }else{
                 this.storage.set('accountService',null).then( () => console.log('accountService set to null.'));

@@ -9,11 +9,10 @@ import {CustomerHomePage} from "../pages/customer-home/customer-home";
   templateUrl: 'app.html'
 })
 export class MyApp {
-  @ViewChild(Nav) nav: Nav;
+
 
   rootPage:any = HomePage;
 
-  customerPages : Array<{title:string,component:any,icon:string}>;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
     platform.ready().then(() => {
@@ -23,14 +22,8 @@ export class MyApp {
       splashScreen.hide();
     });
 
-    this.customerPages = [
-      {title: 'Home' , component: CustomerHomePage, icon: 'home'}
-    ];
   }
 
-  openPage(page){
-    this.nav.setRoot(page.component);
-  }
 
 }
 

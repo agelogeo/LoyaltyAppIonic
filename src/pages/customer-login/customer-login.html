@@ -20,6 +20,10 @@
         <ion-label floating>Κωδικός ή Τηλέφωνο</ion-label>
         <ion-input type="number" ngModel name="barcode" required clearInput="true"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label>Μόνιμη σύνδεση</ion-label>
+        <ion-checkbox color="danger" [(ngModel)]="remember" name="test"></ion-checkbox>
+      </ion-item>
     </ion-list>
     <button type="submit" ion-button block [disabled]="!f.valid">Σύνδεση</button>
   </form>

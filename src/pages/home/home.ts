@@ -28,6 +28,31 @@ export class HomePage implements OnInit{
 
       console.log('HOME WILL ENTER');
 
+      const loading = this.loadingCtrl.create({
+        spinner: 'hide',
+        content: `<div class="lds-css ng-scope">
+  <div style="width:100%;height:100%" class="lds-wedges">
+    <div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+      <div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>`,
+        duration: 1000
+      });
+      loading.present();
+
+
       this.storage.get('accountService')
         .then( (acc : AccountService) => {
           console.log('acc : '+acc);
@@ -37,6 +62,7 @@ export class HomePage implements OnInit{
               if(acc.role=='customer'){
                 this.navCtrl.setRoot(CustomerHomeTabsPage,{customer : acc.customer});
               }else if(acc.role=='operator'){
+                loading.dismiss();
                 this.navCtrl.setRoot(TabsPage,{id:acc.operator.id,
                   username:acc.operator.username,
                   password:acc.operator.password,
@@ -44,6 +70,7 @@ export class HomePage implements OnInit{
                   first_name:acc.operator.first_name,
                   last_name:acc.operator.last_name,
                   phone:acc.operator.phone});
+
               }
             }
           }
