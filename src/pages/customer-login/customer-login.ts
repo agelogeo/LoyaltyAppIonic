@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
-import {CustomerHomePage} from "../customer-home/customer-home";
 import {Http} from "@angular/http";
 import {CustomerHomeTabsPage} from "../customer-home-tabs/customer-home-tabs";
+import {AccountService} from "../../services/account";
+import {Customer} from "../../model/customer";
+import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
+import {Storage} from "@ionic/storage";
 
 /**
  * Generated class for the CustomerLoginPage page.
@@ -12,14 +15,17 @@ import {CustomerHomeTabsPage} from "../customer-home-tabs/customer-home-tabs";
  * Ionic pages and navigation.
  */
 
+declare var cordova: any;
+
 @IonicPage()
+@Injectable()
 @Component({
   selector: 'page-customer-login',
   templateUrl: 'customer-login.html',
 })
 export class CustomerLoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private toastCtrl:ToastController,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
+  constructor(private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,public navCtrl: NavController, public navParams: NavParams,private http:Http,private toastCtrl:ToastController,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
 
   }
 
@@ -78,15 +84,49 @@ export class CustomerLoginPage {
         });
         loading.dismiss();
         toast.present();
-        this.navCtrl.setRoot(CustomerHomeTabsPage,{id:data.id,
-                                                      name:data.name,
-                                                      surname:data.surname,
-                                                      phone:data.phone,
-                                                      barcode:data.barcode,
-                                                      stamps:data.stamps,
-                                                      coupons_used:data.coupons_used,
-                                                      visits:data.visits,
-                                                      last_visit:data.last_visit});
+
+        const c = new Customer();
+        c.id=data.id;
+        c.name = data.name;
+        c.surname = data.surname;
+        c.phone = data.phone;
+        c.barcode = data.barcode;
+        c.stamps = data.stamps;
+        c.coupons_used = data.coupons_used;
+        c.visits = data.visits;
+        c.last_visit = data.last_visit;
+
+
+        const fileTransfer: FileTransferObject = this.transfer.create();
+        const url = 'https://chart.googleapis.com/chart?cht=qr&chl='+c.barcode+'&chs=250x250';
+        if ((<any>window).cordova) {
+          // running on device/emulator
+          fileTransfer.download(url, cordova.file.dataDirectory + c.barcode+'.png')
+            .then((entry) => {
+              console.log('download complete: ' + entry.toURL());
+              console.log(entry);
+              c.image_url = entry.toURL();
+              this.accountService.LogIn('customer',c);
+
+              if(c.barcode==45556){
+                this.storage.set('accountService',this.accountService).then( () => console.log('accountService saved.'));
+              }else{
+                this.storage.set('accountService',null).then( () => console.log('accountService set to null.'));
+              }
+
+            }, (error) => {
+              console.log('DOWNLOAD : '+error);
+              // handle error
+            });
+
+        } else {
+          // running in dev mode
+          c.image_url = url;
+        }
+
+
+        /**/
+        this.navCtrl.setRoot(CustomerHomeTabsPage,{customer: c});
       }
     });
   }

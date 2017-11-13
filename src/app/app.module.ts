@@ -24,6 +24,7 @@ import {CustomerCardPage} from "../pages/customer-card/customer-card";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {FileTransfer} from "@ionic-native/file-transfer";
 import {IonicStorageModule, Storage} from "@ionic/storage";
+import {AccountService} from "../services/account";
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import {IonicStorageModule, Storage} from "@ionic/storage";
     QRScanner,
     SplashScreen,
     MyLinks,
+    AccountService,
     InAppBrowser,
     FileTransfer,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
