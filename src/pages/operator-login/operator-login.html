@@ -18,6 +18,10 @@
         <ion-label floating>Συνθηματικό</ion-label>
         <ion-input  type="password" ngModel name="password" required clearInput="true"></ion-input>
       </ion-item>
+      <ion-item>
+        <ion-label>Μόνιμη σύνδεση</ion-label>
+        <ion-checkbox color="danger" [(ngModel)]="remember" name="test"></ion-checkbox>
+      </ion-item>
     </ion-list>
     <button type="submit" ion-button block [disabled]="!f.valid">Σύνδεση</button>
   </form>

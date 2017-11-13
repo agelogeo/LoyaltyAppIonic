@@ -26,6 +26,7 @@ import {FileTransfer} from "@ionic-native/file-transfer";
 import {IonicStorageModule, Storage} from "@ionic/storage";
 import {AccountService} from "../services/account";
 import {CustomerSettingsPage} from "../pages/customer-settings/customer-settings";
+import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings";
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {CustomerSettingsPage} from "../pages/customer-settings/customer-settings
     FilterPage,
     StatsPage,
     CustomerCardPage,
-    CustomerSettingsPage
+    CustomerSettingsPage,
+    OperatorSettingsPage
   ],
   imports: [
     BrowserModule,
@@ -67,7 +69,8 @@ import {CustomerSettingsPage} from "../pages/customer-settings/customer-settings
     FilterPage,
     StatsPage,
     CustomerCardPage,
-    CustomerSettingsPage
+    CustomerSettingsPage,
+    OperatorSettingsPage
   ],
   providers: [
     StatusBar,

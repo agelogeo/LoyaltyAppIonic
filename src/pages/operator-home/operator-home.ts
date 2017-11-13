@@ -11,6 +11,7 @@ import {Customer} from "../../model/customer";
 import {StatsPage} from "../stats/stats";
 import {ScannedPage} from "../scanned/scanned";
 import {CustomerCardPage} from "../customer-card/customer-card";
+import {OperatorSettingsPage} from "../operator-settings/operator-settings";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -29,13 +30,7 @@ export class OperatorHomePage implements OnInit{
   operator = new Operator();
 
   constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
-    this.operator.id=this.navParams.get('id');
-    this.operator.username=this.navParams.get('username');
-    this.operator.password=this.navParams.get('password');
-    this.operator.access_level=this.navParams.get('access_level');
-    this.operator.first_name=this.navParams.get('first_name');
-    this.operator.last_name=this.navParams.get('last_name');
-    this.operator.phone=this.navParams.get('phone');
+    this.operator=this.navParams.get('operator');
   }
 
   ionViewDidLoad() {
@@ -170,5 +165,9 @@ export class OperatorHomePage implements OnInit{
       }
     });
 
+  }
+
+  onSettings(){
+    this.navCtrl.push(OperatorSettingsPage);
   }
 }

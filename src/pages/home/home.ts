@@ -62,18 +62,13 @@ export class HomePage implements OnInit{
               if(acc.role=='customer'){
                 this.navCtrl.setRoot(CustomerHomeTabsPage,{customer : acc.customer});
               }else if(acc.role=='operator'){
-                loading.dismiss();
-                this.navCtrl.setRoot(TabsPage,{id:acc.operator.id,
-                  username:acc.operator.username,
-                  password:acc.operator.password,
-                  access_level:acc.operator.access_level,
-                  first_name:acc.operator.first_name,
-                  last_name:acc.operator.last_name,
-                  phone:acc.operator.phone});
+                this.navCtrl.setRoot(TabsPage,{operator : acc.operator});
 
               }
+
             }
           }
+          loading.dismiss();
         })
         .catch( err => console.log(err));
 

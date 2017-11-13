@@ -1,9 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, Injectable} from '@angular/core';
 import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
 import {TabsPage} from "../operator-tabs/operator-tabs";
 import {MyLinks} from "../../services/mylinks";
+import {Operator} from "../../model/operator";
+import {FileTransferObject, FileTransfer} from "@ionic-native/file-transfer";
+import {AccountService} from "../../services/account";
+import {Storage} from "@ionic/storage";
 
 /**
  * Generated class for the OperatorLoginPage page.
@@ -12,14 +16,20 @@ import {MyLinks} from "../../services/mylinks";
  * Ionic pages and navigation.
  */
 
+
+declare var cordova: any;
+
 @IonicPage()
+@Injectable()
 @Component({
   selector: 'page-operator-login',
   templateUrl: 'operator-login.html',
 })
 export class OperatorLoginPage {
 
-  constructor(private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  remember : boolean = false;
+
+  constructor(private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -68,14 +78,37 @@ export class OperatorLoginPage {
         });
         alert.present();
       }else {
+        const toast = this.toastCtrl.create({
+          message: 'You logged in successfully',
+          showCloseButton: true,
+          closeButtonText: 'Ok',
+          duration: 2000
+        });
         loading.dismiss();
-        this.navCtrl.setRoot(TabsPage,{id:data.id,
-          username:data.username,
-          password:data.password,
-          access_level:data.access_level,
-          first_name:data.first_name,
-          last_name:data.last_name,
-          phone:data.phone});
+        toast.present();
+
+        const operator = new Operator();
+        operator.id=data.id;
+        operator.username = data.username;
+        operator.password = data.password;
+        operator.access_level = data.access_level;
+        operator.first_name = data.first_name;
+        operator.last_name = data.last_name;
+        operator.phone = data.phone;
+
+        this.accountService.LogIn('operator',operator);
+
+        if(this.remember){
+          this.storage.set('accountService',this.accountService).then( () => console.log('accountService saved.'));
+        }else{
+          this.storage.set('accountService',null).then( () => console.log('accountService set to null.'));
+        }
+
+
+        /**/
+        this.navCtrl.setRoot(TabsPage,{operator: operator});
+
+
       }
     });
   }
