@@ -43,7 +43,7 @@ export class StatsPage implements OnInit{
 
 
 
-  constructor(private actionSheetCtrl:ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(private myLinks : MyLinks,private actionSheetCtrl:ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
   }
 
   pieChartForm = new PieChartForm();
@@ -117,24 +117,7 @@ export class StatsPage implements OnInit{
   makeTheDaysCall(date : string, hours : string, interval : string, title : string){
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 5000
     });
     loading.present();
@@ -232,24 +215,7 @@ export class StatsPage implements OnInit{
 
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 5000
     });
     loading.present();
@@ -301,24 +267,7 @@ export class StatsPage implements OnInit{
   makeTheLineCall(date : string, hours : string, title : string){
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 5000
     });
     loading.present();

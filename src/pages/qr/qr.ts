@@ -8,6 +8,7 @@ import {ScannedPage} from "../scanned/scanned";
 import {Http} from "@angular/http";
 import {CustomerCardPage} from "../customer-card/customer-card";
 import {Customer} from "../../model/customer";
+import {MyLinks} from "../../services/mylinks";
 
 /**
  * Generated class for the QrPage page.
@@ -24,7 +25,8 @@ import {Customer} from "../../model/customer";
 export class QrPage implements OnInit{
 
 
-  constructor(private http:Http,
+  constructor(private myLinks: MyLinks,
+              private http:Http,
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController,
               private viewCtrl: ViewController,
@@ -96,24 +98,7 @@ export class QrPage implements OnInit{
 
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 5000
     });
     loading.present();

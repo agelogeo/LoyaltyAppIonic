@@ -12,6 +12,7 @@ import {StatsPage} from "../stats/stats";
 import {ScannedPage} from "../scanned/scanned";
 import {CustomerCardPage} from "../customer-card/customer-card";
 import {OperatorSettingsPage} from "../operator-settings/operator-settings";
+import {MyLinks} from "../../services/mylinks";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -29,7 +30,7 @@ export class OperatorHomePage implements OnInit{
   @ViewChild('myTabs') tabs : Tabs;
   operator = new Operator();
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(private myLinks: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
     this.operator=this.navParams.get('operator');
   }
 
@@ -94,24 +95,7 @@ export class OperatorHomePage implements OnInit{
 
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 5000
     });
     loading.present();

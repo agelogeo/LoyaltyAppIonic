@@ -9,6 +9,7 @@ import {AccountService} from "../../services/account";
 import {CustomerHomeTabsPage} from "../customer-home-tabs/customer-home-tabs";
 import {TabsPage} from "../operator-tabs/operator-tabs";
 import {Storage} from "@ionic/storage";
+import {MyLinks} from "../../services/mylinks";
 
 @Component({
   selector: 'page-home',
@@ -19,7 +20,7 @@ export class HomePage implements OnInit{
 
 
 
-  constructor(private storage: Storage,private accountService:AccountService,public navCtrl: NavController,private loadingCtrl: LoadingController,private http: Http,private alertCtrl:AlertController) {
+  constructor(private myLinks : MyLinks,private storage: Storage,private accountService:AccountService,public navCtrl: NavController,private loadingCtrl: LoadingController,private http: Http,private alertCtrl:AlertController) {
 
   }
 
@@ -30,12 +31,7 @@ export class HomePage implements OnInit{
 
       const loading = this.loadingCtrl.create({
         spinner: 'hide',
-        content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-dual-ring">
-    <div></div>
-    <div></div>
-  </div>
-</div>`,
+        content: this.myLinks.loading_html,
         duration: 1000
       });
       loading.present();
@@ -67,7 +63,9 @@ export class HomePage implements OnInit{
 
 
     const loading = this.loadingCtrl.create({
-      content : 'Signin you up..'
+      spinner: 'hide',
+      content: this.myLinks.loading_html,
+      duration: 1000
     });
     loading.present();
 
