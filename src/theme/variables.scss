@@ -34,11 +34,13 @@ $fab-size : 70px;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary:    #488aff,
-  secondary:  #32db64,
+  primary: #2f8fff,
+  secondary:  #d74946,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #222,
+  oldBlue:    #2f8fff,
+  navyBlue:   #0f6491
 );
 
 
@@ -46,13 +48,13 @@ $colors: (
 // --------------------------------------------------
 // iOS only Sass variables can go here
 
-$toolbar-ios-background:   #0076fe;
+$toolbar-ios-background:   #0f6491;
 
 
 // App Material Design Variables
 // --------------------------------------------------
 // Material Design only Sass variables can go here
-$toolbar-md-background:    #0076fe;
+$toolbar-md-background:    #0f6491;
 
 
 

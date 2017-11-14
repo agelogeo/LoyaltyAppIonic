@@ -29,7 +29,7 @@ export class OperatorLoginPage {
 
   remember : boolean = false;
 
-  constructor(private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(private myLinks:MyLinks,private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
@@ -39,24 +39,7 @@ export class OperatorLoginPage {
   onLoginOperator(form : NgForm){
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 5000
     });
     loading.present();

@@ -116,89 +116,75 @@ ion-app.cameraView, ion-app.cameraView ion-content, ion-app.cameraView .nav-deco
   animation-duraton: 750ms;
 }
 
+/*SIMPLE LOADER*/
+
+.loader {
+  position: relative;
+  border: 16px solid rgba(243, 243, 243, 0);
+  border-radius: 50%;
+  border-top: 16px solid color($colors,secondary,base);
+  border-right: 16px solid color($colors,navyBlue,base);
+  border-bottom: 16px solid color($colors,secondary,base);
+  border-left: 16px solid color($colors,navyBlue,base);
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
 /*SPINNER ANIMATION*/
 
-@keyframes lds-wedges {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-@-webkit-keyframes lds-wedges {
-  0% {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-.lds-wedges {
+.spinner {
+  width: 80px;
+  height: 80px;
+
   position: relative;
+  margin:  auto;
 }
-.lds-wedges > div > div {
-  -webkit-transform-origin: 100px 100px;
-  transform-origin: 100px 100px;
-  -webkit-animation: lds-wedges 3s linear infinite;
-  animation: lds-wedges 3s linear infinite;
-  opacity: 0.8;
-}
-.lds-wedges > div > div > div {
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: color($colors, secondary, base);
+  opacity: 0.6;
   position: absolute;
-  left: 30px;
-  top: 30px;
-  width: 70px;
-  height: 70px;
-  border-radius: 70px 0 0 0;
-  -webkit-transform-origin: 100px 100px;
-  transform-origin: 100px 100px;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
 }
-.lds-wedges > div div:nth-child(1) > div {
-  background: #c5523f;
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg);
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
 }
-.lds-wedges > div div:nth-child(1) {
-  -webkit-animation-duration: 0.75s;
-  animation-duration: 0.75s;
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
 }
-.lds-wedges > div div:nth-child(2) > div {
-  background: #f2b736;
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-.lds-wedges > div div:nth-child(2) {
-  -webkit-animation-duration: 1s;
-  animation-duration: 1s;
-}
-.lds-wedges > div div:nth-child(3) > div {
-  background: #499255;
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-.lds-wedges > div div:nth-child(3) {
-  -webkit-animation-duration: 1.5s;
-  animation-duration: 1.5s;
-}
-.lds-wedges > div div:nth-child(4) > div {
-  background: #1875e5;
-  -webkit-transform: rotate(0deg);
-  transform: rotate(0deg);
-}
-.lds-wedges > div div:nth-child(4) {
-  -webkit-animation-duration: 3s;
-  animation-duration: 3s;
-}
-.lds-wedges {
-  width: 70px !important;
-  height: 70px !important;
-  -webkit-transform: translate(-35px, -35px) scale(0.35) translate(35px, 35px);
-  transform: translate(-35px, -35px) scale(0.35) translate(35px, 35px);
+
+@keyframes sk-bounce {
+  0%, 100% {
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% {
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
 }
 
 /*TRANS*/

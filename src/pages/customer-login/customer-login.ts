@@ -7,6 +7,7 @@ import {AccountService} from "../../services/account";
 import {Customer} from "../../model/customer";
 import {FileTransfer, FileTransferObject} from "@ionic-native/file-transfer";
 import {Storage} from "@ionic/storage";
+import {MyLinks} from "../../services/mylinks";
 
 /**
  * Generated class for the CustomerLoginPage page.
@@ -27,7 +28,7 @@ export class CustomerLoginPage {
 
   remember : boolean = false;
 
-  constructor(private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,public navCtrl: NavController, public navParams: NavParams,private http:Http,private toastCtrl:ToastController,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
+  constructor(private myLinks : MyLinks,private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,public navCtrl: NavController, public navParams: NavParams,private http:Http,private toastCtrl:ToastController,private loadingCtrl:LoadingController,private alertCtrl:AlertController) {
 
   }
 
@@ -40,24 +41,7 @@ export class CustomerLoginPage {
 
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 3000
     });
     loading.present();

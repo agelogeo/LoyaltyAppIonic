@@ -31,21 +31,9 @@ export class HomePage implements OnInit{
       const loading = this.loadingCtrl.create({
         spinner: 'hide',
         content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
+  <div style="width:100%;height:100%" class="lds-dual-ring">
+    <div></div>
+    <div></div>
   </div>
 </div>`,
         duration: 1000

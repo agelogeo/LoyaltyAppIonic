@@ -1,5 +1,12 @@
 export class MyLinks{
 
+  loading_html = `<div class="loader"></div>`;
+
+/*<div class="spinner">
+  <div class="double-bounce1"></div>
+    <div class="double-bounce2"></div>
+    </div>*/
+
   url = 'https://loyaltyapp.000webhostapp.com/loyalty.php?';
   database = 'db=id755156_loyalty_db';
 
