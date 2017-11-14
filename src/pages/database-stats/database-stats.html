@@ -23,7 +23,7 @@
     <ion-searchbar  placeholder="Αναζήτηση.." (ionInput)="getItems($event)" animated="true" showCancelButton="true" (ionCancel)="onSearchCancel()"></ion-searchbar>
   </ion-toolbar>
   <ion-list >
-    <ion-item-sliding *ngFor="let c of customers; let i = index;" no-padding no-margin [ngClass]="(i%2==0) ? 'animate-from-left-to-right':'animate-from-right-to-left'">
+    <ion-item-sliding *ngFor="let c of customers; let i = index;" no-padding no-margin [ngClass]="(i%2==0) ? 'ldt-zoom-in':'ldt-zoom-in'">
       <ion-item  (click)="onLoadCustomerCard(c,i)">
         <ion-grid no-margin no-padding>
           <ion-row>
