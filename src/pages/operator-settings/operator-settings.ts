@@ -53,8 +53,8 @@ export class OperatorSettingsPage {
   }
 
   onSaveOperator(form : NgForm){
-    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_save&id='+this.operator.id+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone);
-    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_save&id='+this.operator.id+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone)
+    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.operator.id+'&username='+form.value.username+'&first_name='+form.value.name+'&phone='+form.value.phone+'&last_name='+form.value.surname+'&access_level='+this.operator.access_level+'&password='+this.operator.password);
+    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.operator.id+'&username='+form.value.username+'&first_name='+form.value.name+'&phone='+form.value.phone+'&last_name='+form.value.surname+'&access_level='+this.operator.access_level+'&password='+this.operator.password)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
@@ -79,6 +79,7 @@ export class OperatorSettingsPage {
         this.operator.first_name=form.value.name;
         this.operator.last_name=form.value.surname;
         this.operator.phone=form.value.phone;
+        this.operator.username=form.value.username;
         //this.dismiss(this.originalCustomer);
       }
     });
