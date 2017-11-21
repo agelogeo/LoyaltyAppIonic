@@ -7,12 +7,75 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>OperatorSettings</ion-title>
+    <ion-title>Προφίλ {{operator.first_name}}</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="onLogOut()"><ion-icon name="log-out"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <button ion-button block (click)="onLogOut()">Log out</button>
+  <ion-list text-left *ngIf="operator.access_level==1">
+    <ion-list-header>
+      Διαχειριστής
+    </ion-list-header>
+    <form #f="ngForm" (ngSubmit)="onSaveOperator(f)">
+      <ion-item>
+          <ion-label stacked>Ρυθμιση #1</ion-label>
+          <ion-input type="text" [ngModel]="operator.first_name" name="name" required ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Ρυθμιση #2</ion-label>
+          <ion-input type="text" [ngModel]="operator.last_name" name="surname" required ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Ρυθμιση #3</ion-label>
+          <ion-input type="number" [ngModel]="operator.phone" name="phone" required ></ion-input>
+        </ion-item>
+        <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
+
+    </form>
+  </ion-list>
+
+  <ion-list text-left>
+    <ion-list-header>
+      Γενικά
+    </ion-list-header>
+    <button ion-button color="danger" clear icon-left><ion-icon name="unlock"></ion-icon> Αλλαγή κωδικού</button>
+  </ion-list>
+
+  <form #f="ngForm" (ngSubmit)="onSaveOperator(f)">
+    <ion-list>
+      <ion-list-header>
+        Στοιχεια λογαριασμου
+      </ion-list-header>
+      <ion-item>
+        <ion-label stacked>Όνομα</ion-label>
+        <ion-input type="text" [ngModel]="operator.first_name" name="name" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Επίθετο</ion-label>
+        <ion-input type="text" [ngModel]="operator.last_name" name="surname" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Τηλέφωνο</ion-label>
+        <ion-input type="number" [ngModel]="operator.phone" name="phone" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Όνομα χρήστη</ion-label>
+        <ion-input [ngModel]="operator.username" name="username" required ></ion-input>
+      </ion-item>
+      <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
+    </ion-list>
+  </form>
+
+  <ion-list>
+    <ion-list-header >
+      Εφαρμογή
+    </ion-list-header>
+    <button ion-button clear  icon-left ><ion-icon name="star-half"></ion-icon> Αξιολόγηση</button>
+    <button ion-button clear  icon-left ><ion-icon name="paper"></ion-icon> Feedback</button>
+  </ion-list>
 </ion-content>

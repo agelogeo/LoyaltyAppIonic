@@ -9,7 +9,7 @@
 <ion-content padding>
   <div class="ld ldt-power-on">
     <form #f="ngForm" (ngSubmit)="onCreateCustomer(f)" >
-      <ion-list >
+      <ion-list>
         <ion-item >
           <ion-label floating>Όνομα</ion-label>
           <ion-input type="text" ngModel name="name" required></ion-input>
@@ -25,7 +25,6 @@
         <button  type="submit" ion-button block [disabled]="!f.valid">Δημιουργία λογαριασμού</button>
       </ion-list>
     </form>
-    <ion-item-divider></ion-item-divider>
     <ion-list>
       <ion-item-group >
         <ion-label text-center>Είστε ήδη μέλος;</ion-label>

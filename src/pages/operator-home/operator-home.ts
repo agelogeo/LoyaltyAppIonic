@@ -152,6 +152,6 @@ export class OperatorHomePage implements OnInit{
   }
 
   onSettings(){
-    this.navCtrl.push(OperatorSettingsPage);
+    this.navCtrl.push(OperatorSettingsPage,{operatorId: this.operator});
   }
 }
