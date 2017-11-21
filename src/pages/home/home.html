@@ -22,11 +22,11 @@
           <ion-label floating>Τηλέφωνο</ion-label>
           <ion-input type="number" ngModel name="phone" required></ion-input>
         </ion-item>
+        <button  type="submit" ion-button block [disabled]="!f.valid">Δημιουργία λογαριασμού</button>
       </ion-list>
-      <button  type="submit" ion-button block [disabled]="!f.valid">Δημιουργία λογαριασμού</button>
     </form>
-    <ion-list >
-      <ion-item-divider></ion-item-divider>
+    <ion-item-divider></ion-item-divider>
+    <ion-list>
       <ion-item-group >
         <ion-label text-center>Είστε ήδη μέλος;</ion-label>
         <button  ion-button color="primary" block (click)="goToLogin()">Σύνδεση</button>

@@ -7,12 +7,58 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>CustomerSettings</ion-title>
+    <ion-title>Προφίλ {{originalCustomer.name}}</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="onLogOut()"><ion-icon name="log-out"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-<button ion-button block (click)="onLogOut()">Log out</button>
+  <ion-list text-left>
+    <ion-list-header>
+      Γενικά
+    </ion-list-header>
+    <ion-item>
+      <ion-label icon-left><ion-icon *ngIf="isNotificationsEnabled()" name="notifications"></ion-icon><ion-icon *ngIf="!isNotificationsEnabled()" name="notifications-off"></ion-icon> Ειδοποιήσεις</ion-label>
+      <ion-toggle [(ngModel)]="notificationToggle" ></ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label icon-left><ion-icon name="lock"></ion-icon> Κωδικός</ion-label>
+      <ion-toggle [(ngModel)]="passwordToggle" ></ion-toggle>
+    </ion-item>
+    <button ion-button color="danger" clear icon-left [disabled]="!isPasswordEnabled()"><ion-icon name="unlock"></ion-icon> Αλλαγή κωδικού</button>
+  </ion-list>
+
+  <form #f="ngForm" (ngSubmit)="onSaveCustomer(f)">
+    <ion-list>
+      <ion-list-header>
+        Στοιχεια λογαριασμου
+      </ion-list-header>
+      <ion-item>
+        <ion-label fixed>Όνομα</ion-label>
+        <ion-input type="text" [ngModel]="originalCustomer.name" name="name" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Επίθετο</ion-label>
+        <ion-input [ngModel]="originalCustomer.surname" name="surname" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Τηλέφωνο</ion-label>
+        <ion-input [ngModel]="originalCustomer.phone" name="phone" required [clearInput]="mode=='edit'"  [readonly]="mode=='scanned'"></ion-input>
+      </ion-item>
+      <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
+    </ion-list>
+  </form>
+
+  <ion-list>
+    <ion-list-header >
+      Εφαρμογή
+    </ion-list-header>
+    <button ion-button clear  icon-left ><ion-icon name="star-half"></ion-icon> Αξιολόγηση</button>
+    <button ion-button clear  icon-left ><ion-icon name="send"></ion-icon> Προτείνετε μας σε εναν φιλο σας</button>
+    <button ion-button clear  icon-left ><ion-icon name="paper"></ion-icon> Feedback</button>
+  </ion-list>
 </ion-content>

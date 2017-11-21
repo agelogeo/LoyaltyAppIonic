@@ -60,7 +60,7 @@ export class CustomerHomePage implements OnInit{
   }
 
   onSettings(){
-    this.navCtrl.push(CustomerSettingsPage);
+    this.navCtrl.push(CustomerSettingsPage,{ customerId: this.customer,mode : 'edit'});
   }
 
 }
