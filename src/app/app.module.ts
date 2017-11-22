@@ -28,6 +28,7 @@ import {AccountService} from "../services/account";
 import {CustomerSettingsPage} from "../pages/customer-settings/customer-settings";
 import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings";
 import {CouponsHomePage} from "../pages/coupons-home/coupons-home";
+import {CouponCardPage} from "../pages/coupon-card/coupon-card";
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import {CouponsHomePage} from "../pages/coupons-home/coupons-home";
     CustomerCardPage,
     CustomerSettingsPage,
     OperatorSettingsPage,
-    CouponsHomePage
+    CouponsHomePage,
+    CouponCardPage
   ],
   imports: [
     BrowserModule,
@@ -73,7 +75,8 @@ import {CouponsHomePage} from "../pages/coupons-home/coupons-home";
     CustomerCardPage,
     CustomerSettingsPage,
     OperatorSettingsPage,
-    CouponsHomePage
+    CouponsHomePage,
+    CouponCardPage
   ],
   providers: [
     StatusBar,

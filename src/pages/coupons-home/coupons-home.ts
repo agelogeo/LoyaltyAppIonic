@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {
+  AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams,
+  ToastController
+} from 'ionic-angular';
 import {Coupon} from "../../model/coupon";
 import {MyLinks} from "../../services/mylinks";
 import {Http} from "@angular/http";
+import {CouponCardPage} from "../coupon-card/coupon-card";
 
 /**
  * Generated class for the CouponsHomePage page.
@@ -19,7 +23,7 @@ import {Http} from "@angular/http";
 export class CouponsHomePage {
   coupons : any;
 
-  constructor(private toastCtrl:ToastController,private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private modalCtrl:ModalController,private toastCtrl:ToastController,private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewWillEnter() {
@@ -127,5 +131,16 @@ export class CouponsHomePage {
         toast.present();
       }
     });
+  }
+
+  onLoadCouponCard(coupon:Coupon,i : number){
+    let modal = this.modalCtrl.create(CouponCardPage,{ couponId: coupon,mode : 'edit'});
+    modal.onDidDismiss(coupon => {
+      if (coupon != null) {
+        this.coupons[i] = coupon;
+      }
+      //this.openDatabaseStats('default');
+    });
+    modal.present();
   }
 }
