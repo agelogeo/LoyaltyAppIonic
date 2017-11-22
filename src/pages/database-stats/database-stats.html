@@ -36,21 +36,21 @@
           </ion-row>
           <ion-row>
             <ion-col>
-              <h3>{{c.visits}} Total visits | {{c.last_visit}}</h3>
+              <h3>{{c.visits}} Συνολικές επισκέψεις | {{c.last_visit}}</h3>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col>
-              <p>{{c.coupons_used}} Coupons Used</p>
+              <p>{{c.coupons_used}} Εξαργυρωμένα κουπόνια</p>
             </ion-col>
             <ion-col text-right>
-              <p>{{c.stamps}} Stamps</p>
+              <p>{{c.stamps}} Σφραγίδες</p>
             </ion-col>
           </ion-row>
         </ion-grid>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="danger" icon-left (click)="onDelete(c,i)"><ion-icon name="trash"></ion-icon>Delete</button>
+        <button ion-button color="danger" icon-left (click)="onDelete(c,i)"><ion-icon name="trash"></ion-icon>Διαγραφή</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

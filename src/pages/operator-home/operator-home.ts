@@ -13,6 +13,7 @@ import {ScannedPage} from "../scanned/scanned";
 import {CustomerCardPage} from "../customer-card/customer-card";
 import {OperatorSettingsPage} from "../operator-settings/operator-settings";
 import {MyLinks} from "../../services/mylinks";
+import {CouponsHomePage} from "../coupons-home/coupons-home";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -153,5 +154,9 @@ export class OperatorHomePage implements OnInit{
 
   onSettings(){
     this.navCtrl.push(OperatorSettingsPage,{operatorId: this.operator});
+  }
+
+  openCoupons(){
+    this.navCtrl.push(CouponsHomePage);
   }
 }

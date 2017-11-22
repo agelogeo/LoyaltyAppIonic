@@ -43,7 +43,7 @@
       </ion-row>
       <ion-row *ngIf="operator.access_level==1">
         <ion-col text-center >
-          <button ion-button block text-wrap>Διαχείριση κουπονιών</button>
+          <button ion-button block text-wrap (click)="openCoupons()">Διαχείριση κουπονιών</button>
         </ion-col>
       </ion-row>
     </ion-card-content>

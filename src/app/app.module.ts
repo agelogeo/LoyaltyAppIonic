@@ -27,6 +27,7 @@ import {IonicStorageModule, Storage} from "@ionic/storage";
 import {AccountService} from "../services/account";
 import {CustomerSettingsPage} from "../pages/customer-settings/customer-settings";
 import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings";
+import {CouponsHomePage} from "../pages/coupons-home/coupons-home";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings
     StatsPage,
     CustomerCardPage,
     CustomerSettingsPage,
-    OperatorSettingsPage
+    OperatorSettingsPage,
+    CouponsHomePage
   ],
   imports: [
     BrowserModule,
@@ -70,7 +72,8 @@ import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings
     StatsPage,
     CustomerCardPage,
     CustomerSettingsPage,
-    OperatorSettingsPage
+    OperatorSettingsPage,
+    CouponsHomePage
   ],
   providers: [
     StatusBar,
