@@ -73,8 +73,8 @@ export class CouponsHomePage {
     console.log(coupon);
     console.log(i);
     const alert = this.alertCtrl.create({
-      title: 'Είστε σίγουρος;',
-      message: 'Δεν θα μπορείτε να ανακτήσετε αυτό το κουπόνι.',
+      title: 'ΠΡΟΣΟΧΗ !!!',
+      message: 'Αμα διαγράψετε το κουπόνι αυτό θα διαγράψτε και τους μετρητές που σχετίζονται με αυτο.Δεν θα μπορείτε να ανακτήσετε αυτό το κουπόνι.',
       buttons: [
         {
           text : 'Ακύρωση',
