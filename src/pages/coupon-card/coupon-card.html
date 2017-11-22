@@ -17,11 +17,11 @@
   <form #f="ngForm" (ngSubmit)="onSaveCoupon(f)">
     <ion-list>
       <ion-item>
-        <ion-label fixed>Όνομα</ion-label>
+        <ion-label stacked>Όνομα</ion-label>
         <ion-input type="text" [ngModel]="coupon.name" name="name" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label fixed>Απαιτούμενες Σφραγίδες</ion-label>
+        <ion-label stacked text-wrap>Απαιτούμενες Σφραγίδες</ion-label>
         <ion-input [ngModel]="coupon.required_stamps" name="required_stamps" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
       </ion-item>
     </ion-list>
