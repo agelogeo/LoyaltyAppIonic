@@ -131,17 +131,17 @@ export class DatabaseStatsPage {
     console.log(customer);
     console.log(i);
     const alert = this.alertCtrl.create({
-      title: 'Are you sure?',
-      message: 'If you click Yes ,you won\'t be able to recover this customer',
+      title: 'Είστε σίγουρος;',
+      message: 'Δεν θα μπορείτε να ανακτήσετε αυτόν τον πελάτη.',
       buttons: [
         {
-        text : 'No',
+        text : 'Ακύρωση',
         role : 'cancel',
         handler : () => {
         }
         },
         {
-        text : 'Delete',
+        text : 'Διαγραφή',
           handler: () => {
             this.deleteCustomer(customer,i);
           }
@@ -154,24 +154,7 @@ export class DatabaseStatsPage {
   deleteCustomer(customer:Customer,i : number){
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
-      content: `<div class="lds-css ng-scope">
-  <div style="width:100%;height:100%" class="lds-wedges">
-    <div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-      <div>
-        <div></div>
-      </div>
-    </div>
-  </div>
-</div>`,
+      content: this.myLinks.loading_html,
       duration: 5000
     });
     loading.present();
@@ -196,7 +179,7 @@ export class DatabaseStatsPage {
         loading.dismiss();
         this.customers.splice(i,1);
         const toast = this.toastCtrl.create({
-          message: customer.name+' '+customer.surname+' was removed successfully',
+          message: customer.name+' '+customer.surname+' διαγράφτηκε επιτυχώς.',
           duration: 1500,
         });
         toast.present();

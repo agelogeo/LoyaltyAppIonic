@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {Coupon} from "../../model/coupon";
 import {MyLinks} from "../../services/mylinks";
 import {Http} from "@angular/http";
@@ -19,10 +19,10 @@ import {Http} from "@angular/http";
 export class CouponsHomePage {
   coupons : any;
 
-  constructor(private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private toastCtrl:ToastController,private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     console.log('ionViewDidLoad CouponsHomePage');
     this.getCoupons();
   }
@@ -67,5 +67,65 @@ export class CouponsHomePage {
       }
     });
 
+  }
+
+  onDelete(coupon:Coupon,i : number){
+    console.log(coupon);
+    console.log(i);
+    const alert = this.alertCtrl.create({
+      title: 'Είστε σίγουρος;',
+      message: 'Δεν θα μπορείτε να ανακτήσετε αυτό το κουπόνι.',
+      buttons: [
+        {
+          text : 'Ακύρωση',
+          role : 'cancel',
+          handler : () => {
+          }
+        },
+        {
+          text : 'Διαγραφή',
+          handler: () => {
+            this.deleteCoupon(coupon,i);
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  deleteCoupon(coupon:Coupon,i : number){
+    const loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: this.ml.loading_html,
+      duration: 5000
+    });
+    loading.present();
+
+    console.log(this.ml.base+this.ml.a_coupon_deletion+'&id='+coupon.id);
+    this.http.get(this.ml.base+this.ml.a_coupon_deletion+'&id='+coupon.id)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        loading.dismiss();
+        this.coupons.splice(i,1);
+        const toast = this.toastCtrl.create({
+          message: 'Το κουπόνι '+coupon.name+ ' διαγράφτηκε επιτυχώς',
+          duration: 1500,
+        });
+        toast.present();
+      }
+    });
   }
 }

@@ -15,7 +15,7 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item-sliding  *ngFor="let coupon of coupons">
+    <ion-item-sliding  *ngFor="let coupon of coupons; let i = index;">
       <ion-item>
         <ion-avatar item-start>
           <img src="assets/icon/favicon.ico">
@@ -24,8 +24,8 @@
         <p>{{coupon.required_stamps}} απαιτούμενες σφραγίδες </p>
       </ion-item>
       <ion-item-options side="right">
-        <button ion-button color="danger">
-          <ion-icon name="trash"></ion-icon>
+        <button ion-button color="danger" (click)="onDelete(coupon,i)">
+          <ion-icon name="trash" ></ion-icon>
           Διαγραφή
         </button>
       </ion-item-options>
