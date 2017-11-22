@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Προφίλ {{operator.first_name}}</ion-title>
+    <ion-title>Προφίλ {{aS.operator.first_name}}</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="onLogOut()"><ion-icon name="log-out"></ion-icon></button>
     </ion-buttons>
@@ -17,22 +17,22 @@
 
 
 <ion-content padding>
-  <ion-list text-left *ngIf="operator.access_level==1">
+  <ion-list text-left *ngIf="aS.operator.access_level==1">
     <ion-list-header>
       Διαχειριστής
     </ion-list-header>
     <form #f="ngForm" (ngSubmit)="onSaveOperator(f)">
       <ion-item>
           <ion-label stacked>Ρυθμιση #1</ion-label>
-          <ion-input type="text" [ngModel]="operator.first_name" name="name" required ></ion-input>
+          <ion-input type="text" [ngModel]="aS.operator.first_name" name="name" required ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Ρυθμιση #2</ion-label>
-          <ion-input type="text" [ngModel]="operator.last_name" name="surname" required ></ion-input>
+          <ion-input type="text" [ngModel]="aS.operator.last_name" name="surname" required ></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Ρυθμιση #3</ion-label>
-          <ion-input type="number" [ngModel]="operator.phone" name="phone" required ></ion-input>
+          <ion-input type="number" [ngModel]="aS.operator.phone" name="phone" required ></ion-input>
         </ion-item>
         <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
 
@@ -53,19 +53,19 @@
       </ion-list-header>
       <ion-item>
         <ion-label stacked>Όνομα</ion-label>
-        <ion-input type="text" [ngModel]="operator.first_name" name="name" required ></ion-input>
+        <ion-input type="text" [ngModel]="aS.operator.first_name" name="name" required ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>Επίθετο</ion-label>
-        <ion-input type="text" [ngModel]="operator.last_name" name="surname" required ></ion-input>
+        <ion-input type="text" [ngModel]="aS.operator.last_name" name="surname" required ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>Τηλέφωνο</ion-label>
-        <ion-input type="number" [ngModel]="operator.phone" name="phone" required ></ion-input>
+        <ion-input type="number" [ngModel]="aS.operator.phone" name="phone" required ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked>Όνομα χρήστη</ion-label>
-        <ion-input [ngModel]="operator.username" name="username" required ></ion-input>
+        <ion-input [ngModel]="aS.operator.username" name="username" required ></ion-input>
       </ion-item>
       <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
     </ion-list>

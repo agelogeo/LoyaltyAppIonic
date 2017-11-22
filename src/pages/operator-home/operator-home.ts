@@ -14,6 +14,7 @@ import {CustomerCardPage} from "../customer-card/customer-card";
 import {OperatorSettingsPage} from "../operator-settings/operator-settings";
 import {MyLinks} from "../../services/mylinks";
 import {CouponsHomePage} from "../coupons-home/coupons-home";
+import {AccountService} from "../../services/account";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -31,7 +32,7 @@ export class OperatorHomePage implements OnInit{
   @ViewChild('myTabs') tabs : Tabs;
   operator = new Operator();
 
-  constructor(private myLinks: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(private accountService:AccountService,private myLinks: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
     this.operator=this.navParams.get('operator');
   }
 
@@ -153,7 +154,7 @@ export class OperatorHomePage implements OnInit{
   }
 
   onSettings(){
-    this.navCtrl.push(OperatorSettingsPage,{operatorId: this.operator});
+    this.navCtrl.push(OperatorSettingsPage,{operatorId: this.accountService.operator});
   }
 
   openCoupons(){

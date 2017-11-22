@@ -80,6 +80,7 @@ export class OperatorLoginPage {
         operator.phone = data.phone;
 
         this.accountService.LogIn('operator',operator);
+        console.log(operator);
 
         if(this.remember){
           this.storage.set('accountService',this.accountService).then( () => console.log('accountService saved.'));
@@ -89,7 +90,7 @@ export class OperatorLoginPage {
 
 
         /**/
-        this.navCtrl.setRoot(TabsPage,{operator: operator});
+        this.navCtrl.setRoot(TabsPage,{operator: this.accountService.operator});
 
 
       }
