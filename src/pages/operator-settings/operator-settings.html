@@ -43,7 +43,7 @@
     <ion-list-header>
       Γενικά
     </ion-list-header>
-    <button ion-button color="danger" clear icon-left><ion-icon name="unlock"></ion-icon> Αλλαγή κωδικού</button>
+    <button ion-button color="danger" clear icon-left (click)="showPasswordPrompt()"><ion-icon name="unlock"></ion-icon> Αλλαγή συνθηματικού</button>
   </ion-list>
 
   <form #f="ngForm" (ngSubmit)="onSaveOperator(f)">

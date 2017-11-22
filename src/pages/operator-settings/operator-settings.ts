@@ -84,4 +84,84 @@ export class OperatorSettingsPage {
       }
     });
   }
+
+  showPasswordPrompt() {
+    let prompt = this.alertCtrl.create({
+      title: 'Αλλαγή κωδικού',
+      message: "Παρακαλώ εισάγετε τον παλαιό κωδικό σας και τον καινούργιο που επιθυμείτε",
+      inputs: [
+        {
+          name: 'oldpassword',
+          placeholder: 'Παλιός κωδικός'
+        },{
+          name: 'newpassword',
+          placeholder: 'Νέος κωδικός'
+        },{
+          name: 'newpasswordagain',
+          placeholder: 'Επαλήθευση νέου κωδικού'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Ακύρωση',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Αλλαγή',
+          handler: data => {
+            if(data.oldpassword != this.operator.password ){
+              const toast = this.toastCtrl.create({
+                message: 'Ο παλιός κωδικός είναι λανθασμένος.',
+                showCloseButton: true,
+                closeButtonText: 'Ok',
+                duration: 2000
+              });
+              toast.present();
+            }else if(data.newpassword != data.newpasswordagain && data.newpassword != ""){
+              const toast = this.toastCtrl.create({
+                message: 'Ο νέος κωδικός δεν ταιριάζει με την επαλήθευση.',
+                showCloseButton: true,
+                closeButtonText: 'Ok',
+                duration: 2000
+              });
+              toast.present();
+            }else{
+              console.log(data);
+              console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.operator.id+'&username='+this.operator.username+'&first_name='+this.operator.first_name+'&phone='+this.operator.phone+'&last_name='+this.operator.last_name+'&access_level='+this.operator.access_level+'&password='+data.newpassword);
+              this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.operator.id+'&username='+this.operator.username+'&first_name='+this.operator.first_name+'&phone='+this.operator.phone+'&last_name='+this.operator.last_name+'&access_level='+this.operator.access_level+'&password='+data.newpassword)
+                .map(res => res.json()).subscribe(data => {
+
+                if (data.error != null) {
+                  const alert = this.alertCtrl.create({
+                    title: 'Error',
+                    message: data.message,
+                    buttons: [{
+                      text : 'Ok',
+                      handler: () => {
+                      }
+                    }]
+                  });
+                  alert.present();
+                }else {
+                  const toast = this.toastCtrl.create({
+                    message: 'Ο νέος κωδικός αποθηκεύτηκε',
+                    showCloseButton: true,
+                    closeButtonText: 'Ok',
+                    duration: 2000
+                  });
+                  toast.present();
+                  this.operator.password=data.newpassword;
+                  //this.dismiss(this.originalCustomer);
+                }
+              });
+            }
+          }
+        }
+      ]
+    });
+    prompt.present();
+  }
+
 }
