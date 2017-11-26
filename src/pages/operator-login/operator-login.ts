@@ -78,6 +78,8 @@ export class OperatorLoginPage {
         operator.first_name = data.first_name;
         operator.last_name = data.last_name;
         operator.phone = data.phone;
+        operator.same_day_twice = data.same_day_twice;
+        operator.stamp_value = data.stamp_value;
 
         this.accountService.LogIn('operator',operator);
         console.log(operator);

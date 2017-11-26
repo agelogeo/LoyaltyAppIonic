@@ -6,6 +6,8 @@ export class Operator{
   first_name: string;
   last_name: string;
   phone: number;
+  same_day_twice: boolean;
+  stamp_value: number;
 
   constructor(){
 

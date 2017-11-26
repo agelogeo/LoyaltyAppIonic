@@ -1,0 +1,34 @@
+<!--
+  Generated template for the OperatorAdminsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Παράμετροι συστήματος</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list text-left >
+    <ion-list-header>
+      Διαχειριστής
+    </ion-list-header>
+    <form #f="ngForm" (ngSubmit)="onSaveParams(f)">
+      <ion-item>
+        <ion-label stacked>Same Day Twice</ion-label>
+        <ion-input type="text" [ngModel]="aS.operator.same_day_twice" name="name" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Stamp Value</ion-label>
+        <ion-input type="text" [ngModel]="aS.operator.stamp_value" name="surname" required ></ion-input>
+      </ion-item>
+      <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
+
+    </form>
+  </ion-list>
+</ion-content>

@@ -9,6 +9,7 @@ import {Storage} from "@ionic/storage";
 import {Operator} from "../../model/operator";
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
+import {OperatorAdminsPage} from "../operator-admins/operator-admins";
 
 /**
  * Generated class for the OperatorSettingsPage page.
@@ -167,4 +168,7 @@ export class OperatorSettingsPage {
     prompt.present();
   }
 
+  onOpenParams(){
+    this.navCtrl.push(OperatorAdminsPage);
+  }
 }

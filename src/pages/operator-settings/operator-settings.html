@@ -17,26 +17,11 @@
 
 
 <ion-content padding>
-  <ion-list text-left *ngIf="aS.operator.access_level==1">
+  <ion-list text-left >
     <ion-list-header>
       Διαχειριστής
     </ion-list-header>
-    <form #f="ngForm" (ngSubmit)="onSaveOperator(f)">
-      <ion-item>
-          <ion-label stacked>Ρυθμιση #1</ion-label>
-          <ion-input type="text" [ngModel]="aS.operator.first_name" name="name" required ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Ρυθμιση #2</ion-label>
-          <ion-input type="text" [ngModel]="aS.operator.last_name" name="surname" required ></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Ρυθμιση #3</ion-label>
-          <ion-input type="number" [ngModel]="aS.operator.phone" name="phone" required ></ion-input>
-        </ion-item>
-        <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
-
-    </form>
+    <button ion-button round block (click)="onOpenParams()">Παράμετροι συστήματος</button>
   </ion-list>
 
   <ion-list text-left>
@@ -47,6 +32,7 @@
   </ion-list>
 
   <form #f="ngForm" (ngSubmit)="onSaveOperator(f)">
+
     <ion-list>
       <ion-list-header>
         Στοιχεια λογαριασμου

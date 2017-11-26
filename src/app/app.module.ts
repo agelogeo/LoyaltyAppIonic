@@ -29,6 +29,7 @@ import {CustomerSettingsPage} from "../pages/customer-settings/customer-settings
 import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings";
 import {CouponsHomePage} from "../pages/coupons-home/coupons-home";
 import {CouponCardPage} from "../pages/coupon-card/coupon-card";
+import {OperatorAdminsPage} from "../pages/operator-admins/operator-admins";
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import {CouponCardPage} from "../pages/coupon-card/coupon-card";
     CustomerSettingsPage,
     OperatorSettingsPage,
     CouponsHomePage,
-    CouponCardPage
+    CouponCardPage,
+    OperatorAdminsPage
   ],
   imports: [
     BrowserModule,
@@ -76,7 +78,8 @@ import {CouponCardPage} from "../pages/coupon-card/coupon-card";
     CustomerSettingsPage,
     OperatorSettingsPage,
     CouponsHomePage,
-    CouponCardPage
+    CouponCardPage,
+    OperatorAdminsPage
   ],
   providers: [
     StatusBar,
