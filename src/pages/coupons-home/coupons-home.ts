@@ -143,4 +143,15 @@ export class CouponsHomePage {
     });
     modal.present();
   }
+
+  onAddCoupon(){
+    let modal = this.modalCtrl.create(CouponCardPage,{ couponId: null,mode : 'add'});
+    modal.onDidDismiss(coupon => {
+      if (coupon != null) {
+        this.getCoupons();
+      }
+      //this.openDatabaseStats('default');
+    });
+    modal.present();
+  }
 }

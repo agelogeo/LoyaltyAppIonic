@@ -45,35 +45,65 @@ export class CouponCardPage {
     return false;
   }
 
-  onSaveCoupon(form : NgForm){
-    console.log(this.ml.base+this.ml.a_coupon_save+'&id='+this.coupon.id+'&name='+form.value.name+'&required='+form.value.required_stamps);
-    this.http.get(this.ml.base+this.ml.a_coupon_save+'&id='+this.coupon.id+'&name='+form.value.name+'&required='+form.value.required_stamps)
-      .map(res => res.json()).subscribe(data => {
+  onSubmit(form : NgForm){
+    if(this.mode=='edit'){
+      console.log(this.ml.base+this.ml.a_coupon_save+'&id='+this.coupon.id+'&name='+form.value.name+'&required='+form.value.required_stamps);
+      this.http.get(this.ml.base+this.ml.a_coupon_save+'&id='+this.coupon.id+'&name='+form.value.name+'&required='+form.value.required_stamps)
+        .map(res => res.json()).subscribe(data => {
 
-      if (data.error != null) {
-        const alert = this.alertCtrl.create({
-          title: 'Error',
-          message: data.message,
-          buttons: [{
-            text : 'Ok',
-            handler: () => {
-            }
-          }]
-        });
-        alert.present();
-      }else {
-        const toast = this.toastCtrl.create({
-          message: 'Οι αλλαγές αποθηκεύτηκαν.',
-          showCloseButton: true,
-          closeButtonText: 'Ok',
-          duration: 2000
-        });
-        toast.present();
-        this.coupon.name=form.value.name;
-        this.coupon.required_stamps=form.value.required_stamps;
-        this.dismiss(this.coupon);
-      }
-    });
+        if (data.error != null) {
+          const alert = this.alertCtrl.create({
+            title: 'Error',
+            message: data.message,
+            buttons: [{
+              text : 'Ok',
+              handler: () => {
+              }
+            }]
+          });
+          alert.present();
+        }else {
+          const toast = this.toastCtrl.create({
+            message: 'Οι αλλαγές αποθηκεύτηκαν.',
+            showCloseButton: true,
+            closeButtonText: 'Ok',
+            duration: 2000
+          });
+          toast.present();
+          this.coupon.name=form.value.name;
+          this.coupon.required_stamps=form.value.required_stamps;
+          this.dismiss(this.coupon);
+        }
+      });
+    }else if(this.mode=='add'){
+      console.log(this.ml.base+this.ml.a_coupon_creation+'&name='+form.value.name+'&required='+form.value.required_stamps);
+      this.http.get(this.ml.base+this.ml.a_coupon_creation+'&name='+form.value.name+'&required='+form.value.required_stamps)
+        .map(res => res.json()).subscribe(data => {
+
+        if (data.error != null) {
+          const alert = this.alertCtrl.create({
+            title: 'Error',
+            message: data.message,
+            buttons: [{
+              text : 'Ok',
+              handler: () => {
+              }
+            }]
+          });
+          alert.present();
+        }else {
+          const toast = this.toastCtrl.create({
+            message: 'Το κουπόνι προστέθηκε επιτυχώς.',
+            showCloseButton: true,
+            closeButtonText: 'Ok',
+            duration: 2000
+          });
+          toast.present();
+          this.dismiss('');
+        }
+      });
+    }
+
   }
 
 }

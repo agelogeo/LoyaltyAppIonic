@@ -7,30 +7,38 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Κουπόνι {{ coupon.name }}</ion-title>
+    <ion-title *ngIf="mode=='edit'">Κουπόνι {{ coupon.name }}</ion-title>
+    <ion-title *ngIf="mode=='add'">Προσθήκη κουπονιού</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <form #f="ngForm" (ngSubmit)="onSaveCoupon(f)">
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <ion-list>
       <ion-item>
         <ion-label stacked>Όνομα</ion-label>
-        <ion-input type="text" [ngModel]="coupon.name" name="name" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
+        <ion-input *ngIf="mode=='edit'" type="text" [ngModel]="coupon.name" name="name" required ></ion-input>
+        <ion-input *ngIf="mode=='add'" type="text" ngModel name="name" required ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label stacked text-wrap>Απαιτούμενες Σφραγίδες</ion-label>
-        <ion-input [ngModel]="coupon.required_stamps" name="required_stamps" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
+        <ion-input *ngIf="mode=='edit'" [ngModel]="coupon.required_stamps" name="required_stamps" required type="number"></ion-input>
+        <ion-input *ngIf="mode=='add'" ngModel name="required_stamps" required type="number"></ion-input>
       </ion-item>
     </ion-list>
     <ion-row *ngIf="mode=='edit'">
       <ion-col>
-        <button type="submit" ion-button block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
+        <button  type="submit" ion-button block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="mode=='edit'">
+    <ion-row *ngIf="mode=='add'">
+      <ion-col>
+        <button  type="submit" ion-button block [disabled]="!f.valid">Προσθήκη</button>
+      </ion-col>
+    </ion-row>
+    <ion-row >
       <ion-col>
         <button type="button" color="danger"  ion-button block (click)="dismiss(null)">Ακύρωση</button>
       </ion-col>
