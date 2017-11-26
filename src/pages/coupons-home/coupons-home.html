@@ -8,6 +8,9 @@
 
   <ion-navbar>
     <ion-title>Διαχείριση κουπονιών</ion-title>
+    <ion-buttons right>
+      <button icon-only ion-button (click)="onAddCoupon()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -32,7 +35,5 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-fab bottom right >
-    <button ion-fab color="secondary" (click)="onAddCoupon()"><ion-icon name="add"></ion-icon></button>
-  </ion-fab>
+
 </ion-content>
