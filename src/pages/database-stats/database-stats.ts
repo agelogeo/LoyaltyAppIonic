@@ -10,6 +10,7 @@ import {Http} from "@angular/http";
 import {MyLinks} from "../../services/mylinks";
 import {StatsPage} from "../stats/stats";
 import {CustomerCardPage} from "../customer-card/customer-card";
+import {AccountService} from "../../services/account";
 
 /**
  * Generated class for the DatabaseStatsPage page.
@@ -28,7 +29,8 @@ export class DatabaseStatsPage {
   customers : any;
   fullCustomers : any;
 
-  constructor(private myLinks : MyLinks,private modalCtrl: ModalController,private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
+
+  constructor(public aS:AccountService,private myLinks : MyLinks,private modalCtrl: ModalController,private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
   }
 
 

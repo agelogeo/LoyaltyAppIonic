@@ -38,7 +38,7 @@
           <button ion-button block text-wrap>Διαχείριση συντονιστών</button>
         </ion-col>
         <ion-col text-center >
-          <button ion-button block text-wrap>Διαχείριση πελατών</button>
+          <button ion-button block text-wrap (click)="openDatabaseStats()" >Διαχείριση πελατών</button>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="operator.access_level==1">

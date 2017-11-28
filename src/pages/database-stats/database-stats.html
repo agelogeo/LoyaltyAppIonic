@@ -10,8 +10,8 @@
     <ion-title>Βάση πελατών</ion-title>
     <ion-buttons right>
       <button ion-button icon-only (click)="onToggleSearchBar()"><ion-icon name="search"></ion-icon></button>
-      <button ion-button icon-only (click)="onStats()"><ion-icon name="stats"></ion-icon></button>
-      <button ion-button icon-only (click)="onFilter($event)"><ion-icon name="funnel"></ion-icon></button>
+      <button ion-button icon-only *ngIf="aS.operator.access_level==1" (click)="onStats()"><ion-icon name="stats"></ion-icon></button>
+      <button ion-button icon-only *ngIf="aS.operator.access_level==1" (click)="onFilter($event)"><ion-icon name="funnel"></ion-icon></button>
     </ion-buttons>
   </ion-navbar>
 

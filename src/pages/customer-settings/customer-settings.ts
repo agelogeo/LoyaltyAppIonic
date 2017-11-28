@@ -26,7 +26,7 @@ export class CustomerSettingsPage {
   originalCustomer : Customer;
   mode : string;
   passwordToggle: boolean = false;
-  notificationToggle: boolean = false;
+  notificationToggle: boolean = true;
   notificationValue: string = "notifications-off";
 
   constructor(private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,private accountService:AccountService,public navCtrl: NavController, public navParams: NavParams) {
