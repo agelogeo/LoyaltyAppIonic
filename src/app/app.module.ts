@@ -30,6 +30,8 @@ import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings
 import {CouponsHomePage} from "../pages/coupons-home/coupons-home";
 import {CouponCardPage} from "../pages/coupon-card/coupon-card";
 import {OperatorAdminsPage} from "../pages/operator-admins/operator-admins";
+import {SharePage} from "../pages/share/share";
+import {SocialSharing} from "@ionic-native/social-sharing";
 
 @NgModule({
   declarations: [
@@ -51,7 +53,8 @@ import {OperatorAdminsPage} from "../pages/operator-admins/operator-admins";
     OperatorSettingsPage,
     CouponsHomePage,
     CouponCardPage,
-    OperatorAdminsPage
+    OperatorAdminsPage,
+    SharePage
   ],
   imports: [
     BrowserModule,
@@ -79,7 +82,8 @@ import {OperatorAdminsPage} from "../pages/operator-admins/operator-admins";
     OperatorSettingsPage,
     CouponsHomePage,
     CouponCardPage,
-    OperatorAdminsPage
+    OperatorAdminsPage,
+    SharePage
   ],
   providers: [
     StatusBar,
@@ -89,6 +93,7 @@ import {OperatorAdminsPage} from "../pages/operator-admins/operator-admins";
     AccountService,
     InAppBrowser,
     FileTransfer,
+    SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

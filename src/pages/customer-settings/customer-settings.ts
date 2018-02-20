@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, App, IonicPage, LoadingController, NavController, NavParams,
+  AlertController, App, IonicPage, LoadingController, NavController, NavParams, PopoverController,
   ToastController
 } from 'ionic-angular';
 import {HomePage} from "../home/home";
@@ -9,6 +9,8 @@ import {Storage} from "@ionic/storage";
 import {Customer} from "../../model/customer";
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
+import {SocialSharing} from "@ionic-native/social-sharing";
+import {SharePage} from "../share/share";
 
 /**
  * Generated class for the CustomerSettingsPage page.
@@ -29,7 +31,7 @@ export class CustomerSettingsPage {
   notificationToggle: boolean = true;
   notificationValue: string = "notifications-off";
 
-  constructor(private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,private accountService:AccountService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private socialSharing: SocialSharing,private popoverCtrl: PopoverController,private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,private accountService:AccountService,public navCtrl: NavController, public navParams: NavParams) {
     this.originalCustomer=this.navParams.get('customerId');
     this.mode=this.navParams.get('mode');
   }
@@ -94,5 +96,25 @@ export class CustomerSettingsPage {
 
   isNotificationsEnabled(){
     return this.notificationToggle;
+  }
+
+  regularShare(event: MouseEvent){
+    const popover = this.popoverCtrl.create(SharePage);
+    popover.present({ev: event});
+    popover.onDidDismiss(
+      data => {
+        if (data == null) {
+
+        }else{
+          if (data.action == "android"){
+            this.socialSharing.share("Hello can you install this app?", "Daily Betting Tips", null, "https://play.google.com/store/apps/details?id=gr.betting.admin.bettingtips");
+          } else if (data.action == "ios"){
+
+          }else if (data.action == "windows"){
+
+          }
+        }
+      }
+    )
   }
 }

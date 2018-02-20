@@ -1,0 +1,16 @@
+page-share {
+  ion-item , ion-content , ion-grid{
+    background-color : color($colors, menuBackground , base) !important;
+  }
+
+  h4  {
+    color : color($colors, menuText, base);
+  }
+
+  .grayscale {-webkit-filter: hue-rotate(300deg); filter: hue-rotate(300deg);}
+
+  p {
+    color : color($colors, menuSubText, base) !important;
+  }
+
+}
