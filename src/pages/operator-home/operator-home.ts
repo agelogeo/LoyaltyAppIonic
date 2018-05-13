@@ -98,6 +98,7 @@ export class OperatorHomePage implements OnInit{
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: this.myLinks.loading_html,
+      cssClass: 'loading',
       duration: 5000
     });
     loading.present();

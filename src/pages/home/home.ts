@@ -29,12 +29,13 @@ export class HomePage implements OnInit{
 
       console.log('HOME WILL ENTER');
 
-      const loading = this.loadingCtrl.create({
+      /*const loading = this.loadingCtrl.create({
         spinner: 'hide',
         content: this.myLinks.loading_html,
+        cssClass: 'loading',
         duration: 1000
       });
-      loading.present();
+      loading.present();*/
 
 
       this.storage.get('accountService')
@@ -52,7 +53,7 @@ export class HomePage implements OnInit{
 
             }
           }
-          loading.dismiss();
+          //loading.dismiss();
         })
         .catch( err => console.log(err));
 
@@ -65,6 +66,7 @@ export class HomePage implements OnInit{
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: this.myLinks.loading_html,
+      cssClass: 'loading',
       duration: 1000
     });
     loading.present();

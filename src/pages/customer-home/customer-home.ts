@@ -6,7 +6,7 @@ import {Storage} from "@ionic/storage";
 import {AccountService} from "../../services/account";
 import {HomePage} from "../home/home";
 import {CustomerSettingsPage} from "../customer-settings/customer-settings";
-
+import QRCode from 'qrcode';
 
 /**
  * Generated class for the CustomerHomePage page.
@@ -23,7 +23,7 @@ import {CustomerSettingsPage} from "../customer-settings/customer-settings";
 })
 export class CustomerHomePage implements OnInit{
 
-
+  generated = '';
   customer = new Customer();
 
   constructor(private loadingCtrl: LoadingController,private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {
@@ -32,7 +32,9 @@ export class CustomerHomePage implements OnInit{
 
   }
 
-
+  displayQrCode() {
+    return this.generated !== '';
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CustomerHomePage');
@@ -40,6 +42,12 @@ export class CustomerHomePage implements OnInit{
 
   ngOnInit(){
     console.log(this.customer);
+    const qrcode = QRCode;
+      const self = this;
+      qrcode.toDataURL(this.customer.barcode, { errorCorrectionLevel: 'H', scale : 10 }, function (err, url) {
+        self.generated = url;
+      })
+
   }
 
   openInAppBrowser(){

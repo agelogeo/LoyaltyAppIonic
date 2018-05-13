@@ -35,6 +35,7 @@ export class CouponsHomePage {
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: this.ml.loading_html,
+      cssClass: 'loading',
       duration: 5000
     });
     loading.present();
@@ -101,6 +102,7 @@ export class CouponsHomePage {
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: this.ml.loading_html,
+      cssClass: 'loading',
       duration: 5000
     });
     loading.present();

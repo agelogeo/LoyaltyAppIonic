@@ -42,11 +42,12 @@ export class CustomerLoginPage {
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: this.myLinks.loading_html,
+      cssClass: 'loading',
       duration: 3000
     });
     loading.present();
-    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+form.value.barcode);
-    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+form.value.barcode)
+    console.log(this.myLinks.base+this.myLinks.a_customer_login+'&action=customer_login&username='+form.value.barcode);
+    this.http.get(this.myLinks.base+this.myLinks.a_customer_login+'&action=customer_login&username='+form.value.barcode)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {

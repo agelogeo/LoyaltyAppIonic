@@ -25,12 +25,16 @@
     <ion-row align-items-stretch id="first_row">
     <ion-col col-8>
 
-      <ion-row class="ldt-zoom-in">
+      <ion-row class="ldt-zoom-in" >
         <ion-col text-center>
-          <img  id="barcode"  [src]="customer.image_url">
+          <!--<img  id="barcode"  [src]="customer.image_url">-->
+          <img  id="barcode" [src]="generated" />
+        </ion-col>
+      </ion-row>
 
-          <br>
-          <h4 id="barcode_text">{{customer.barcode}}</h4>
+      <ion-row class="ldt-zoom-in" >
+        <ion-col text-center>
+           <h4 id="barcode_text">{{customer.barcode}}</h4>
         </ion-col>
       </ion-row>
 

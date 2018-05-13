@@ -1,14 +1,21 @@
 export class MyLinks{
 
-  loading_html = `<div class="loader"></div>`;
+  loading_html = `<div>
+  <div class="sk-folding-cube">
+    <div class="sk-cube1 sk-cube"></div>
+    <div class="sk-cube2 sk-cube"></div>
+    <div class="sk-cube4 sk-cube"></div>
+    <div class="sk-cube3 sk-cube"></div>
+  </div>
+</div>`;
 
 /*<div class="spinner">
   <div class="double-bounce1"></div>
     <div class="double-bounce2"></div>
     </div>*/
 
-  url = 'https://loyaltyapp.000webhostapp.com/loyalty.php?';
-  database = 'db=id755156_loyalty_db';
+  url = 'https://apployalty.000webhostapp.com/loyalty.php?';
+  database = 'db=id5733007_mydb';
 
 
   // Actions
