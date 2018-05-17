@@ -12,7 +12,6 @@ import {CustomerHomePage} from "../pages/customer-home/customer-home";
 })
 export class MyApp {
 
-
   rootPage:any = HomePage;
 
   showSplash = true;

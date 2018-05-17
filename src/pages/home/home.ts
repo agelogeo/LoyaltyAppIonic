@@ -27,6 +27,8 @@ export class HomePage implements OnInit{
   ngOnInit(){
     if((<any>window).cordova){
 
+
+
       console.log('HOME WILL ENTER');
 
       /*const loading = this.loadingCtrl.create({
@@ -125,5 +127,7 @@ export class HomePage implements OnInit{
   goToAdmin(){
     this.navCtrl.push(OperatorLoginPage);
   }
+
+
 
 }
