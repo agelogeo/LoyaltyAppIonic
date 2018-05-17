@@ -1,0 +1,74 @@
+<!--
+  Generated template for the OperatorCardPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title *ngIf="mode=='edit'">Συντονιστής {{ operator.first_name }}</ion-title>
+    <ion-title *ngIf="mode=='add'">Προσθήκη συντονιστή</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Όνομα χρήστη</ion-label>
+        <ion-input *ngIf="mode=='edit'" type="text" [ngModel]="operator.username" name="username" required ></ion-input>
+        <ion-input *ngIf="mode=='add'" type="text" ngModel name="username" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Συνθηματικό</ion-label>
+        <ion-input *ngIf="mode=='edit'" type="text" [ngModel]="operator.password" name="password" required ></ion-input>
+        <ion-input *ngIf="mode=='add'" type="text" ngModel name="password" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Άδεια λογαριασμού</ion-label>
+        <ion-select *ngIf="mode=='edit'" [(ngModel)]="operator.access_level" name="access_level"  required>
+          <ion-option value="1">Διαχειριστής</ion-option>
+          <ion-option value="2">Συντονιστής</ion-option>
+        </ion-select>
+        <ion-select *ngIf="mode=='add'" ngModel name="access_level"  required>
+          <ion-option value="1">Διαχειριστής</ion-option>
+          <ion-option value="2">Συντονιστής</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Όνομα</ion-label>
+        <ion-input *ngIf="mode=='edit'" type="text" [ngModel]="operator.first_name" name="first_name" required ></ion-input>
+        <ion-input *ngIf="mode=='add'" type="text" ngModel name="first_name" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Επώνυμο</ion-label>
+        <ion-input *ngIf="mode=='edit'" type="text" [ngModel]="operator.last_name" name="last_name" required ></ion-input>
+        <ion-input *ngIf="mode=='add'" type="text" ngModel name="last_name" required ></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Τηλέφωνο</ion-label>
+        <ion-input *ngIf="mode=='edit'" type="number" [ngModel]="operator.phone" name="phone" required ></ion-input>
+        <ion-input *ngIf="mode=='add'" type="number" ngModel name="phone" required ></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-row *ngIf="mode=='edit'">
+      <ion-col>
+        <button  type="submit" ion-button block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="mode=='add'">
+      <ion-col>
+        <button  type="submit" ion-button block [disabled]="!f.valid">Προσθήκη</button>
+      </ion-col>
+    </ion-row>
+    <ion-row >
+      <ion-col>
+        <button type="button" color="danger"  ion-button block (click)="dismiss(null)">Ακύρωση</button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

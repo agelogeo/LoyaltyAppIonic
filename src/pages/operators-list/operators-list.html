@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Διαχείριση συντονιστών</ion-title>
+    <ion-buttons right>
+      <button icon-only ion-button (click)="onAddOperator()"><ion-icon name="add"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+  <ion-list>
+    <ion-item-sliding  *ngFor="let operator of operators; let i = index;">
+      <ion-item (click)="onLoadOperatorCard(operator,i)">
+        <ion-avatar item-start>
+          <img src="assets/icon/favicon.ico">
+        </ion-avatar>
+        <h2 *ngIf="operator.access_level==1">{{operator.first_name}} {{operator.last_name}} / Διαχειριστής</h2>
+        <h2 *ngIf="operator.access_level==2">{{operator.first_name}} {{operator.last_name}} / Συντονιστής</h2>
+        <p >{{operator.username}} / {{operator.phone}} </p>
+      </ion-item>
+      <ion-item-options side="right">
+        <button ion-button color="danger" (click)="onDelete(operator,i)">
+          <ion-icon name="trash" ></ion-icon>
+          Διαγραφή
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+</ion-content>

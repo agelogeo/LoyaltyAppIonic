@@ -35,7 +35,7 @@
     <ion-card-content>
       <ion-row >
         <ion-col text-center *ngIf="operator.access_level==1">
-          <button ion-button block text-wrap>Διαχείριση συντονιστών</button>
+          <button ion-button block text-wrap (click)="openOperators()">Διαχείριση συντονιστών</button>
         </ion-col>
         <ion-col text-center >
           <button ion-button block text-wrap (click)="openDatabaseStats()" >Διαχείριση πελατών</button>

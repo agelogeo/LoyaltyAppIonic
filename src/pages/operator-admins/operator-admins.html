@@ -20,12 +20,15 @@
     </ion-list-header>
     <form #f="ngForm" (ngSubmit)="onSaveParams(f)">
       <ion-item>
-        <ion-label stacked>Same Day Twice</ion-label>
-        <ion-input type="text" [ngModel]="aS.operator.same_day_twice" name="name" required ></ion-input>
+        <ion-label stacked>Διπλότυπες σφραγίδες ανά μέρα</ion-label>
+        <ion-select [(ngModel)]="aS.operator.same_day_twice" name="twice"  required>
+          <ion-option value="1">Ναι</ion-option>
+          <ion-option value="2">Όχι</ion-option>
+        </ion-select>
       </ion-item>
       <ion-item>
-        <ion-label stacked>Stamp Value</ion-label>
-        <ion-input type="text" [ngModel]="aS.operator.stamp_value" name="surname" required ></ion-input>
+        <ion-label stacked>Τιμή σφραγίδας</ion-label>
+        <ion-input type="number" [ngModel]="aS.operator.stamp_value" name="value" required ></ion-input>
       </ion-item>
       <button type="submit" ion-button round block [disabled]="isFormTheSame(f)">Αποθήκευση</button>
 

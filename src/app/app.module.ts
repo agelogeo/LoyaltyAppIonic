@@ -32,6 +32,8 @@ import {CouponCardPage} from "../pages/coupon-card/coupon-card";
 import {OperatorAdminsPage} from "../pages/operator-admins/operator-admins";
 import {SharePage} from "../pages/share/share";
 import {SocialSharing} from "@ionic-native/social-sharing";
+import {OperatorsListPage} from "../pages/operators-list/operators-list";
+import {OperatorCardPage} from "../pages/operator-card/operator-card";
 
 @NgModule({
   declarations: [
@@ -54,7 +56,9 @@ import {SocialSharing} from "@ionic-native/social-sharing";
     CouponsHomePage,
     CouponCardPage,
     OperatorAdminsPage,
-    SharePage
+    SharePage,
+    OperatorsListPage,
+    OperatorCardPage
   ],
   imports: [
     BrowserModule,
@@ -83,7 +87,9 @@ import {SocialSharing} from "@ionic-native/social-sharing";
     CouponsHomePage,
     CouponCardPage,
     OperatorAdminsPage,
-    SharePage
+    SharePage,
+    OperatorsListPage,
+    OperatorCardPage
   ],
   providers: [
     StatusBar,

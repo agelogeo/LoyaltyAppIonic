@@ -15,6 +15,7 @@ import {OperatorSettingsPage} from "../operator-settings/operator-settings";
 import {MyLinks} from "../../services/mylinks";
 import {CouponsHomePage} from "../coupons-home/coupons-home";
 import {AccountService} from "../../services/account";
+import {OperatorsListPage} from "../operators-list/operators-list";
 
 /**
  * Generated class for the OperatorHomePage page.
@@ -160,5 +161,9 @@ export class OperatorHomePage implements OnInit{
 
   openCoupons(){
     this.navCtrl.push(CouponsHomePage);
+  }
+
+  openOperators(){
+    this.navCtrl.push(OperatorsListPage);
   }
 }
