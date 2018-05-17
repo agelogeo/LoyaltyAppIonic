@@ -6,35 +6,39 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <div class="ld ldt-power-on">
-    <form #f="ngForm" (ngSubmit)="onCreateCustomer(f)" >
+
+<ion-content  >
+  <div class="example">
+    <div class="ld ldt-power-on " padding >
+      <form #f="ngForm" (ngSubmit)="onCreateCustomer(f)" margin-top>
+        <ion-list class="mylist">
+          <ion-item >
+            <ion-label floating >Όνομα</ion-label>
+            <ion-input type="text" ngModel name="name" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Επίθετο</ion-label>
+            <ion-input type="text" ngModel name="surname" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label floating>Τηλέφωνο</ion-label>
+            <ion-input type="number" ngModel name="phone" required></ion-input>
+          </ion-item>
+          <button  type="submit" ion-button block [disabled]="!f.valid">Δημιουργία λογαριασμού</button>
+        </ion-list>
+      </form>
       <ion-list>
-        <ion-item >
-          <ion-label floating>Όνομα</ion-label>
-          <ion-input type="text" ngModel name="name" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Επίθετο</ion-label>
-          <ion-input type="text" ngModel name="surname" required></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label floating>Τηλέφωνο</ion-label>
-          <ion-input type="number" ngModel name="phone" required></ion-input>
-        </ion-item>
-        <button  type="submit" ion-button block [disabled]="!f.valid">Δημιουργία λογαριασμού</button>
+        <ion-item-group >
+          <ion-label text-center>Είστε ήδη μέλος;</ion-label>
+          <button  ion-button color="primary" block (click)="goToLogin()">Σύνδεση</button>
+        </ion-item-group>
+        <hr>
+        <ion-item-group>
+          <ion-label text-center>Έχετε λογαριασμό διαχειριστή;</ion-label>
+          <button  ion-button color="secondary" block (click)="goToAdmin()">Σύνδεση ως διαχειριστής</button>
+        </ion-item-group>
       </ion-list>
-    </form>
-    <ion-list>
-      <ion-item-group >
-        <ion-label text-center>Είστε ήδη μέλος;</ion-label>
-        <button  ion-button color="primary" block (click)="goToLogin()">Σύνδεση</button>
-      </ion-item-group>
-      <hr>
-      <ion-item-group>
-        <ion-label text-center>Έχετε λογαριασμό διαχειριστή;</ion-label>
-        <button  ion-button color="secondary" block (click)="goToAdmin()">Σύνδεση ως διαχειριστής</button>
-      </ion-item-group>
-    </ion-list>
+    </div>
   </div>
 </ion-content>
+
