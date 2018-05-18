@@ -7,8 +7,9 @@
 </ion-header>
 
 
-<ion-content  >
-  <div id="background-wrap">
+<ion-content>
+  <div id="particles-js"></div>
+  <!--<div id="background-wrap">
     <div class="bubble x1"></div>
     <div class="bubble x2"></div>
     <div class="bubble x3"></div>
@@ -19,7 +20,7 @@
     <div class="bubble x8"></div>
     <div class="bubble x9"></div>
     <div class="bubble x10"></div>
-  </div>
+  </div>-->
   <div class="example">
     <div class="ld ldt-power-on " padding >
       <form #f="ngForm" (ngSubmit)="onCreateCustomer(f)" margin-top>
@@ -41,12 +42,12 @@
       </form>
       <ion-list>
         <ion-item-group >
-          <ion-label text-center>Είστε ήδη μέλος;</ion-label>
+          <ion-label color="light" text-center>Είστε ήδη μέλος;</ion-label>
           <button  ion-button color="primary" block (click)="goToLogin()">Σύνδεση</button>
         </ion-item-group>
         <hr>
         <ion-item-group>
-          <ion-label text-center>Έχετε λογαριασμό διαχειριστή;</ion-label>
+          <ion-label color="light" text-center>Έχετε λογαριασμό διαχειριστή;</ion-label>
           <button  ion-button color="secondary" block (click)="goToAdmin()">Σύνδεση ως διαχειριστής</button>
         </ion-item-group>
       </ion-list>
