@@ -46,10 +46,10 @@
     </ion-list>
     <ion-row *ngIf="mode=='scanned'">
       <ion-col>
-        <button type="button" color="secondary" large ion-button block (click)="dismiss(null)">Εξαργύρωση</button>
+        <button type="button" color="secondary" large ion-button block (click)="onConsumeCoupon()">Εξαργύρωση</button>
       </ion-col>
       <ion-col>
-        <button type="button" large ion-button block (click)="dismiss(null)">Σφραγίδα</button>
+        <button type="button" large ion-button block (click)="onAddStamp()">Σφραγίδα</button>
       </ion-col>
     </ion-row>
     <ion-row *ngIf="mode=='edit'">

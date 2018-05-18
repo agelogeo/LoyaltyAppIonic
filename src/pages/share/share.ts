@@ -7,7 +7,7 @@ import {ViewController} from "ionic-angular";
     <ion-grid text-center>
       <ion-row>
         <ion-col>
-          <h4>Choose your platform</h4>
+          <h4>Επιλέξτε πλατφόρμα</h4>
         </ion-col>
       </ion-row>
       <ion-row>

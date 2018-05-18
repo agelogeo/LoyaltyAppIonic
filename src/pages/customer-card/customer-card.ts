@@ -6,6 +6,8 @@ import {
 import {Customer} from "../../model/customer";
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
+import {MyLinks} from "../../services/mylinks";
+import {CouponsConsumePage} from "../coupons-consume/coupons-consume";
 
 /**
  * Generated class for the CustomerCardPage page.
@@ -24,7 +26,7 @@ export class CustomerCardPage {
   mode : string;
 
 
-  constructor(private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private myLinks : MyLinks,private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
     this.originalCustomer=this.navParams.get('customerId');
     this.mode=this.navParams.get('mode');
   }
@@ -47,8 +49,8 @@ export class CustomerCardPage {
   }
 
   onSaveCustomer(form : NgForm){
-    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_save&id='+this.originalCustomer.id+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone);
-    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_save&id='+this.originalCustomer.id+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone)
+    console.log(this.myLinks.base+this.myLinks.a_customer_save+'&id='+this.originalCustomer.id+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone);
+    this.http.get(this.myLinks.base+this.myLinks.a_customer_save+'&id='+this.originalCustomer.id+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
@@ -78,4 +80,13 @@ export class CustomerCardPage {
     });
   }
 
+  onConsumeCoupon(){
+    this.navCtrl.push(CouponsConsumePage,{customerId :  this.originalCustomer});
+
+  }
+
+  onAddStamp(){
+
+
+  }
 }

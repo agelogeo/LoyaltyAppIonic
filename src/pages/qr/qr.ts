@@ -104,8 +104,8 @@ export class QrPage implements OnInit{
     });
     loading.present();
 
-    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+barcode);
-    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_login&username='+barcode)
+    console.log(this.myLinks.base+this.myLinks.a_customer_login+'&username='+barcode);
+    this.http.get(this.myLinks.base+this.myLinks.a_customer_login+'&username='+barcode)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
