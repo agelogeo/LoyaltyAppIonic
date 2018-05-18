@@ -9,8 +9,64 @@
 
 
 <ion-content padding>
-  <form #f="ngForm" (ngSubmit)="onSaveCustomer(f)">
-    <ion-list>
+
+  <ion-card *ngIf="mode=='scanned'">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="../resources/icon.png">
+      </ion-avatar>
+      <h2>{{originalCustomer.name}} {{originalCustomer.surname}} </h2>
+      <p>{{originalCustomer.barcode}} , {{originalCustomer.phone}}</p>
+    </ion-item>
+
+
+    <ion-card-content>
+      </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="pricetags"></ion-icon>
+          <div>{{originalCustomer.coupons_used}} Κουπόνια</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="trophy"></ion-icon>
+          <div>{{originalCustomer.stamps}} Σφραγίδες</div>
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col center text-center>
+        <ion-note>
+          Τελευταία επίσκεψη : {{originalCustomer.last_visit}}
+        </ion-note>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col center text-center>
+        <ion-note>
+          {{originalCustomer.visits}} επισκέψεις
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+  <ion-row *ngIf="mode=='scanned'">
+    <ion-col>
+      <button type="button" color="secondary" large ion-button block (click)="onConsumeCoupon()">Εξαργύρωση</button>
+    </ion-col>
+    <ion-col>
+      <button type="button" large ion-button block (click)="onAddStamp()">Σφραγίδα</button>
+    </ion-col>
+  </ion-row>
+
+  <form #f="ngForm" (ngSubmit)="onSaveCustomer(f)" *ngIf="mode=='edit'">
+
+    <ion-list >
       <ion-item>
         <ion-label fixed>Όνομα</ion-label>
         <ion-input type="text" [ngModel]="originalCustomer.name" name="name" required [clearInput]="mode=='edit'" [readonly]="mode=='scanned'"></ion-input>
@@ -44,14 +100,6 @@
         <ion-input [ngModel]="originalCustomer.last_visit" name="last_visit" required readonly="true"></ion-input>
       </ion-item>
     </ion-list>
-    <ion-row *ngIf="mode=='scanned'">
-      <ion-col>
-        <button type="button" color="secondary" large ion-button block (click)="onConsumeCoupon()">Εξαργύρωση</button>
-      </ion-col>
-      <ion-col>
-        <button type="button" large ion-button block (click)="onAddStamp()">Σφραγίδα</button>
-      </ion-col>
-    </ion-row>
     <ion-row *ngIf="mode=='edit'">
       <ion-col>
         <button type="submit" ion-button block [disabled]="isFormTheSame(f)">Αποθήκευση</button>

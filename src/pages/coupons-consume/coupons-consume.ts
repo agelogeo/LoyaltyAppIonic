@@ -84,89 +84,6 @@ export class CouponsConsumePage {
 
   }
 
-  onDelete(coupon:Coupon,i : number){
-    console.log(coupon);
-    console.log(i);
-    const alert = this.alertCtrl.create({
-      title: 'ΠΡΟΣΟΧΗ !!!',
-      message: 'Αμα διαγράψετε το κουπόνι αυτό θα διαγράψτε και τους μετρητές που σχετίζονται με αυτο.Δεν θα μπορείτε να ανακτήσετε αυτό το κουπόνι.',
-      buttons: [
-        {
-          text : 'Ακύρωση',
-          role : 'cancel',
-          handler : () => {
-          }
-        },
-        {
-          text : 'Διαγραφή',
-          handler: () => {
-            this.deleteCoupon(coupon,i);
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
-
-  deleteCoupon(coupon:Coupon,i : number){
-    const loading = this.loadingCtrl.create({
-      spinner: 'hide',
-      content: this.ml.loading_html,
-      cssClass: 'loading',
-      duration: 5000
-    });
-    loading.present();
-
-    console.log(this.ml.base+this.ml.a_coupon_deletion+'&id='+coupon.id);
-    this.http.get(this.ml.base+this.ml.a_coupon_deletion+'&id='+coupon.id)
-      .map(res => res.json()).subscribe(data => {
-
-      if (data.error != null) {
-        const alert = this.alertCtrl.create({
-          title: 'Error',
-          message: data.message,
-          buttons: [{
-            text : 'Ok',
-            handler: () => {
-              loading.dismiss();
-            }
-          }]
-        });
-        alert.present();
-      }else {
-        loading.dismiss();
-        this.coupons.splice(i,1);
-        const toast = this.toastCtrl.create({
-          message: 'Το κουπόνι '+coupon.name+ ' διαγράφτηκε επιτυχώς',
-          duration: 1500,
-        });
-        toast.present();
-      }
-    });
-  }
-
-  onLoadCouponCard(coupon:Coupon,i : number){
-    let modal = this.modalCtrl.create(CouponCardPage,{ couponId: coupon,mode : 'edit'});
-    modal.onDidDismiss(coupon => {
-      if (coupon != null) {
-        this.coupons[i] = coupon;
-      }
-      //this.openDatabaseStats('default');
-    });
-    modal.present();
-  }
-
-  onAddCoupon(){
-    let modal = this.modalCtrl.create(CouponCardPage,{ couponId: null,mode : 'add'});
-    modal.onDidDismiss(coupon => {
-      if (coupon != null) {
-        this.getCoupons();
-      }
-      //this.openDatabaseStats('default');
-    });
-    modal.present();
-  }
-
   onTapCoupon(coupon : Coupon, i : number){
     const alert = this.alertCtrl.create({
       title: 'Είστε σίγουρος;',
@@ -191,6 +108,33 @@ export class CouponsConsumePage {
   }
 
   ConsumeCoupon(coupon : Coupon, i : number){
+    const loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: this.ml.loading_html,
+      cssClass: 'loading',
+      duration: 5000
+    });
+    loading.present();
 
+    console.log(this.ml.base+this.ml.a_get_db+this.ml.a_stamp_change_remove+'&id='+this.originalCustomer.id+'&value='+coupon.required_stamps);
+    this.http.get(this.ml.base+this.ml.a_get_db+this.ml.a_stamp_change_remove+'&id='+this.originalCustomer.id+'&value='+coupon.required_stamps)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+      }else {
+        this.navCtrl.pop();
+      }
+    });
   }
 }

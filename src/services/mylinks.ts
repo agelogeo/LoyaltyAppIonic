@@ -14,8 +14,8 @@ export class MyLinks{
     <div class="double-bounce2"></div>
     </div>*/
 
-  url = 'https://apployalty.000webhostapp.com/loyalty.php?';
-  database = 'db=id5733007_mydb';
+  url = 'https://aloyalty.000webhostapp.com/loyalty.php?';
+  database = 'db=id5809553_appdb';
 
 
   // Actions
@@ -25,8 +25,8 @@ export class MyLinks{
   a_coupon_save = '&action=coupon_save';
 
   a_stamp_change = '&action=stamp_change';
-    a_stamp_change_add = '&operation=add';
-    a_stamp_change_remove = '&operation=remove';
+    a_stamp_change_add = '&action=stamp_change&operation=add';
+    a_stamp_change_remove = '&action=stamp_change&operation=remove';
 
   a_coupon_credit = '&action=coupon_credit';
 

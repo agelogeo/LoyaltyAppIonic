@@ -36,9 +36,12 @@ export class OperatorSettingsPage {
 
   onLogOut(){
     this.aS.LogOut();
-    this.storage.set('accountService',this.aS)
+
+    this.storage.set('accountService',null)
       .then(() => {
+
         this.app.getRootNav().setRoot(HomePage);
+
         console.log('Log out successfully');
       })
       .catch( err => console.log(err));

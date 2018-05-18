@@ -73,8 +73,8 @@ export class HomePage implements OnInit{
     });
     loading.present();
 
-    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_creation&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone);
-    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=customer_creation&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone)
+    console.log(this.myLinks.base+this.myLinks.a_customer_creation+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone);
+    this.http.get(this.myLinks.base+this.myLinks.a_customer_creation+'&name='+form.value.name+'&surname='+form.value.surname+'&phone='+form.value.phone)
       .map(res => res.json()).subscribe(data => {
 
         if (data.error != null) {
