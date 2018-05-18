@@ -12,30 +12,33 @@
 
   <ion-card *ngIf="mode=='scanned'">
 
-    <ion-item>
-      <ion-avatar item-start>
-        <img src="../resources/icon.png">
-      </ion-avatar>
+    <ion-item center text-center>
       <h2>{{originalCustomer.name}} {{originalCustomer.surname}} </h2>
       <p>{{originalCustomer.barcode}} , {{originalCustomer.phone}}</p>
     </ion-item>
 
 
     <ion-card-content>
-      </ion-card-content>
 
-    <ion-row>
+    <ion-row center text-center>
+      <ion-col>
+        <button ion-button icon-left clear small>
+          <ion-icon name="trophy"></ion-icon>
+          <div>{{originalCustomer.stamps}} Σφραγίδες</div>
+        </button>
+      </ion-col>
       <ion-col>
         <button ion-button icon-left clear small>
           <ion-icon name="pricetags"></ion-icon>
           <div>{{originalCustomer.coupons_used}} Κουπόνια</div>
         </button>
       </ion-col>
-      <ion-col>
-        <button ion-button icon-left clear small>
-          <ion-icon name="trophy"></ion-icon>
-          <div>{{originalCustomer.stamps}} Σφραγίδες</div>
-        </button>
+    </ion-row>
+    <ion-row center text-center>
+      <ion-col >
+        <ion-note>
+          {{originalCustomer.visits}} επισκέψεις
+        </ion-note>
       </ion-col>
     </ion-row>
     <ion-row>
@@ -45,14 +48,8 @@
         </ion-note>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col center text-center>
-        <ion-note>
-          {{originalCustomer.visits}} επισκέψεις
-        </ion-note>
-      </ion-col>
-    </ion-row>
 
+    </ion-card-content>
   </ion-card>
 
   <ion-row *ngIf="mode=='scanned'">

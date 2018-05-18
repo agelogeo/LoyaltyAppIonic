@@ -86,7 +86,32 @@ export class CustomerCardPage {
   }
 
   onAddStamp(){
+    const loading = this.loadingCtrl.create({
+      spinner: 'hide',
+      content: this.myLinks.loading_html,
+      cssClass: 'loading',
+      duration: 5000
+    });
+    loading.present();
 
+    console.log(this.myLinks.base+this.myLinks.a_get_db+this.myLinks.a_stamp_change_add+'&id='+this.originalCustomer.id+'&value=1');
+    this.http.get(this.myLinks.base+this.myLinks.a_get_db+this.myLinks.a_stamp_change_add+'&id='+this.originalCustomer.id+'&value=1')
+      .map(res => res.json()).subscribe(data => {
 
+      if (data.error != null) {
+        const alert = this.alertCtrl.create({
+          title: 'Error',
+          message: data.message,
+          buttons: [{
+            text : 'Ok',
+            handler: () => {
+              loading.dismiss();
+            }
+          }]
+        });
+        alert.present();
+        this.originalCustomer.stamps=data.results.stamps;
+      }
+    });
   }
 }
