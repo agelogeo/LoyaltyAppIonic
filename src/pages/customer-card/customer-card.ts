@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {
-  AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController,
+  AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams, ToastController,
   ViewController
 } from 'ionic-angular';
 import {Customer} from "../../model/customer";
@@ -8,6 +8,7 @@ import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
 import {MyLinks} from "../../services/mylinks";
 import {CouponsConsumePage} from "../coupons-consume/coupons-consume";
+import {CouponCardPage} from "../coupon-card/coupon-card";
 
 /**
  * Generated class for the CustomerCardPage page.
@@ -26,7 +27,7 @@ export class CustomerCardPage {
   mode : string;
 
 
-  constructor(private myLinks : MyLinks,private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private modalCtrl: ModalController,private myLinks : MyLinks,private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
     this.originalCustomer=this.navParams.get('customerId');
     this.mode=this.navParams.get('mode');
   }
@@ -81,8 +82,14 @@ export class CustomerCardPage {
   }
 
   onConsumeCoupon(){
-    this.navCtrl.push(CouponsConsumePage,{customerId :  this.originalCustomer});
-
+    let modal = this.modalCtrl.create(CouponsConsumePage,{ customerId: this.originalCustomer });
+    modal.onDidDismiss(customer => {
+      if (customer != null) {
+        this.originalCustomer = customer;
+      }
+      //this.openDatabaseStats('default');
+    });
+    modal.present();
   }
 
   onAddStamp(){
@@ -110,7 +117,7 @@ export class CustomerCardPage {
           }]
         });
         alert.present();
-        this.originalCustomer.stamps=data.results.stamps;
+        this.originalCustomer.stamps=data.stamps;
       }
     });
   }

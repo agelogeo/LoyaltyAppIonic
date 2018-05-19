@@ -6,7 +6,7 @@ import {
   ModalController,
   NavController,
   NavParams,
-  ToastController
+  ToastController, ViewController
 } from 'ionic-angular';
 import {Http} from "@angular/http";
 import {Coupon} from "../../model/coupon";
@@ -30,7 +30,7 @@ export class CouponsConsumePage {
   originalCustomer : Customer;
   coupons : any;
 
-  constructor(private modalCtrl:ModalController,private toastCtrl:ToastController,private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private viewCtrl: ViewController,private modalCtrl:ModalController,private toastCtrl:ToastController,private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
     this.originalCustomer=this.navParams.get('customerId');
   }
 
@@ -133,7 +133,8 @@ export class CouponsConsumePage {
         });
         alert.present();
       }else {
-        this.navCtrl.pop();
+        this.originalCustomer.stamps=this.originalCustomer.stamps-coupon.required_stamps;
+        this.viewCtrl.dismiss(this.originalCustomer);
       }
     });
   }
