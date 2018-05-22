@@ -1,10 +1,7 @@
-import {Component, Injectable, OnInit, ViewChild} from '@angular/core';
-import {App, Img, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {Component, OnInit} from '@angular/core';
+import { IonicPage, NavController, NavParams} from 'ionic-angular';
 import {Customer} from "../../model/customer";
 import {InAppBrowser, InAppBrowserEvent} from '@ionic-native/in-app-browser';
-import {Storage} from "@ionic/storage";
-import {AccountService} from "../../services/account";
-import {HomePage} from "../home/home";
 import {CustomerSettingsPage} from "../customer-settings/customer-settings";
 import QRCode from 'qrcode';
 
@@ -26,7 +23,7 @@ export class CustomerHomePage implements OnInit{
   generated = '';
   customer = new Customer();
 
-  constructor(private loadingCtrl: LoadingController,private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private iab: InAppBrowser,public navCtrl: NavController, public navParams: NavParams) {
     this.customer = this.navParams.get('customer');
 
 

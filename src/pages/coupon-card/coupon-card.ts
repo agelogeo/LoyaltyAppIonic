@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController,
+  AlertController, IonicPage,  NavController, NavParams, ToastController,
   ViewController
 } from 'ionic-angular';
 import {Coupon} from "../../model/coupon";
@@ -25,7 +25,7 @@ export class CouponCardPage {
   mode : string;
 
 
-  constructor(private ml:MyLinks,private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private ml:MyLinks,private toastCtrl: ToastController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
     this.coupon=this.navParams.get('couponId');
     this.mode=this.navParams.get('mode');
   }

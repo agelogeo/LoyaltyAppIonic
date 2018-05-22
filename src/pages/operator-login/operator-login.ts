@@ -5,7 +5,6 @@ import {Http} from "@angular/http";
 import {TabsPage} from "../operator-tabs/operator-tabs";
 import {MyLinks} from "../../services/mylinks";
 import {Operator} from "../../model/operator";
-import {FileTransferObject, FileTransfer} from "@ionic-native/file-transfer";
 import {AccountService} from "../../services/account";
 import {Storage} from "@ionic/storage";
 
@@ -17,7 +16,6 @@ import {Storage} from "@ionic/storage";
  */
 
 
-declare var cordova: any;
 
 @IonicPage()
 @Injectable()
@@ -29,7 +27,7 @@ export class OperatorLoginPage {
 
   remember : boolean = false;
 
-  constructor(private myLinks:MyLinks,private storage: Storage,private transfer: FileTransfer,private accountService : AccountService,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(private myLinks:MyLinks,private storage: Storage,private accountService : AccountService,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {

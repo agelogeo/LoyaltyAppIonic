@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, App, IonicPage, LoadingController, NavController, NavParams,
+  AlertController, App, IonicPage,  NavController, NavParams,
   ToastController
 } from 'ionic-angular';
 import {AccountService} from "../../services/account";
 import {HomePage} from "../home/home";
 import {Storage} from "@ionic/storage";
-import {Operator} from "../../model/operator";
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
 import {OperatorAdminsPage} from "../operator-admins/operator-admins";
@@ -26,7 +25,7 @@ import {OperatorAdminsPage} from "../operator-admins/operator-admins";
 export class OperatorSettingsPage {
   //operator = new Operator();
 
-  constructor(private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,public aS:AccountService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private toastCtrl: ToastController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,public aS:AccountService,public navCtrl: NavController, public navParams: NavParams) {
     //this.operator=this.navParams.get('operatorId');
   }
 

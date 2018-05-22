@@ -2,9 +2,8 @@ import { Component } from '@angular/core';
 import {
   ActionSheetController,
   AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams,
-  PopoverController, ToastController
+   ToastController
 } from 'ionic-angular';
-import {FilterPage} from "../filter/filter";
 import {Customer} from "../../model/customer";
 import {Http} from "@angular/http";
 import {MyLinks} from "../../services/mylinks";
@@ -30,7 +29,7 @@ export class DatabaseStatsPage {
   fullCustomers : any;
 
 
-  constructor(public aS:AccountService,private myLinks : MyLinks,private modalCtrl: ModalController,private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private popoverCtrl:PopoverController,private http:Http,private loadingCtrl:LoadingController) {
+  constructor(public aS:AccountService,private myLinks : MyLinks,private modalCtrl: ModalController,private toastCtrl:ToastController,public actionSheetCtrl: ActionSheetController,private ml: MyLinks,public navCtrl: NavController, public navParams: NavParams,private alertCtrl: AlertController,private http:Http,private loadingCtrl:LoadingController) {
   }
 
 

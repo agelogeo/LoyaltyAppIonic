@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, App, IonicPage, LoadingController, NavController, NavParams, PopoverController,
+  AlertController, App, IonicPage,  NavController, NavParams, PopoverController,
   ToastController
 } from 'ionic-angular';
 import {HomePage} from "../home/home";
@@ -31,7 +31,7 @@ export class CustomerSettingsPage {
   notificationToggle: boolean = true;
   notificationValue: string = "notifications-off";
 
-  constructor(private socialSharing: SocialSharing,private popoverCtrl: PopoverController,private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,private accountService:AccountService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private socialSharing: SocialSharing,private popoverCtrl: PopoverController,private toastCtrl: ToastController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,private accountService:AccountService,public navCtrl: NavController, public navParams: NavParams) {
     this.originalCustomer=this.navParams.get('customerId');
     this.mode=this.navParams.get('mode');
   }

@@ -1,10 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {
-  AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController,
-  ViewController
+  AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController
 } from 'ionic-angular';
 import {QRScanner, QRScannerStatus} from "@ionic-native/qr-scanner";
-import {ScannedPage} from "../scanned/scanned";
 import {Http} from "@angular/http";
 import {CustomerCardPage} from "../customer-card/customer-card";
 import {Customer} from "../../model/customer";
@@ -29,7 +27,6 @@ export class QrPage implements OnInit{
               private http:Http,
               private loadingCtrl:LoadingController,
               private alertCtrl:AlertController,
-              private viewCtrl: ViewController,
               public navCtrl: NavController,
               public navParams: NavParams,
               private qrScanner: QRScanner,

@@ -9,7 +9,6 @@ import {DatabaseStatsPage} from "../database-stats/database-stats";
 import {Http} from "@angular/http";
 import {Customer} from "../../model/customer";
 import {StatsPage} from "../stats/stats";
-import {ScannedPage} from "../scanned/scanned";
 import {CustomerCardPage} from "../customer-card/customer-card";
 import {OperatorSettingsPage} from "../operator-settings/operator-settings";
 import {MyLinks} from "../../services/mylinks";

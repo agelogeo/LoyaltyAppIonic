@@ -1,6 +1,5 @@
 import {Component} from "@angular/core";
 
-import {QrPage} from "../qr/qr";
 import {NavParams} from "ionic-angular";
 import {CustomerHomePage} from "../customer-home/customer-home";
 

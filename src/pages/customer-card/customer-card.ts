@@ -8,7 +8,6 @@ import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
 import {MyLinks} from "../../services/mylinks";
 import {CouponsConsumePage} from "../coupons-consume/coupons-consume";
-import {CouponCardPage} from "../coupon-card/coupon-card";
 
 /**
  * Generated class for the CustomerCardPage page.

@@ -8,7 +8,6 @@ import {
   NavParams,
   ToastController
 } from 'ionic-angular';
-import {CouponCardPage} from "../coupon-card/coupon-card";
 import {Http} from "@angular/http";
 import {Coupon} from "../../model/coupon";
 import {MyLinks} from "../../services/mylinks";

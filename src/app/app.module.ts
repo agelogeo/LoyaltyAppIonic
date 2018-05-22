@@ -23,7 +23,7 @@ import {StatsPage} from "../pages/stats/stats";
 import {CustomerCardPage} from "../pages/customer-card/customer-card";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {FileTransfer} from "@ionic-native/file-transfer";
-import {IonicStorageModule, Storage} from "@ionic/storage";
+import {IonicStorageModule} from "@ionic/storage";
 import {AccountService} from "../services/account";
 import {CustomerSettingsPage} from "../pages/customer-settings/customer-settings";
 import {OperatorSettingsPage} from "../pages/operator-settings/operator-settings";

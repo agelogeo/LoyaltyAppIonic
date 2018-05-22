@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, IonicPage, LoadingController, NavController, NavParams, ToastController} from 'ionic-angular';
-import {Http} from "@angular/http";
+import { IonicPage,  NavController, NavParams} from 'ionic-angular';
 import {Customer} from "../../model/customer";
 
 /**
@@ -17,7 +16,7 @@ import {Customer} from "../../model/customer";
 })
 export class ScannedPage implements OnInit{
   customer = new Customer();
-  constructor(public navCtrl: NavController, public navParams: NavParams,private http:Http,private loadingCtrl:LoadingController,private alertCtrl:AlertController,private toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.customer.id=this.navParams.get('id');
     this.customer.name=this.navParams.get('name');
     this.customer.surname=this.navParams.get('surname');

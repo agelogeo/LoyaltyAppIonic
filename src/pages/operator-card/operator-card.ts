@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {
   AlertController,
   IonicPage,
-  LoadingController,
   NavController,
   NavParams,
   ToastController,
@@ -30,7 +29,7 @@ export class OperatorCardPage {
   mode : string;
 
 
-  constructor(private ml:MyLinks,private toastCtrl: ToastController,private loadingCtrl : LoadingController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private ml:MyLinks,private toastCtrl: ToastController,private alertCtrl: AlertController,private http : Http,private viewCtrl : ViewController,public navCtrl: NavController, public navParams: NavParams) {
     this.operator=this.navParams.get('operatorId');
     this.mode=this.navParams.get('mode');
   }
