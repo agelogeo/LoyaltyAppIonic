@@ -46,7 +46,7 @@ export class FeedbackPage {
             this.emailComposer.open(email);
           }
         });
-        
+
         this.emailComposer.hasPermission().then( () => {
 
             let email = {
