@@ -120,6 +120,7 @@ export class CouponsConsumePage {
     this.http.get(this.ml.base+this.ml.a_get_db+this.ml.a_stamp_change_remove+'&id='+this.originalCustomer.id+'&value='+coupon.required_stamps)
       .map(res => res.json()).subscribe(data => {
 
+
       if (data.error != null) {
         const alert = this.alertCtrl.create({
           title: 'Error',
