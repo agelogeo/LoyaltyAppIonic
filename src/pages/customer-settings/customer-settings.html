@@ -19,7 +19,7 @@
 <ion-content padding>
   <ion-list text-left>
     <ion-list-header>
-      Γενικά
+      Γενικά ( Υπό κατασκευή )
     </ion-list-header>
     <ion-item>
       <ion-label ><ion-icon *ngIf="isNotificationsEnabled()" name="notifications"></ion-icon><ion-icon *ngIf="!isNotificationsEnabled()" name="notifications-off"></ion-icon> Ειδοποιήσεις</ion-label>
@@ -59,6 +59,6 @@
     </ion-list-header>
     <button ion-button clear  icon-left ><ion-icon name="star-half"></ion-icon> Αξιολόγηση</button>
     <button ion-button clear  icon-left (click)="regularShare($event)"><ion-icon name="send"></ion-icon> Προτείνετε μας σε εναν φιλο σας</button>
-    <button ion-button clear  icon-left ><ion-icon name="paper"></ion-icon> Feedback</button>
+    <button ion-button clear  icon-left (click)="openFeedback()"><ion-icon name="paper"></ion-icon> Feedback</button>
   </ion-list>
 </ion-content>

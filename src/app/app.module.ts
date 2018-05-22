@@ -35,6 +35,8 @@ import {SocialSharing} from "@ionic-native/social-sharing";
 import {OperatorsListPage} from "../pages/operators-list/operators-list";
 import {OperatorCardPage} from "../pages/operator-card/operator-card";
 import {CouponsConsumePage} from "../pages/coupons-consume/coupons-consume";
+import {FeedbackPage} from "../pages/feedback/feedback";
+import {EmailComposer} from "@ionic-native/email-composer";
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import {CouponsConsumePage} from "../pages/coupons-consume/coupons-consume";
     SharePage,
     OperatorsListPage,
     OperatorCardPage,
-    CouponsConsumePage
+    CouponsConsumePage,
+    FeedbackPage
   ],
   imports: [
     BrowserModule,
@@ -92,7 +95,8 @@ import {CouponsConsumePage} from "../pages/coupons-consume/coupons-consume";
     SharePage,
     OperatorsListPage,
     OperatorCardPage,
-    CouponsConsumePage
+    CouponsConsumePage,
+    FeedbackPage
   ],
   providers: [
     StatusBar,
@@ -102,6 +106,7 @@ import {CouponsConsumePage} from "../pages/coupons-consume/coupons-consume";
     AccountService,
     InAppBrowser,
     FileTransfer,
+    EmailComposer,
     SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

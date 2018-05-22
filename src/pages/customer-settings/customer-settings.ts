@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {
-  AlertController, App, IonicPage,  NavController, NavParams, PopoverController,
+  AlertController, App, IonicPage, ModalController, NavController, NavParams, PopoverController,
   ToastController
 } from 'ionic-angular';
 import {HomePage} from "../home/home";
@@ -12,6 +12,8 @@ import {Http} from "@angular/http";
 import {SocialSharing} from "@ionic-native/social-sharing";
 import {SharePage} from "../share/share";
 import {MyLinks} from "../../services/mylinks";
+import {CouponCardPage} from "../coupon-card/coupon-card";
+import {FeedbackPage} from "../feedback/feedback";
 
 /**
  * Generated class for the CustomerSettingsPage page.
@@ -32,7 +34,13 @@ export class CustomerSettingsPage {
   notificationToggle: boolean = true;
   notificationValue: string = "notifications-off";
 
-  constructor(private myLinks: MyLinks,private socialSharing: SocialSharing,private popoverCtrl: PopoverController,private toastCtrl: ToastController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,private accountService:AccountService,public navCtrl: NavController, public navParams: NavParams) {
+
+
+  constructor(private myLinks: MyLinks,private socialSharing: SocialSharing,
+              private popoverCtrl: PopoverController,private toastCtrl: ToastController,
+              private alertCtrl: AlertController,private http : Http,private app:App,
+              private storage: Storage,private accountService:AccountService,public navCtrl: NavController,
+              public navParams: NavParams,private modalCtrl: ModalController) {
     this.originalCustomer=this.navParams.get('customerId');
     this.mode=this.navParams.get('mode');
   }
@@ -117,5 +125,16 @@ export class CustomerSettingsPage {
         }
       }
     )
+  }
+
+  openFeedback(){
+    let modal = this.modalCtrl.create(FeedbackPage);
+    /*modal.onDidDismiss(coupon => {
+      if (coupon != null) {
+        this.coupons[i] = coupon;
+      }
+      //this.openDatabaseStats('default');
+    });*/
+    modal.present();
   }
 }
