@@ -44,7 +44,7 @@
     <ion-row>
       <ion-col center text-center>
         <ion-note>
-          Τελευταία επίσκεψη : {{originalCustomer.last_visit}}
+          Τελευταία επίσκεψη : <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="YYYY/MM/DD" [(ngModel)]="originalCustomer.last_visit"></ion-datetime>
         </ion-note>
       </ion-col>
     </ion-row>

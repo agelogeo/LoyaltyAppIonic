@@ -84,7 +84,7 @@
 
       <ion-row class="rows side-background">
         <ion-col text-center align-self-center>
-          <h6>{{customer.last_visit}}</h6>
+          <h6><ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="YYYY/MM/DD" [(ngModel)]="customer.last_visit"></ion-datetime></h6>
           <p>Τελευταία επίσκεψη</p>
         </ion-col>
       </ion-row>
