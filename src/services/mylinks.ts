@@ -46,6 +46,7 @@ export class MyLinks{
   a_get_track_visits = '&action=track_visit';
   a_get_visits_by_day = '&action=get_visits_by_day';
   a_get_available_months = '&action=get_available_months';
+  a_get_available_years = '&action=get_available_years';
   a_get_days_chart = '&action=get_days_chart';
 
   base = this.url;

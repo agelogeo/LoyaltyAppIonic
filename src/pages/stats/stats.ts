@@ -36,6 +36,7 @@ export class StatsPage implements OnInit{
   lineTitle:any;
 
   results = [];
+  years = [];
   myDate : string;
 
 
@@ -66,6 +67,22 @@ export class StatsPage implements OnInit{
       }else {
         for(var i=0;i<data.results.length;i++){
           this.results.push(data.results[i].MONTH);
+        }
+      }
+    });
+
+    console.log(this.ml.base+this.ml.a_get_available_years);
+    this.http.get(this.ml.base+this.ml.a_get_available_years)
+      .map(res => res.json()).subscribe(data => {
+
+      if (data.error != null) {
+        const toast = this.toastCtrl.create({
+          message: data.message
+        });
+        toast.present();
+      }else {
+        for(var i=0;i<data.results.length;i++){
+          this.years.push(data.results[i].YEAR);
         }
       }
     });
@@ -259,6 +276,11 @@ export class StatsPage implements OnInit{
   //LINE CHART
   getAvailableMonths(){
     return this.results;
+  }
+
+  //LINE CHART
+  getAvailableYears(){
+    return this.years;
   }
 
   getDate(){
