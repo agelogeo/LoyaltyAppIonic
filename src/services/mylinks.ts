@@ -48,7 +48,7 @@ export class MyLinks{
   a_get_available_months = '&action=get_available_months';
   a_get_days_chart = '&action=get_days_chart';
 
-  base = this.url+this.database;
+  base = this.url;
 
   constructor(){
 

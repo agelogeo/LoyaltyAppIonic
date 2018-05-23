@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {
   AlertController, IonicPage, LoadingController, ModalController, NavController, NavParams,
-  ToastController
+  ToastController, ViewController
 } from 'ionic-angular';
 import {Coupon} from "../../model/coupon";
 import {MyLinks} from "../../services/mylinks";
@@ -21,9 +21,9 @@ import {CouponCardPage} from "../coupon-card/coupon-card";
   templateUrl: 'coupons-home.html',
 })
 export class CouponsHomePage {
-  coupons : any;
+  coupons :  Coupon[];
 
-  constructor(private modalCtrl:ModalController,private toastCtrl:ToastController,private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private viewCtrl: ViewController,private modalCtrl:ModalController,private toastCtrl:ToastController,private alertCtrl:AlertController,private http: Http,private ml : MyLinks,private loadingCtrl:LoadingController,public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewWillEnter() {
@@ -31,7 +31,22 @@ export class CouponsHomePage {
     this.getCoupons();
   }
 
+  /*ionViewDidLeave(){
+    this.viewCtrl.dismiss();
+  }*/
+
+  doRefresh(refresher) {
+    console.log('Begin async operation', refresher);
+    this.getCoupons();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      refresher.complete();
+
+    }, 2000);
+  }
+
   getCoupons(){
+    this.coupons = [];
     const loading = this.loadingCtrl.create({
       spinner: 'hide',
       content: this.ml.loading_html,
@@ -40,8 +55,8 @@ export class CouponsHomePage {
     });
     loading.present();
 
-    console.log(this.ml.base+this.ml.a_get_db+this.ml.a_get_coupons);
-    this.http.get(this.ml.base+this.ml.a_get_db+this.ml.a_get_coupons)
+    console.log(this.ml.base+this.ml.a_get_coupons);
+    this.http.get(this.ml.base+this.ml.a_get_coupons)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
@@ -66,9 +81,9 @@ export class CouponsHomePage {
           c.name=item.name;
           c.required_stamps=item.required_stamps;
 
-          coupons.push(c);
+          this.coupons.push(c);
         }
-        this.coupons=coupons;
+        //this.coupons=coupons;
       }
     });
 
@@ -149,7 +164,7 @@ export class CouponsHomePage {
   onAddCoupon(){
     let modal = this.modalCtrl.create(CouponCardPage,{ couponId: null,mode : 'add'});
     modal.onDidDismiss(coupon => {
-      if (coupon != null) {
+      if (coupon == null) {
         this.getCoupons();
       }
       //this.openDatabaseStats('default');

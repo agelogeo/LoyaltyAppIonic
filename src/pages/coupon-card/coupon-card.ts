@@ -99,7 +99,8 @@ export class CouponCardPage {
             duration: 2000
           });
           toast.present();
-          this.dismiss('');
+
+          this.dismiss(null);
         }
       });
     }
