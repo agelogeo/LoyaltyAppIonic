@@ -9,6 +9,7 @@ import {Storage} from "@ionic/storage";
 import {NgForm} from "@angular/forms";
 import {Http} from "@angular/http";
 import {OperatorAdminsPage} from "../operator-admins/operator-admins";
+import {MyLinks} from "../../services/mylinks";
 
 /**
  * Generated class for the OperatorSettingsPage page.
@@ -25,7 +26,7 @@ import {OperatorAdminsPage} from "../operator-admins/operator-admins";
 export class OperatorSettingsPage {
   //operator = new Operator();
 
-  constructor(private toastCtrl: ToastController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,public aS:AccountService,public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private myLinks : MyLinks,private toastCtrl: ToastController,private alertCtrl: AlertController,private http : Http,private app:App,private storage: Storage,public aS:AccountService,public navCtrl: NavController, public navParams: NavParams) {
     //this.operator=this.navParams.get('operatorId');
   }
 
@@ -56,8 +57,8 @@ export class OperatorSettingsPage {
   }
 
   onSaveOperator(form : NgForm){
-    console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.aS.operator.id+'&username='+form.value.username+'&first_name='+form.value.name+'&phone='+form.value.phone+'&last_name='+form.value.surname+'&access_level='+this.aS.operator.access_level+'&password='+this.aS.operator.password);
-    this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.aS.operator.id+'&username='+form.value.username+'&first_name='+form.value.name+'&phone='+form.value.phone+'&last_name='+form.value.surname+'&access_level='+this.aS.operator.access_level+'&password='+this.aS.operator.password)
+    console.log(this.myLinks.base+this.myLinks.a_operator_save+'&id='+this.aS.operator.id+'&username='+form.value.username+'&first_name='+form.value.name+'&phone='+form.value.phone+'&last_name='+form.value.surname+'&access_level='+this.aS.operator.access_level+'&password='+this.aS.operator.password);
+    this.http.get(this.myLinks.base+this.myLinks.a_operator_save+'&id='+this.aS.operator.id+'&username='+form.value.username+'&first_name='+form.value.name+'&phone='+form.value.phone+'&last_name='+form.value.surname+'&access_level='+this.aS.operator.access_level+'&password='+this.aS.operator.password)
       .map(res => res.json()).subscribe(data => {
 
       if (data.error != null) {
@@ -133,8 +134,8 @@ export class OperatorSettingsPage {
             }else{
               console.log(data);
               console.log(data.newpassword);
-              console.log('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.aS.operator.id+'&username='+this.aS.operator.username+'&first_name='+this.aS.operator.first_name+'&phone='+this.aS.operator.phone+'&last_name='+this.aS.operator.last_name+'&access_level='+this.aS.operator.access_level+'&password='+data.newpassword);
-              this.http.get('https://loyaltyapp.000webhostapp.com/loyalty.php?db=id755156_loyalty_db&action=operator_save&id='+this.aS.operator.id+'&username='+this.aS.operator.username+'&first_name='+this.aS.operator.first_name+'&phone='+this.aS.operator.phone+'&last_name='+this.aS.operator.last_name+'&access_level='+this.aS.operator.access_level+'&password='+data.newpassword)
+              console.log(this.myLinks.base+this.myLinks.a_operator_save+'&id='+this.aS.operator.id+'&username='+this.aS.operator.username+'&first_name='+this.aS.operator.first_name+'&phone='+this.aS.operator.phone+'&last_name='+this.aS.operator.last_name+'&access_level='+this.aS.operator.access_level+'&password='+data.newpassword);
+              this.http.get(this.myLinks.base+this.myLinks.a_operator_save+'&id='+this.aS.operator.id+'&username='+this.aS.operator.username+'&first_name='+this.aS.operator.first_name+'&phone='+this.aS.operator.phone+'&last_name='+this.aS.operator.last_name+'&access_level='+this.aS.operator.access_level+'&password='+data.newpassword)
                 .map(res => res.json()).subscribe(result => {
 
                 if (result.error != null) {

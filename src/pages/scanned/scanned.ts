@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { IonicPage,  NavController, NavParams} from 'ionic-angular';
 import {Customer} from "../../model/customer";
+import QRCode from 'qrcode';
 
 /**
  * Generated class for the ScannedPage page.
@@ -15,6 +16,7 @@ import {Customer} from "../../model/customer";
   templateUrl: 'scanned.html',
 })
 export class ScannedPage implements OnInit{
+  generated = '';
   customer = new Customer();
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.customer.id=this.navParams.get('id');
@@ -40,6 +42,12 @@ export class ScannedPage implements OnInit{
 
   ngOnInit(){
     console.log(this.customer);
+    const qrcode = QRCode;
+    const self = this;
+    qrcode.toDataURL(this.customer.barcode, { errorCorrectionLevel: 'H', scale : 10 }, function (err, url) {
+      self.generated = url;
+    })
+
   }
 
 }
