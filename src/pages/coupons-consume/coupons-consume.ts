@@ -112,9 +112,9 @@ export class CouponsConsumePage {
       duration: 5000
     });
     loading.present();
-
-    console.log(this.ml.base+this.ml.a_get_db+this.ml.a_stamp_change_remove+'&id='+this.originalCustomer.id+'&value='+coupon.required_stamps);
-    this.http.get(this.ml.base+this.ml.a_get_db+this.ml.a_stamp_change_remove+'&id='+this.originalCustomer.id+'&value='+coupon.required_stamps)
+    let date = new Date();
+    console.log(this.ml.base+this.ml.a_get_db+this.ml.a_stamp_change_remove+'&id='+this.originalCustomer.id+'&value='+coupon.required_stamps+'&coupon='+coupon.id+'&date='+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+'&hours='+date.getHours());
+    this.http.get(this.ml.base+this.ml.a_get_db+this.ml.a_stamp_change_remove+'&id='+this.originalCustomer.id+'&value='+coupon.required_stamps+'&coupon='+coupon.id+'&date='+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+'&hours='+date.getHours())
       .map(res => res.json()).subscribe(data => {
 
 
