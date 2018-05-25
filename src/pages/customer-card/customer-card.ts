@@ -102,9 +102,11 @@ export class CustomerCardPage {
     });
     loading.present();
 
-    console.log(this.myLinks.base+this.myLinks.a_get_db+this.myLinks.a_stamp_change_add+'&id='+this.originalCustomer.id+'&value=1&coupon=null&date='+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+'&hours='+date.getHours());
-    this.http.get(this.myLinks.base+this.myLinks.a_get_db+this.myLinks.a_stamp_change_add+'&id='+this.originalCustomer.id+'&value=1&coupon=null&date='+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+'&hours='+date.getHours())
+    console.log(this.myLinks.base+this.myLinks.a_stamp_change_add+'&id='+this.originalCustomer.id+'&value=1&coupon=null&date='+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+'&hours='+date.getHours());
+    this.http.get(this.myLinks.base+this.myLinks.a_stamp_change_add+'&id='+this.originalCustomer.id+'&value=1&coupon=null&date='+date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+'&hours='+date.getHours())
       .map(res => res.json()).subscribe(data => {
+
+      this.originalCustomer.stamps=data.stamps;
 
       if (data.error != null) {
         const alert = this.alertCtrl.create({
@@ -118,7 +120,6 @@ export class CustomerCardPage {
           }]
         });
         alert.present();
-        this.originalCustomer.stamps=data.stamps;
       }
     });
   }
