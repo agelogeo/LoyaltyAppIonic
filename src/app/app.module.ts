@@ -37,6 +37,7 @@ import {OperatorCardPage} from "../pages/operator-card/operator-card";
 import {CouponsConsumePage} from "../pages/coupons-consume/coupons-consume";
 import {FeedbackPage} from "../pages/feedback/feedback";
 import {EmailComposer} from "@ionic-native/email-composer";
+import {AndroidPermissions} from "@ionic-native/android-permissions";
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import {EmailComposer} from "@ionic-native/email-composer";
     InAppBrowser,
     FileTransfer,
     EmailComposer,
+    AndroidPermissions,
     SocialSharing,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

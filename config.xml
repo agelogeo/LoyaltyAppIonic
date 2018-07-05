@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.loyalty" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="gr.loyaltyapp.loyaltyapp" version="1.2.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Ionic Loyalty</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
+    <description>An awesome Loyalty service.</description>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">Agelogeo / Ntouskas</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
@@ -89,5 +89,7 @@
     <plugin name="cordova-sqlite-storage" spec="^2.1.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
+    <plugin name="cordova-plugin-android-permissions" spec="^1.0.0" />
     <engine name="android" spec="7.0.0" />
+    <engine name="browser" spec="5.0.3" />
 </widget>

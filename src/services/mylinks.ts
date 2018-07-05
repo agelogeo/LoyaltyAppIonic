@@ -14,7 +14,7 @@ export class MyLinks{
     <div class="double-bounce2"></div>
     </div>*/
 
-  url = 'http://aloyalty.xyz/loyalty.php?';
+  url = '';
   //database = 'db=id5809553_appdb';
 
 
